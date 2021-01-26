@@ -1,25 +1,32 @@
-class User3 {
+interface Variables {
+    nombre: string;
+    apellido: string
+}
+
+let datos = {} as Variables;
+datos.nombre = "Juan";
+datos.apellido = "Duran";
+
+type NumberOrString = number | string;
+let age : NumberOrString;
+
+class User5 {
     name: string;
-    constructor(name:string){
-        this.name = name;
-    }
 }
 
 class Admin {
-    permissions: number;
-    constructor(permissions: number){
-        this.permissions = permissions;
-    }
-    getPermissions() : number {
-        return this.permissions;
-    }
-} 
+   permiso: number; 
+}
 
-let user: User3 & Admin;
+type UserAdmin = User5 & Admin;
+let user: UserAdmin;
 
-user.name = "Juan";
-user.permissions = 3;
-console.log(user.name);
-console.log(user.permissions);
-console.log(user.getPermissions());
-user.getPermissions();
+type FuncString = () => string;
+function ejecutor (f: FuncString) {};
+
+ejecutor(()=>"casa");
+
+let tupla : [string,number];
+
+tupla[0]="string obligatorio";
+tupla[1]=3;
