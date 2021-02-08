@@ -1,21 +1,17 @@
-import { calculoImpuestoVentas, Producto } from "./ejemplos/06-desestrectura-funcion";
-
 /*
     ===== Código de TypeScript =====
 */
-const carroCompra: Producto[] = [
-    {
-        description: 'Computador 1',
-        precio: 700
-    },
-    {
-        description: 'Computador 2',
-        precio: 1000
-    },
-];
 
-const [total, impuesto] = calculoImpuestoVentas(carroCompra);
+class Heroe {
+    // los niveles de acceso permiten el alcance o visibilidad de los mismos
+    private alterEgo: string; // solo visible dentro de la clase
+    public edad: number; // fuera de la clase se puede ver
+    static nombreReal: string; // se puede acceder a la propiedad sin crear una instancia de la clase
 
-console.log(`El subtotal del carro de compra es: ${total}`);
-console.log(`El total de impuesto es: ${impuesto}`);
-console.log(`El total de la compra es: ${total + impuesto}`);
+    imprimirAlterEgo(){
+        return `El nombre es: ${this.alterEgo}`
+    }
+}
+
+const ironMan = new Heroe();
+console.log(ironMan);
