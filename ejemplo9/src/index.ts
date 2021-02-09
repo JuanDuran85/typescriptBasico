@@ -2,14 +2,12 @@
     ===== Código de TypeScript =====
 */
 
-// genericos
+// un decorador es una funcion que expande su clase añadiendo funcionalidades especiales. 
 
-function tipoDeFuncion<ABC>(argumento: ABC) {
-    return argumento;
+class MiSuperClase {
+    public miPropiedad: string = 'ABC';
+    
+    imprimirPropiedad(){
+        console.log(this.miPropiedad);
+    }
 }
-
-let soyString = tipoDeFuncion("Hola Mundo");
-let soyNumero = tipoDeFuncion(134);
-let soyArreglo = tipoDeFuncion([1,"34", true]);
-
-let explicito = tipoDeFuncion<number>(200);
