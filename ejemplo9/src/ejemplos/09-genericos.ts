@@ -15,3 +15,12 @@ let soyNumero = tipoDeFuncion(134);
 let soyArreglo = tipoDeFuncion([1,"34", true]);
 
 let explicito = tipoDeFuncion<number>(200);
+
+
+function printAll<T>(valor : T[]) {
+    console.log(valor)
+}
+
+printAll<string>(["uno","dos"]);
+printAll<number>([20,55,354]);
+printAll<boolean>([false]);
