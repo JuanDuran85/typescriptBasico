@@ -6,9 +6,9 @@ Ejemplos de TypeScript Básico.
         npm i -g typescript
     ```
 
-2. Para ver la version instalada: 
+2. Para ver la version instalada:  
     ```
-        ts --version
+        tsc --version
     ```
 
 3. Compilar un archivo TS.
@@ -30,3 +30,19 @@ Ejemplos de TypeScript Básico.
     ```
         tsc --init
     ```
+
+
+## Otras instalaciones:
+
+1. RxJs
+    ```
+    npm install rxjs
+    ```
+2. Type RxJS 
+   ```
+   npm install --save @types/es6-shim
+   ``` 
+3. TSUN
+   ```
+   npm install -g tsun
+   ```

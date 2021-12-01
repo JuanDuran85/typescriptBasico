@@ -7,22 +7,22 @@ let datos = {} as Variables;
 datos.nombre = "Juan";
 datos.apellido = "Duran";
 
-type NumberOrString = number | string;
-let age : NumberOrString;
+type NumberOrString2 = number | string;
+let age2 : NumberOrString2;
 
 class User5 {
     name: string;
 }
 
-class Admin {
+class Admin2 {
    permiso: number; 
 }
 
-type UserAdmin = User5 & Admin;
-let user: UserAdmin;
+type UserAdmin2 = User5 & Admin2;
+let user2: UserAdmin2;
 
-type FuncString = () => string;
-function ejecutor (f: FuncString) {};
+type FuncString2 = () => string;
+function ejecutor (f: FuncString2) {};
 
 ejecutor(()=>"casa");
 
