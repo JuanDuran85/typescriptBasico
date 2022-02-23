@@ -7,7 +7,7 @@ Ejemplos de TypeScript Básico.
     ```
 
 2. Para ver la version instalada:  
-    ```
+    ```bash
         tsc --version
     ```
 
@@ -27,22 +27,25 @@ Ejemplos de TypeScript Básico.
     ```  
 
 6. Generar el archivo de configuración de TS por comando.
-    ```
+    ```bash
         tsc --init
     ```
-
+7. Trabajar con modo observador
+   ```bash
+        tsc --watch
+   ```
 
 ## Otras instalaciones:
 
 1. RxJs
-    ```
+    ```bash
     npm install rxjs
     ```
 2. Type RxJS 
-   ```
+   ```bash
    npm install --save @types/es6-shim
    ``` 
 3. TSUN
-   ```
+   ```bash
    npm install -g tsun
    ```
