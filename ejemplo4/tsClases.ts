@@ -1,4 +1,4 @@
-class User {
+class User2 {
     private _nombre: string;
     private _apellido: string;
 
@@ -18,7 +18,7 @@ class User {
     }
 }
 
-let usuario : User = new User("","");
+let usuario : User2 = new User2("","");
 
 usuario.fullName = "Juan Duran";
 console.log(usuario.fullName);

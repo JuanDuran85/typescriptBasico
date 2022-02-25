@@ -22,11 +22,17 @@ type UserAdmin2 = User5 & Admin2;
 let user2: UserAdmin2;
 
 type FuncString2 = () => string;
-function ejecutor (f: FuncString2) {};
+function ejecutor (f: FuncString2) {
+    console.log(f());
+}
 
 ejecutor(()=>"casa");
 
-let tupla : [string,number];
+let tupla: [string,number] = ["casa",5];
+
+console.log(tupla);
 
 tupla[0]="string obligatorio";
 tupla[1]=3;
+
+console.log(tupla);

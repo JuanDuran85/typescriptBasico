@@ -9,8 +9,8 @@ function isString(valor : number | string): valor is string {
 }
 
 
-function printAge(age: number | string) {
-    if (isNumber(age)) {
+function printAge(age2: number | string) {
+    if (isNumber(age2)) {
         console.log("es un numero");
     } else {
         console.log("Es una cadena");
@@ -35,11 +35,11 @@ type NumberOrString = number | string;
 let age : NumberOrString;
 
 class User {
-    name: string;
+    name: string = "Juan";
 }
 
 class Admin {
-    permissions : number;
+    permissions : number = 0;
 }
 
 type UserAdmin = User & Admin;
@@ -72,7 +72,7 @@ enum PaymenState {
 console.log(PaymenState.EnDeuda);
 
 class Pedido {
-    tallas: number;
+    tallas: number = 0;
 }
 
 let pedido : Pedido = new Pedido();

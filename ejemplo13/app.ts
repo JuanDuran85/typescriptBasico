@@ -121,3 +121,7 @@ let mystique: Charles | Apocalipsis;
 mystique = charles;
 mystique = apocalipsis;
 
+let mutable: number | string[];
+     
+mutable = ["Adios","Hola"];
+mutable = 123;

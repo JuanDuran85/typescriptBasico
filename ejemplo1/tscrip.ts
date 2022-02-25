@@ -29,7 +29,7 @@ otraVD("Yece");
 // retorno null o undefined con void en la funcion
 
 function otra(nombre:string) : void {
-    return null;
+    console.log(nombre);
 }
 
 // 
