@@ -100,7 +100,6 @@
   },
   "exclude": [],
   "include": [
-    "ejemplo17/src/*.ts",
-    "ejemplo17/src/classes/*.ts",
+    "ejemplo18/*.ts",
   ],
 }
