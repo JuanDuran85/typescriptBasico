@@ -1,9 +1,21 @@
-import { Hero as SuperHero } from './classes/Hero';
-import powers from './data/power';
+import axios from "axios";
+import { Pokemon } from "./interfaces/pokemon.interface";
 
-console.log("iroman");
+const getPokemon = async (pokemonId: number): Promise<Pokemon> => {
+  try {
+    const { data } = await axios.get<Pokemon>(
+      `https://pokeapi.co/api/v2/pokemon/${pokemonId}`
+    );
+    return data;
+  } catch (error) {
+    throw new Error(`Error en peticion: ${error}`);
+  }
+};
 
-console.log(powers)
-
-const iroman = new SuperHero("iroman", 1, 50);
-console.log(iroman.power);
+getPokemon(1)
+  .then((pokemon: Pokemon) => {
+    console.log(pokemon);
+    console.log(pokemon.name);
+    console.log(pokemon.sprites.front_default);
+  })
+  .catch((error) => error);
