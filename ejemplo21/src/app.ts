@@ -35,3 +35,13 @@ function generateErrorMessage(message: string, code: number): never {
 }
 
 generateErrorMessage("Error de prueba not found",404)
+
+//-----------------------------------------------------------------------------
+
+const buttonInPage = document.querySelector('button')!;
+
+function clickHandler(message: string){
+    console.log(`Click ${message}`);
+}
+
+buttonInPage.addEventListener('click', clickHandler.bind(null,'messaje'))
