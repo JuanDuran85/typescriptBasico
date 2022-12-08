@@ -24,9 +24,13 @@ function addAndHandleCallback(n1: number, n2: number, callFunc: (num: number)=>v
 
 addAndHandleCallback(3,5,(result: number)=> console.log(result));
 
-// using never on function: Some functions never return a value. The never type represents values which are never observed. In a return type, this means that the function throws an exception or terminates execution of the program.
+/**
+ * 
+ * using never on function
+ */
+// Some functions never return a value. The never type represents values which are never observed. In a return type, this means that the function throws an exception or terminates execution of the program.
 
-function generateErrorMessage(message: string, code: number): never{
+function generateErrorMessage(message: string, code: number): never {
     throw {message, code}
 }
 

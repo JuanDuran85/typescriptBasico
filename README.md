@@ -13,26 +13,32 @@ Ejemplos de TypeScript Básico.
 
 3. Compilar un archivo TS.
     ```bash 
-        tsc nombre_archivo.ts
+        tsc fileName.ts
     ```
 
 4. Indicar por comando cual será la versión resultante de JS al compilar
     ```bash 
-        tsc --target ES2015 nombre_archivo.ts
+        tsc --target ES2015 fileName.ts
     ```  
 
-5. Indicar cual será el directorio donde se creará el archivo compilado en JS
+5. Indicar por comando cual será el directorio donde se creará el archivo compilado en JS
     ```bash 
-        tsc --outDir js nombre_archivo.ts
+        tsc --outDir dirName fileName.ts
     ```  
 
 6. Generar el archivo de configuración de TS por comando.
     ```bash
         tsc --init
     ```
+    Para mas informacion del archivo deconfiguracion [tsconfig](https://www.typescriptlang.org/tsconfig)
+  
 7. Trabajar con modo observador
    ```bash
-        tsc --watch
+        tsc fileName.ts --watch
+   ```
+   or
+   ```bash
+        tsc fileName.ts -w
    ```
 
 ## Otras instalaciones:
