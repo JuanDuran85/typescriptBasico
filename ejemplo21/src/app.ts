@@ -45,3 +45,25 @@ function clickHandler(message: string){
 }
 
 buttonInPage.addEventListener('click', clickHandler.bind(null,'messaje'))
+
+//-----------------------------------------------------------------------------
+
+const addListNumbers = (...numbers: number[]): number => {
+    return numbers.reduce((result:  number,value: number)=> {
+        return result + value;
+    },0)
+}
+
+console.log(`Result: ${addListNumbers(1,3,4,5,6,2)}`);
+
+
+
+
+
+
+
+
+
+
+
+
