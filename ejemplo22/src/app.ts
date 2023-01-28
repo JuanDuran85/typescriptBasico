@@ -28,12 +28,27 @@ class ItDepartament extends Departament{
 }
 
 class AccountingDepartament extends Departament{
+    
+    private lastReport: string | undefined;
+    
     constructor(id: string, private reports: string[]){
         super(id, 'Accounting');
+        this.lastReport = reports[this.reports.length - 1];
+    }
+
+    get mostRecentReports(){
+        if(this.lastReport) return this.lastReport;
+        throw new Error("No report available");
+    }
+
+    set mostRecentReports(newValue: string) {
+        if (!newValue) throw new Error("Pless pass in a valid value");
+        this.addReports(newValue);
     }
 
     addReports(reportText: string){
-        this.reports.push(reportText);;
+        this.reports.push(reportText);
+        this.lastReport = reportText;
     }
 
     getReports(){
