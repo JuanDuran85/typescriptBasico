@@ -1,88 +1,84 @@
 class Departament {
+  private employees: string[] = [];
+  // when you use protected for a property, that property is available in the other class
+  protected budget: number[] = [];
 
-    private employees: string[] = [];
-    // when you use protected for a property, that property is available in the other class
-    protected budget: number[] = [];
+  // You can use a short definition on the constructor
+  constructor(public name: string, private readonly idUser: string) {}
 
-    // You can use a short definition on the constructor
-    constructor(public name: string, private readonly idUser: string){}
+  describe(this: Departament) {
+    console.log(`Department: ${this.name}`);
+    console.log(`Id User: ${this.idUser}`);
+  }
 
-    describe(this: Departament){
-        console.log(`Department: ${this.name}`);
-        console.log(`Id User: ${this.idUser}`);
-    }
+  addEmployees(employee: string) {
+    this.employees.push(employee);
+  }
 
-    addEmployees(employee: string){
-        this.employees.push(employee);
-    }
-
-    showEmployeeInformation(){
-        console.log(`Employees: ${this.employees}`);
-    }
+  showEmployeeInformation() {
+    console.log(`Employees: ${this.employees}`);
+  }
 }
 
-class ItDepartament extends Departament{
-    constructor(id: string, public admins: string[]){
-        super(id, 'IT')
-    }
+class ItDepartament extends Departament {
+  constructor(id: string, public admins: string[]) {
+    super(id, "IT");
+  }
 }
 
-class AccountingDepartament extends Departament{
-    
-    private lastReport: string | undefined;
-    
-    constructor(id: string, private reports: string[]){
-        super(id, 'Accounting');
-        this.lastReport = reports[this.reports.length - 1];
-    }
+class AccountingDepartament extends Departament {
+  private lastReport: string | undefined;
 
-    get mostRecentReports(){
-        if(this.lastReport) return this.lastReport;
-        throw new Error("No report available");
-    }
+  constructor(id: string, private reports: string[]) {
+    super(id, "Accounting");
+    this.lastReport = reports[this.reports.length - 1];
+  }
 
-    set mostRecentReports(newValue: string) {
-        if (!newValue) throw new Error("Pless pass in a valid value");
-        this.addReports(newValue);
-    }
+  get mostRecentReports() {
+    if (this.lastReport) return this.lastReport;
+    throw new Error("No report available");
+  }
 
-    addReports(reportText: string){
-        this.reports.push(reportText);
-        this.lastReport = reportText;
-    }
+  set mostRecentReports(newValue: string) {
+    if (!newValue) throw new Error("Pless pass in a valid value");
+    this.addReports(newValue);
+  }
 
-    getReports(){
-        console.log(this.reports);
-    }
+  addReports(reportText: string) {
+    this.reports.push(reportText);
+    this.lastReport = reportText;
+  }
 
-    addBudget(newBudget: number) {
-        if (newBudget < 1000) {
-            console.error("Error: new budget")
-        }
-        this.budget.push(newBudget);
+  getReports() {
+    console.log(this.reports);
+  }
+
+  addBudget(newBudget: number) {
+    if (newBudget < 1000) {
+      console.error("Error: new budget");
     }
+    this.budget.push(newBudget);
+  }
 }
 
-const iTDepart = new ItDepartament("1a3S234d62",['Juan']);
+const iTDepart = new ItDepartament("1a3S234d62", ["Juan"]);
 iTDepart.describe();
 iTDepart.addEmployees("Empleado 1");
 iTDepart.addEmployees("Empleado 2");
 iTDepart.addEmployees("Empleado 3");
-iTDepart.showEmployeeInformation()
+iTDepart.showEmployeeInformation();
 
 const iTDepartCopy = {
-    name: "DUMMY",
-    describe: iTDepart.describe
-}
+  name: "DUMMY",
+  describe: iTDepart.describe,
+};
 
-const accounting = new AccountingDepartament("43Fdd3sD",[]);
+const accounting = new AccountingDepartament("43Fdd3sD", []);
 
 accounting.addBudget(3456);
 accounting.addReports("Errors number one");
-console.log({ accounting});
+console.log({ accounting });
 
 // accountingCopy.describe();
 
-console.log({iTDepart});
-
-
+console.log({ iTDepart });
