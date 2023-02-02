@@ -82,3 +82,9 @@ console.log({ accounting });
 // accountingCopy.describe();
 
 console.log({ iTDepart });
+
+//------------------------------------------------------------------------------------------------------------
+/**
+ * Interfaces
+ */
+
