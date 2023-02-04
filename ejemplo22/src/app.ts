@@ -88,3 +88,10 @@ console.log({ iTDepart });
  * Interfaces
  */
 
+// create interface for anonymous function
+
+interface OnlyAddFuntion {
+  (a: number, b: number): number;
+} 
+
+const onlyAdd: OnlyAddFuntion = (n1: number, n2: number) => n1 + n2; 
