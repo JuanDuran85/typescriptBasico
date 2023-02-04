@@ -13,7 +13,7 @@ interface OnlyAddFuntion {
   
   console.log(onlyAdd(3,4));
   
-  //-----------------------------------
+  //--------------------------------------------------------------------------------
   // formatting a price using the Intl API
   interface FormatCurrencyFunction {
     (value: number, currencyCode: string, locale?: string): string;
@@ -33,3 +33,30 @@ interface OnlyAddFuntion {
   console.log(formatCurrency(1854.56,"CAD",'en'));
   console.log(formatCurrency(1854.56,"CAD",'en-CA'));
   console.log(formatCurrency(1854.56,"EUR","fr"));
+
+
+//--------------------------------------------------------------------------------
+// create a function that returns a specific property
+
+interface getSwitchParameter {
+  (option: string): string;
+}
+
+const getParameterByKey: getSwitchParameter = (option: string) => {
+  const helperFunction: {[key: string]: string} = {
+    a:"input was A",
+    b:"input was B",
+    c:"input was C",
+    d:"input was D",
+    e:"input was E",
+    f:"input was F",
+  };
+
+  return helperFunction[option] || "Cannot find the input."
+}
+
+console.log(getParameterByKey("c"));
+console.log(getParameterByKey("q"));
+console.log(getParameterByKey("f"));
+console.log(getParameterByKey("r"));
+console.log(getParameterByKey("e"));
