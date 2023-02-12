@@ -46,9 +46,108 @@ function printEmployeeInformation(employeeIn: UnknownEmployee): void {
   if ("privileges" in employeeIn)
     console.log(`Privileges to ${employeeIn.name}: ${employeeIn.privileges}`);
 
- if ("startDate" in employeeIn)
+  if ("startDate" in employeeIn)
     console.log(`Start Date for ${employeeIn.name}: ${employeeIn.startDate}`);
 }
 
-printEmployeeInformation({name: 'Juan', startDate: new Date(), active: true});
+printEmployeeInformation({ name: "Juan", startDate: new Date(), active: true });
 printEmployeeInformation(employeeOne);
+
+//--------------------------------------------------------------------------------------
+
+class Car {
+  drive() {
+    console.log("Driving a car...");
+  }
+}
+
+class Truck {
+  drive() {
+    console.log("Driving a truck...");
+  }
+
+  loadCargo(amount: number) {
+    console.log(`Loading cargo... ${amount}`);
+  }
+}
+
+type Vehicle = Car | Truck;
+
+const v1 = new Car();
+const v2 = new Truck();
+
+const useVehicle = (vehicle: Vehicle): void => {
+  vehicle.drive();
+  if (vehicle instanceof Truck) {
+    vehicle.loadCargo(100);
+  }
+};
+
+useVehicle(v1);
+useVehicle(v2);
+
+//--------------------------------------------------------------------------------------------
+// Discriminated union with interface and types
+
+interface Bird {
+  type: "bird";
+  flyingSpeed: number;
+}
+interface Horse {
+  type: "horse";
+  runningSpeed: number;
+}
+
+type Animal = Bird | Horse;
+
+interface GetSwitchParameter {
+  (animal: Animal): string;
+}
+
+const moveAnimal: GetSwitchParameter = (animal: Animal) => {
+  let speed: number = 0;
+  switch (animal.type) {
+    case "bird":
+      speed = animal.flyingSpeed;
+      break;
+    case "horse":
+      speed = animal.runningSpeed;
+      break;
+  }
+
+  return `Moving at speed: ${speed}`;
+};
+
+console.log(
+  moveAnimal({
+    type: "bird",
+    flyingSpeed: 45,
+  })
+);
+
+//--------------------------------------------------------------------------------------------
+// Type casting
+
+// first way
+const userInputElement = <HTMLInputElement>(
+  document.getElementById("user__input")!
+);
+userInputElement.value = "alternativa uno para casting";
+
+// second way
+const userInputElementTwo = document.getElementById(
+  "user__input__two"
+)! as HTMLInputElement;
+userInputElementTwo.value = "alternativa dos para casting";
+
+// third way
+const userInputElementThree = document.getElementById(
+  "user__input__two"
+);
+if (userInputElementThree) {
+  (userInputElementThree as HTMLInputElement).value = "alternativa tres para casting"
+}
+
+
+
+
