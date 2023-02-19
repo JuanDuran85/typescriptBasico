@@ -141,13 +141,58 @@ const userInputElementTwo = document.getElementById(
 userInputElementTwo.value = "alternativa dos para casting";
 
 // third way
-const userInputElementThree = document.getElementById(
-  "user__input__two"
-);
+const userInputElementThree = document.getElementById("user__input__two");
 if (userInputElementThree) {
-  (userInputElementThree as HTMLInputElement).value = "alternativa tres para casting"
+  (userInputElementThree as HTMLInputElement).value =
+    "alternativa tres para casting";
 }
 
+//--------------------------------------------------------------------------------------------
+// Index Properties
 
+interface ErrorContainerType {
+  [prop: string]: string;
+}
 
+const errorIn: ErrorContainerType = {
+  email: "email in",
+  username: "username in",
+};
 
+//--------------------------------------------------------------------------------------------
+// Function Overloads
+
+type CombinableIn = string | number;
+
+function overloadCalculator(a: number, b: number): number;
+function overloadCalculator(a: string, b: string): string;
+function overloadCalculator(a: CombinableIn, b: CombinableIn) {
+  if (typeof a === "string" || typeof b === "string")
+    return a.toString() + b.toString();
+  return a + b;
+}
+
+const resultOverload = overloadCalculator("one","two");
+console.log(resultOverload.split(' - '));
+
+//--------------------------------------------------------------------------------------------
+// Optional Chaining
+// you can use '?' for objects to avoid undefined errors
+const fetchUserDataOne = {
+  id: 0,
+  name: 'Noah',
+  job: {
+    title: 'Dev',
+    description: 'actuating'
+  }
+}
+
+console.log(fetchUserDataOne?.job?.description);
+
+//--------------------------------------------------------------------------------------------
+// Nullish coalescing
+// you can use '??' to avoid enties string o default values
+
+const inputOne = undefined;
+const storeData = inputOne ?? 'Default values';
+console.log(storeData);
