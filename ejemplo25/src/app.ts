@@ -89,3 +89,9 @@ textStorage.addItems({name: "Juan"});
 textStorage.addItems([1,2,3,4,"otro texto"]);
 textStorage.removeItem(4);
 console.log(textStorage.getItems());
+
+const numberStorage = new DataStoregeGeneric<number>();
+numberStorage.addItems(3);
+numberStorage.addItems(4);
+numberStorage.removeItem(4);
+console.log(numberStorage.getItems());
