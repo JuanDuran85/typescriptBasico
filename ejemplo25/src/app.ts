@@ -64,7 +64,7 @@ console.log(extractAndConvert({name:'Juan'}, 'name'));
 // Working with generic classes
 
 // Simple Generic Classes
-class DataStoregeGeneric<T> {
+class DataStoregeGeneric<T extends string | number | boolean> {
   private data: T[] = [];
 
   addItems(item: T){
@@ -72,6 +72,7 @@ class DataStoregeGeneric<T> {
   }
 
   removeItem(item: T){
+    if(this.data.indexOf(item) === -1) return;
     this.data.splice(this.data.indexOf(item),1);
   }
 
@@ -85,8 +86,6 @@ textStorage.addItems(3);
 textStorage.addItems(4);
 textStorage.addItems('5');
 textStorage.addItems('Texto');
-textStorage.addItems({name: "Juan"});
-textStorage.addItems([1,2,3,4,"otro texto"]);
 textStorage.removeItem(4);
 console.log(textStorage.getItems());
 
@@ -95,3 +94,18 @@ numberStorage.addItems(3);
 numberStorage.addItems(4);
 numberStorage.removeItem(4);
 console.log(numberStorage.getItems());
+
+// Generic Utility types
+
+// Awaited<Type>: This type is meant to model operations like await in async functions, or the .then() method on Promises - specifically, the way that they recursively unwrap Promises.
+
+(async()=>{
+  const json: Response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+  const result: any = await json.json();
+  console.log(result);
+})();
+
+
+// Partial
+
+// ReadOnly
