@@ -99,13 +99,36 @@ console.log(numberStorage.getItems());
 
 // Awaited<Type>: This type is meant to model operations like await in async functions, or the .then() method on Promises - specifically, the way that they recursively unwrap Promises.
 
-(async()=>{
-  const json: Response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
-  const result: any = await json.json();
-  console.log(result);
-})();
+interface PlaceHolderToDo {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+}
 
+async function fetchUserData(): Promise<PlaceHolderToDo> {
+  const json: Response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+  return json.json();
+}
+
+type UserData = Awaited<ReturnType<typeof fetchUserData>>;
+
+async function displayUserData(): Promise<void> {
+  const userData: UserData = await fetchUserData();
+  const { id, userId, title, completed } = userData;
+  console.log(`User ${title} has idUser ${id} and id ${userId} and is completed: ${completed}`);
+}
+
+displayUserData();
 
 // Partial
+// Constructs a type with all properties of Type set to optional. This utility will return a type that represents all subsets of a given type.
+
+
+
+
+
+
+
 
 // ReadOnly
