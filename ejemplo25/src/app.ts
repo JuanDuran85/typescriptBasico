@@ -121,7 +121,7 @@ async function displayUserData(): Promise<void> {
 
 displayUserData();
 
-// Partial
+// Partial<Type>
 // Constructs a type with all properties of Type set to optional. This utility will return a type that represents all subsets of a given type.
 
 interface UsersInfo {
@@ -146,8 +146,27 @@ const usuarios = (infoIn: UsersInfo, infoToUpdate: Partial<UsersInfo>) => {
 
 console.log(usuarios(infoUsurio,{ name: 'Juan', lastName: 'Duran', age: 37}));
 
+// Required<Type>
+// Constructs a type consisting of all properties of Type set to required. The opposite of Partial.
 
+interface UserInfo2 {
+  id: string;
+  name: string;
+  lastName?: string;
+  age?: number;
+}
 
+const user1: UserInfo2 = {
+  id: '3f55',
+  name: 'Juan'
+} 
 
+// If you dont use all the property's  object, the error should be: Type '{ id: string; name: string; }' is missing the following properties from type 'Required<UserInfo2>': lastName, agets(2739)
+const user2: Required<UserInfo2> = {
+  id: '3ffghy6',
+  name: 'Juan',
+  lastName: 'Duran',
+  age: 37
+}
 
 // ReadOnly
