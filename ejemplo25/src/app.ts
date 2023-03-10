@@ -55,11 +55,14 @@ console.log(countAndDescribe(["elemento 1"]));
 
 // the keyof conntrains
 
-function extractAndConvert<T extends object, U extends keyof T>(obj: T, key: U) {
+function extractAndConvert<T extends object, U extends keyof T>(
+  obj: T,
+  key: U
+) {
   return `Value: ${obj[key]}`;
 }
 
-console.log(extractAndConvert({name:'Juan'}, 'name'));
+console.log(extractAndConvert({ name: "Juan" }, "name"));
 
 // Working with generic classes
 
@@ -67,16 +70,16 @@ console.log(extractAndConvert({name:'Juan'}, 'name'));
 class DataStoregeGeneric<T extends string | number | boolean> {
   private data: T[] = [];
 
-  addItems(item: T){
+  addItems(item: T) {
     this.data.push(item);
   }
 
-  removeItem(item: T){
-    if(this.data.indexOf(item) === -1) return;
-    this.data.splice(this.data.indexOf(item),1);
+  removeItem(item: T) {
+    if (this.data.indexOf(item) === -1) return;
+    this.data.splice(this.data.indexOf(item), 1);
   }
 
-  getItems(){
+  getItems() {
     return [...this.data];
   }
 }
@@ -84,8 +87,8 @@ class DataStoregeGeneric<T extends string | number | boolean> {
 const textStorage = new DataStoregeGeneric();
 textStorage.addItems(3);
 textStorage.addItems(4);
-textStorage.addItems('5');
-textStorage.addItems('Texto');
+textStorage.addItems("5");
+textStorage.addItems("Texto");
 textStorage.removeItem(4);
 console.log(textStorage.getItems());
 
@@ -107,7 +110,9 @@ interface PlaceHolderToDo {
 }
 
 async function fetchUserData(): Promise<PlaceHolderToDo> {
-  const json: Response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+  const json: Response = await fetch(
+    "https://jsonplaceholder.typicode.com/todos/1"
+  );
   return json.json();
 }
 
@@ -116,7 +121,9 @@ type UserData = Awaited<ReturnType<typeof fetchUserData>>;
 async function displayUserData(): Promise<void> {
   const userData: UserData = await fetchUserData();
   const { id, userId, title, completed } = userData;
-  console.log(`User ${title} has idUser ${id} and id ${userId} and is completed: ${completed}`);
+  console.log(
+    `User ${title} has idUser ${id} and id ${userId} and is completed: ${completed}`
+  );
 }
 
 displayUserData();
@@ -132,19 +139,19 @@ interface UsersInfo {
 }
 
 const infoUsurio: UsersInfo = {
-  id: '',
-  name: '',
-  lastName: '',
+  id: "",
+  name: "",
+  lastName: "",
   age: 0,
 };
 
 console.log(infoUsurio);
 
 const usuarios = (infoIn: UsersInfo, infoToUpdate: Partial<UsersInfo>) => {
-  return { ... infoIn, ...infoToUpdate }; 
-}
+  return { ...infoIn, ...infoToUpdate };
+};
 
-console.log(usuarios(infoUsurio,{ name: 'Juan', lastName: 'Duran', age: 37}));
+console.log(usuarios(infoUsurio, { name: "Juan", lastName: "Duran", age: 37 }));
 
 // Required<Type>
 // Constructs a type consisting of all properties of Type set to required. The opposite of Partial.
@@ -157,16 +164,34 @@ interface UserInfo2 {
 }
 
 const user1: UserInfo2 = {
-  id: '3f55',
-  name: 'Juan'
-} 
+  id: "3f55",
+  name: "Juan",
+};
 
 // If you dont use all the property's  object, the error should be: Type '{ id: string; name: string; }' is missing the following properties from type 'Required<UserInfo2>': lastName, agets(2739)
 const user2: Required<UserInfo2> = {
-  id: '3ffghy6',
-  name: 'Juan',
-  lastName: 'Duran',
-  age: 37
+  id: "3ffghy6",
+  name: "Juan",
+  lastName: "Duran",
+  age: 37,
+};
+
+// Readonly<Type>
+// Constructs a type with all properties of Type set to readonly, meaning the properties of the constructed type cannot be reassigned.
+interface Books {
+  id: string;
+  title: string;
+  pages: number;
 }
 
-// ReadOnly
+const book1: Readonly<Books> = {
+  id: '233drft',
+  title: 'Book 1',
+  pages: 51,
+}
+
+// if you try to assign a new value to a property, you will get an error: Cannot assign to 'pages' because it is a read-only property.
+//book1.pages = 56;
+console.log(book1);
+
+
