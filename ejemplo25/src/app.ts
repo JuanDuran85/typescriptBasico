@@ -64,6 +64,38 @@ function extractAndConvert<T extends object, U extends keyof T>(
 
 console.log(extractAndConvert({ name: "Juan" }, "name"));
 
+
+// using object literal a move it to an interface
+interface GeneritTypeIdentifier {
+  <T>(value: T): T
+}
+
+const result: GeneritTypeIdentifier = (value) => {
+  return value;
+}
+
+console.log(result(3));
+console.log(result('hola'));
+
+//Using Class Types in Generics
+// When creating factories in TypeScript using generics, it is necessary to refer to class types by their constructor functions.
+
+
+class Activeted {
+  active: boolean = false;
+}
+
+class Desactivated {
+  active: boolean = true;
+}
+
+function createInstanceStatus<T>(instance: {new ():T}): T{
+  return new instance();
+}
+
+console.log(createInstanceStatus(Activeted));
+
+
 // Working with generic classes
 
 // Simple Generic Classes
@@ -201,6 +233,16 @@ const book1: Readonly<Books> = {
 // if you try to assign a new value to a property, you will get an error: Cannot assign to 'pages' because it is a read-only property.
 //book1.pages = 56;
 console.log(book1);
+
+// -------------------------------- ReadonlyArray<Type> --------------------------------
+// Create a readonly version of your array.
+
+const arrayValues: number[] = [3,6,2,7,1];
+const copyArrayReadOnly: ReadonlyArray<number> = arrayValues;
+// Now, all mutating methods are removed and will throw a compile-time error.
+// copyArrayReadOnly.push(4);
+// copyArrayReadOnly[2] = 4;
+console.log(copyArrayReadOnly);
 
 // -------------------------------- Record<Keys, Type> --------------------------------
 // Constructs an object type whose property keys are Keys and whose property values are Type. This utility can be used to map the properties of a type to another type.

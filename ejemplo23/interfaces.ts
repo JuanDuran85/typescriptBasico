@@ -60,3 +60,44 @@ console.log(getParameterByKey("q"));
 console.log(getParameterByKey("f"));
 console.log(getParameterByKey("r"));
 console.log(getParameterByKey("e"));
+
+//--------------------------------------------------------------------------------
+// Diferent ways to type complex objects by index.
+//--------------------------------------------------------------------------------
+
+interface DataStructureType {
+  [index: string]: {
+    name: string;
+    activated: boolean;
+    alias: string;
+  }
+}
+
+const fastHardToTypeDataStructure: DataStructureType = {
+  uuid_1: {
+    name: "TypeScript",
+    activated: true,
+    alias: "TS"
+  },
+  uuid_2: {
+    name: "Python",
+    activated: true,
+    alias: "Py"
+  },
+  uuid_3: {
+    name: "Fortran",
+    activated: true,
+    alias: "For"
+  },
+}
+
+const result: DataStructureType = {
+  xyz: {
+    name: "xyz",
+    activated: true,
+    alias: "xyz"
+  }
+};
+
+console.log(result);
+console.log("Aqui");
