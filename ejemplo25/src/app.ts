@@ -204,7 +204,8 @@ interface StoreProperties {
 }
 
 type ClothesKeys =  "tshirt" | "socks" | "jeans";
-
+//type Record<K extends string | number | symbol, T> = { [P in K]: T; }
+//Construct a type with a set of properties K of type T
 const clothes: Record<ClothesKeys, StoreProperties> = {
   tshirt: {
     sku: "tshirt456",
@@ -228,3 +229,18 @@ const clothes: Record<ClothesKeys, StoreProperties> = {
 
 // Pick<Type, Keys>
 // Constructs a type by picking the set of properties Keys (string literal or union of string literals) from Type.
+interface Store2 {
+  name: string;
+  cuantity: number;
+  active: boolean;
+}
+
+// you can create a new type by using only the properties you want to pick.
+// type Pick<T, K extends keyof T> = { [P in K]: T[P]; }
+// From T, pick a set of properties whose keys are in the union K
+type StorePreview = Pick<Store2, "cuantity" & "name">
+
+const storeOne: StorePreview = {
+  cuantity: 4,
+  name: 'jean',
+} 
