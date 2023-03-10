@@ -194,4 +194,37 @@ const book1: Readonly<Books> = {
 //book1.pages = 56;
 console.log(book1);
 
+// Record<Keys, Type>
+// Constructs an object type whose property keys are Keys and whose property values are Type. This utility can be used to map the properties of a type to another type.
+interface StoreProperties {
+  sku: string;
+  name: string;
+  cuantity: number;
+  active: boolean;
+}
 
+type ClothesKeys =  "tshirt" | "socks" | "jeans";
+
+const clothes: Record<ClothesKeys, StoreProperties> = {
+  tshirt: {
+    sku: "tshirt456",
+    name: "Playera",
+    cuantity: 14,
+    active: true
+  },
+  socks: {
+    sku: "socks1573",
+    name: "Socks Prime",
+    cuantity: 451,
+    active: true
+  },
+  jeans: {
+    sku: "jeans5369",
+    name: "Cowboy Traditional",
+    cuantity: 78,
+    active: true
+  }
+}
+
+// Pick<Type, Keys>
+// Constructs a type by picking the set of properties Keys (string literal or union of string literals) from Type.
