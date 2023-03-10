@@ -256,3 +256,26 @@ const storeOne: StorePreview = {
 // -------------------------------- Omit<Type, Keys> --------------------------------
 // Constructs a type by picking all properties from Type and then removing Keys (string literal or union of string literals).
 
+interface Bird {
+  type: string;
+  flyingSpeed: number;
+  colors: string[];
+  origin: string;
+}
+
+// type Omit<T, K extends string | number | symbol> = { [P in Exclude<keyof T, K>]: T[P]; }
+// Construct a type with the properties of T except for those in type K.
+type BirdPreview = Omit<Bird, "colors">;
+const birdPreviewShow: BirdPreview = {
+  type: "bird",
+  flyingSpeed: 45,
+  origin: "Africa"
+}
+
+type BirdCaracteristic = Omit<Bird, "type" | "flyingSpeed">;
+const birdCaracter: BirdCaracteristic = {
+  colors: ["Red","Blue"],
+  origin: "Africa"
+}
+
+
