@@ -53,7 +53,7 @@ function countAndDescribe<T extends Lengthy>(element: T) {
 console.log(countAndDescribe("texto numero 1"));
 console.log(countAndDescribe(["elemento 1"]));
 
-// the keyof conntrains
+// the keyof contrains
 
 function extractAndConvert<T extends object, U extends keyof T>(
   obj: T,
@@ -98,9 +98,12 @@ numberStorage.addItems(4);
 numberStorage.removeItem(4);
 console.log(numberStorage.getItems());
 
-// Generic Utility types
+//---------------------------------------------------------------------------------------------------
+//    -------------------------------- Generic Utility types --------------------------------
+//---------------------------------------------------------------------------------------------------
 
-// Awaited<Type>: This type is meant to model operations like await in async functions, or the .then() method on Promises - specifically, the way that they recursively unwrap Promises.
+// -------------------------------- Awaited<Type> -------------------------------- 
+// This type is meant to model operations like await in async functions, or the .then() method on Promises - specifically, the way that they recursively unwrap Promises.
 
 interface PlaceHolderToDo {
   userId: number;
@@ -128,7 +131,7 @@ async function displayUserData(): Promise<void> {
 
 displayUserData();
 
-// Partial<Type>
+// -------------------------------- Partial<Type> --------------------------------
 // Constructs a type with all properties of Type set to optional. This utility will return a type that represents all subsets of a given type.
 
 interface UsersInfo {
@@ -146,14 +149,15 @@ const infoUsurio: UsersInfo = {
 };
 
 console.log(infoUsurio);
-
+// type Partial<T> = { [P in keyof T]?: T[P]; }
+// Make all properties in T optional
 const usuarios = (infoIn: UsersInfo, infoToUpdate: Partial<UsersInfo>) => {
   return { ...infoIn, ...infoToUpdate };
 };
 
 console.log(usuarios(infoUsurio, { name: "Juan", lastName: "Duran", age: 37 }));
 
-// Required<Type>
+// -------------------------------- Required<Type> --------------------------------
 // Constructs a type consisting of all properties of Type set to required. The opposite of Partial.
 
 interface UserInfo2 {
@@ -168,7 +172,9 @@ const user1: UserInfo2 = {
   name: "Juan",
 };
 
-// If you dont use all the property's  object, the error should be: Type '{ id: string; name: string; }' is missing the following properties from type 'Required<UserInfo2>': lastName, agets(2739)
+// If you don't use all the property's object, the error should be: Type '{ id: string; name: string; }' is missing the following properties from type 'Required<UserInfo2>': lastName.
+// type Required<T> = { [P in keyof T]-?: T[P]; }
+// Make all properties in T required
 const user2: Required<UserInfo2> = {
   id: "3ffghy6",
   name: "Juan",
@@ -176,7 +182,7 @@ const user2: Required<UserInfo2> = {
   age: 37,
 };
 
-// Readonly<Type>
+// -------------------------------- Readonly<Type> --------------------------------
 // Constructs a type with all properties of Type set to readonly, meaning the properties of the constructed type cannot be reassigned.
 interface Books {
   id: string;
@@ -184,6 +190,8 @@ interface Books {
   pages: number;
 }
 
+// type Readonly<T> = { readonly [P in keyof T]: T[P]; }
+// Make all properties in T readonly
 const book1: Readonly<Books> = {
   id: '233drft',
   title: 'Book 1',
@@ -194,7 +202,7 @@ const book1: Readonly<Books> = {
 //book1.pages = 56;
 console.log(book1);
 
-// Record<Keys, Type>
+// -------------------------------- Record<Keys, Type> --------------------------------
 // Constructs an object type whose property keys are Keys and whose property values are Type. This utility can be used to map the properties of a type to another type.
 interface StoreProperties {
   sku: string;
@@ -204,8 +212,8 @@ interface StoreProperties {
 }
 
 type ClothesKeys =  "tshirt" | "socks" | "jeans";
-//type Record<K extends string | number | symbol, T> = { [P in K]: T; }
-//Construct a type with a set of properties K of type T
+// type Record<K extends string | number | symbol, T> = { [P in K]: T; }
+// Construct a type with a set of properties K of type T
 const clothes: Record<ClothesKeys, StoreProperties> = {
   tshirt: {
     sku: "tshirt456",
@@ -227,7 +235,7 @@ const clothes: Record<ClothesKeys, StoreProperties> = {
   }
 }
 
-// Pick<Type, Keys>
+// -------------------------------- Pick<Type, Keys> --------------------------------
 // Constructs a type by picking the set of properties Keys (string literal or union of string literals) from Type.
 interface Store2 {
   name: string;
@@ -244,3 +252,7 @@ const storeOne: StorePreview = {
   cuantity: 4,
   name: 'jean',
 } 
+
+// -------------------------------- Omit<Type, Keys> --------------------------------
+// Constructs a type by picking all properties from Type and then removing Keys (string literal or union of string literals).
+
