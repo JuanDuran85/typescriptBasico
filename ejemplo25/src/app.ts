@@ -155,7 +155,7 @@ function makeDictionary<T>(
   return response;
 }
 
-console.log(makeDictionary(dataNew, (el) => el.id));
+console.log(makeDictionary(dataNew, (el: DataNewInterface) => el.id));
 console.log("---------------------------------------------------------");
 
 //---------------------------------------------------------------------------------------------------
