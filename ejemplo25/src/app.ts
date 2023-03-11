@@ -146,13 +146,11 @@ function makeDictionary<T>(
 ): {
   [x: string]: T;
 } {
-  const response = arrIn.reduce((acc: { [key: string]: T }, current: T) => {
+  return arrIn.reduce((acc: { [key: string]: T }, current: T) => {
     const dictKey: number = callbackIn(current);
     acc[dictKey] = current;
-    return { ...acc };
+    return acc;
   }, {});
-
-  return response;
 }
 
 console.log(makeDictionary(dataNew, (el: DataNewInterface) => el.id));
