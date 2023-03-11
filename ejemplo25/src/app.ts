@@ -64,22 +64,20 @@ function extractAndConvert<T extends object, U extends keyof T>(
 
 console.log(extractAndConvert({ name: "Juan" }, "name"));
 
-
 // using object literal a move it to an interface
 interface GeneritTypeIdentifier {
-  <T>(value: T): T
+  <T>(value: T): T;
 }
 
 const result: GeneritTypeIdentifier = (value) => {
   return value;
-}
+};
 
 console.log(result(3));
-console.log(result('hola'));
+console.log(result("hola"));
 
 //Using Class Types in Generics
 // When creating factories in TypeScript using generics, it is necessary to refer to class types by their constructor functions.
-
 
 class Activeted {
   active: boolean = false;
@@ -89,12 +87,11 @@ class Desactivated {
   active: boolean = true;
 }
 
-function createInstanceStatus<T>(instance: {new ():T}): T{
+function createInstanceStatus<T>(instance: { new (): T }): T {
   return new instance();
 }
 
 console.log(createInstanceStatus(Activeted));
-
 
 // Working with generic classes
 
@@ -130,11 +127,42 @@ numberStorage.addItems(4);
 numberStorage.removeItem(4);
 console.log(numberStorage.getItems());
 
+// Make a dictionary with Generic Type.
+console.log("---------------------------------------------------------");
+interface DataNewInterface {
+  id: number;
+  name: string;
+}
+
+const dataNew: DataNewInterface[] = [
+  { id: 1, name: "Jailyn" },
+  { id: 2, name: "Samara" },
+  { id: 3, name: "Glenda" },
+];
+
+function makeDictionary<T>(
+  arrIn: T[],
+  callbackIn: (arg: T) => number
+): {
+  [x: string]: T;
+} {
+  const response = arrIn.reduce((acc: { [key: string]: T }, current: T) => {
+    const dictKey: number = callbackIn(current);
+    acc[dictKey] = current;
+    return { ...acc };
+  }, {});
+
+  return response;
+}
+
+console.log(makeDictionary(dataNew, (el) => el.id));
+console.log("---------------------------------------------------------");
+
 //---------------------------------------------------------------------------------------------------
 //    -------------------------------- Generic Utility types --------------------------------
 //---------------------------------------------------------------------------------------------------
 
-// -------------------------------- Awaited<Type> -------------------------------- 
+// -------------------------------- Awaited<Type> --------------------------------
 // This type is meant to model operations like await in async functions, or the .then() method on Promises - specifically, the way that they recursively unwrap Promises.
 
 interface PlaceHolderToDo {
@@ -225,10 +253,10 @@ interface Books {
 // type Readonly<T> = { readonly [P in keyof T]: T[P]; }
 // Make all properties in T readonly
 const book1: Readonly<Books> = {
-  id: '233drft',
-  title: 'Book 1',
+  id: "233drft",
+  title: "Book 1",
   pages: 51,
-}
+};
 
 // if you try to assign a new value to a property, you will get an error: Cannot assign to 'pages' because it is a read-only property.
 //book1.pages = 56;
@@ -237,7 +265,7 @@ console.log(book1);
 // -------------------------------- ReadonlyArray<Type> --------------------------------
 // Create a readonly version of your array.
 
-const arrayValues: number[] = [3,6,2,7,1];
+const arrayValues: number[] = [3, 6, 2, 7, 1];
 const copyArrayReadOnly: ReadonlyArray<number> = arrayValues;
 // Now, all mutating methods are removed and will throw a compile-time error.
 // copyArrayReadOnly.push(4);
@@ -253,7 +281,7 @@ interface StoreProperties {
   active: boolean;
 }
 
-type ClothesKeys =  "tshirt" | "socks" | "jeans";
+type ClothesKeys = "tshirt" | "socks" | "jeans";
 // type Record<K extends string | number | symbol, T> = { [P in K]: T; }
 // Construct a type with a set of properties K of type T
 const clothes: Record<ClothesKeys, StoreProperties> = {
@@ -261,21 +289,41 @@ const clothes: Record<ClothesKeys, StoreProperties> = {
     sku: "tshirt456",
     name: "Playera",
     cuantity: 14,
-    active: true
+    active: true,
   },
   socks: {
     sku: "socks1573",
     name: "Socks Prime",
     cuantity: 451,
-    active: true
+    active: true,
   },
   jeans: {
     sku: "jeans5369",
     name: "Cowboy Traditional",
     cuantity: 78,
-    active: true
-  }
+    active: true,
+  },
+};
+
+// Use Record to make an object indexable, instead of typing it out manually
+// For example, avoid this casa:
+
+interface UserForAvoid {
+  name: string;
 }
+
+const usersForAvoid: {
+  [key: string]: UserForAvoid;
+} = {};
+
+// Instead the pass iterface, you can use the Record Type, for example:
+interface UserToUse {
+  name: string;
+}
+
+const userToUse: Record<string, UserToUse> = {
+  x: { name: "44" },
+};
 
 // -------------------------------- Pick<Type, Keys> --------------------------------
 // Constructs a type by picking the set of properties Keys (string literal or union of string literals) from Type.
@@ -288,12 +336,33 @@ interface Store2 {
 // you can create a new type by using only the properties you want to pick.
 // type Pick<T, K extends keyof T> = { [P in K]: T[P]; }
 // From T, pick a set of properties whose keys are in the union K
-type StorePreview = Pick<Store2, "cuantity" & "name">
+type StorePreview = Pick<Store2, "cuantity" & "name">;
 
 const storeOne: StorePreview = {
   cuantity: 4,
-  name: 'jean',
-} 
+  name: "jean",
+};
+
+// create a new type using Pick: We can use Pick to create a new type containiinng only some properties. For example, if you have a UserXY interface with four properties that are all required:
+
+interface UserXY {
+  id: string;
+  username: string;
+  followers: number;
+  isBlocked: boolean;
+}
+
+type UpdateUser = (user: Pick<UserXY, "id" | "isBlocked">) => void;
+
+// you can use Pick to construct a variable with some properties of the interface. For example:
+const updateUser: UpdateUser = (user: Pick<UserXY, "id" | "isBlocked">) => {
+  console.log(`Values in to update: ${user.id}`);
+};
+
+updateUser({
+  id: "23dff32",
+  isBlocked: true,
+});
 
 // -------------------------------- Omit<Type, Keys> --------------------------------
 // Constructs a type by picking all properties from Type and then removing Keys (string literal or union of string literals).
@@ -311,13 +380,40 @@ type BirdPreview = Omit<Bird, "colors">;
 const birdPreviewShow: BirdPreview = {
   type: "bird",
   flyingSpeed: 45,
-  origin: "Africa"
-}
+  origin: "Africa",
+};
 
 type BirdCaracteristic = Omit<Bird, "type" | "flyingSpeed">;
 const birdCaracter: BirdCaracteristic = {
-  colors: ["Red","Blue"],
-  origin: "Africa"
-}
+  colors: ["Red", "Blue"],
+  origin: "Africa",
+};
 
+// -------------------------------- Type Guard --------------------------------
+// You can use type guard to check if the type is correct.
 
+type PersonGeneral = {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+};
+
+const isPersonValid = (data: any): data is PersonGeneral => {
+  if (typeof data?.title !== "string") return false;
+  if (typeof data?.id !== "number") return false;
+  if (typeof data?.userId !== "number") return false;
+  if (typeof data?.completed !== "boolean") return false;
+  return true;
+};
+
+fetch("https://jsonplaceholder.typicode.com/todos/1")
+  .then((response: any) => response.json())
+  .then((jsonResponse: unknown) => {
+    console.log({ jsonResponse });
+    if (isPersonValid(jsonResponse)) {
+      console.info({ jsonResponse });
+    }
+    throw new Error("Unexected response format");
+  })
+  .catch(console.error);
