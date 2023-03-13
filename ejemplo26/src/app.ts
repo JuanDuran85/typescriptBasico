@@ -27,16 +27,48 @@ class Person {
 // creating a decorator factory
 //----------------------------------
 
+function LoggerDecoratorFactory(messageLog: string) {
+  return (param: Function) => {
+    console.log(messageLog);
+    console.log(param);
+  };
+}
 
+@LoggerDecoratorFactory("LOGGIN_PERSON")
+class PersonClass {
+  public name = "Juan";
 
+  constructor() {
+    console.log("Inside of constructor class");
+    console.log("Creating Person object...");
+  }
+}
 
+//---------------------------------------------
+// creating a decorator factory with templates
+//---------------------------------------------
 
+function DecoratorWithTemplate(template: string, hookId: string) {
+  return (construct: any) => {
+    const person: PersonForDecorator = new construct();
+    const element: HTMLElement | null = document.getElementById(hookId);
+    if (hookId) {
+      element!.innerHTML = template;
+      const newElement = document.createElement("h3");
+      newElement.innerHTML = person.name;
+      document.body.appendChild(newElement);
+    }
+  };
+}
 
+@DecoratorWithTemplate("<p>Nuevo mensaje desde el Decorador</p>", "decorator")
+class PersonForDecorator {
+  public name: string = "Juan";
 
-/**
- * Class Decorator
- * Generating metadata using a class decorator: This time we are going to declare a class decorator that will add some metadata to a class when we applied to it:
- */
+  constructor() {
+    console.log("Inside PersonForDecorator");
+  }
+}
 
 // ---------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------
@@ -51,4 +83,11 @@ class Person {
 // ---------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------
 
+/**
+ * Class Decorator
+ * Generating metadata using a class decorator: This time we are going to declare a class decorator that will add some metadata to a class when we applied to it:
+ */
+
+// ---------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------
