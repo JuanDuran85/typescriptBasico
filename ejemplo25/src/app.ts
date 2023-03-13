@@ -156,6 +156,23 @@ function makeDictionary<T>(
 console.log(makeDictionary(dataNew, (el: DataNewInterface) => el.id));
 console.log("---------------------------------------------------------");
 
+// Itersected with type and generics.
+console.log("---------------------------------------------------------");
+
+type Intersected = {
+  a: number;
+} & {
+  b: number;
+} & {
+  c: number;
+};
+
+type PrettifyInterseted<T> = {
+  [K in keyof T]: T[K];
+};
+
+type Result = PrettifyInterseted<Intersected>;
+
 //---------------------------------------------------------------------------------------------------
 //    -------------------------------- Generic Utility types --------------------------------
 //---------------------------------------------------------------------------------------------------
