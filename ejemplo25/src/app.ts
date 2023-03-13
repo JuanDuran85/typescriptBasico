@@ -104,7 +104,7 @@ class DataStoregeGeneric<T extends string | number | boolean> {
   }
 
   removeItem(item: T) {
-    if (this.data.indexOf(item) === -1) return;
+    if (!this.data.includes(item)) return;
     this.data.splice(this.data.indexOf(item), 1);
   }
 
