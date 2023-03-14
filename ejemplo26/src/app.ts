@@ -76,9 +76,46 @@ class PersonForDecorator {
 // All places to add decorator
 //---------------------------------------------
 
-class Product {
-    constructor(public title: string, private _price: number){}
+// adding decorator to a property
+function LogPropertyClasss(targetProperty: any,  propertyName:  string |  Symbol) {
+    console.log("Property Class Decorator...");
+    console.log(targetProperty);
+    console.log(propertyName);
+}
 
+// adding decorator to an Accesor
+function LogAccesorClass(target: any, nameAccesor: string, descriptor: PropertyDescriptor) {
+  console.log("Accesor Class Decorator...");
+  console.log(target);
+  console.log(nameAccesor);
+  console.log(descriptor);
+}
+
+// adding decorator to a Method
+function LogMethodClasss(target: any, nameMethod: string, descriptor: PropertyDescriptor) {
+  console.log("Method Class Decorator...");
+  console.log(target);
+  console.log(nameMethod);
+  console.log(descriptor);
+
+}
+
+function LogParameterMethodClass(target: any, nameMethod: string, positionArgument: number) {
+  console.log("Parametor Class Decorator...");
+  console.log(target);
+  console.log(nameMethod);
+  console.log(positionArgument);
+}
+
+class Product {
+    @LogPropertyClasss
+    public title: string;
+
+    constructor(public titleIn: string, private _price: number){
+        this.title = titleIn;
+    }
+
+    @LogAccesorClass
     set price(value: number){
         if (value > 0) {
             this._price = value;
@@ -87,7 +124,8 @@ class Product {
         throw new Error("The price must be grader than 0");
     }
 
-    getePriceWithTax(tax: number){
+    @LogMethodClasss
+    getPriceWithTax(@LogParameterMethodClass tax: number){
         return this._price * (1 + tax);
     }
 }
