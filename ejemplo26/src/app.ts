@@ -52,12 +52,13 @@ function DecoratorWithTemplate(template: string, hookId: string) {
   return (construct: any) => {
     const person: PersonForDecorator = new construct();
     const element: HTMLElement | null = document.getElementById(hookId);
-    if (hookId) {
-      element!.innerHTML = template;
-      const newElement = document.createElement("h3");
-      newElement.innerHTML = person.name;
-      document.body.appendChild(newElement);
+    if (!hookId) {
+      return;
     }
+    element!.innerHTML = template;
+    const newElement = document.createElement("h3");
+    newElement.innerHTML = person.name;
+    document.body.appendChild(newElement);
   };
 }
 
@@ -69,6 +70,31 @@ class PersonForDecorator {
     console.log("Inside PersonForDecorator");
   }
 }
+
+
+//---------------------------------------------
+// All places to add decorator
+//---------------------------------------------
+
+class Product {
+    constructor(public title: string, private _price: number){}
+
+    set price(value: number){
+        if (value > 0) {
+            this._price = value;
+        }
+
+        throw new Error("The price must be grader than 0");
+    }
+
+    getePriceWithTax(tax: number){
+        return this._price * (1 + tax);
+    }
+}
+
+
+
+
 
 // ---------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------
