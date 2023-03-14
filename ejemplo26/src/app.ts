@@ -52,10 +52,10 @@ function DecoratorWithTemplate(template: string, hookId: string) {
   return (construct: any) => {
     const person: PersonForDecorator = new construct();
     const element: HTMLElement | null = document.getElementById(hookId);
-    if (!hookId) {
+    if (!element) {
       return;
     }
-    element!.innerHTML = template;
+    element.innerHTML = template;
     const newElement = document.createElement("h3");
     newElement.innerHTML = person.name;
     document.body.appendChild(newElement);
@@ -71,20 +71,23 @@ class PersonForDecorator {
   }
 }
 
-
 //---------------------------------------------
 // All places to add decorator
 //---------------------------------------------
 
 // adding decorator to a property
-function LogPropertyClasss(targetProperty: any,  propertyName:  string |  Symbol) {
-    console.log("Property Class Decorator...");
-    console.log(targetProperty);
-    console.log(propertyName);
+function LogPropertyClasss(targetProperty: any, propertyName: string | Symbol) {
+  console.log("Property Class Decorator...");
+  console.log(targetProperty);
+  console.log(propertyName);
 }
 
 // adding decorator to an Accesor
-function LogAccesorClass(target: any, nameAccesor: string, descriptor: PropertyDescriptor) {
+function LogAccesorClass(
+  target: any,
+  nameAccesor: string,
+  descriptor: PropertyDescriptor
+) {
   console.log("Accesor Class Decorator...");
   console.log(target);
   console.log(nameAccesor);
@@ -92,15 +95,22 @@ function LogAccesorClass(target: any, nameAccesor: string, descriptor: PropertyD
 }
 
 // adding decorator to a Method
-function LogMethodClasss(target: any, nameMethod: string, descriptor: PropertyDescriptor) {
+function LogMethodClasss(
+  target: any,
+  nameMethod: string,
+  descriptor: PropertyDescriptor
+) {
   console.log("Method Class Decorator...");
   console.log(target);
   console.log(nameMethod);
   console.log(descriptor);
-
 }
 
-function LogParameterMethodClass(target: any, nameMethod: string, positionArgument: number) {
+function LogParameterMethodClass(
+  target: any,
+  nameMethod: string,
+  positionArgument: number
+) {
   console.log("Parametor Class Decorator...");
   console.log(target);
   console.log(nameMethod);
@@ -108,28 +118,116 @@ function LogParameterMethodClass(target: any, nameMethod: string, positionArgume
 }
 
 class Product {
-    @LogPropertyClasss
-    public title: string;
+  @LogPropertyClasss
+  public title: string;
 
-    constructor(public titleIn: string, private _price: number){
-        this.title = titleIn;
+  constructor(public titleIn: string, private _price: number) {
+    this.title = titleIn;
+  }
+
+  @LogAccesorClass
+  set price(value: number) {
+    if (value > 0) {
+      this._price = value;
     }
 
-    @LogAccesorClass
-    set price(value: number){
-        if (value > 0) {
-            this._price = value;
-        }
+    throw new Error("The price must be grader than 0");
+  }
 
-        throw new Error("The price must be grader than 0");
-    }
-
-    @LogMethodClasss
-    getPriceWithTax(@LogParameterMethodClass tax: number){
-        return this._price * (1 + tax);
-    }
+  @LogMethodClasss
+  getPriceWithTax(@LogParameterMethodClass tax: number) {
+    return this._price * (1 + tax);
+  }
 }
 
+//---------------------------------------------
+// returning values with decorator
+//---------------------------------------------
+
+// adding a decorator with template and returning some value
+
+function DecoratorWithTemplateReturValue(template: string, hookId: string) {
+  console.log("---- DecoratorWithTemplateReturValue ----");
+  return <T extends { new (...args: any[]): { nameUser: string } }>(
+    originalConstruct: T
+  ) =>
+    class extends originalConstruct {
+      //adding new functionality
+      constructor(..._: any[]) {
+        super();
+        console.log("---- Rendering tamplate ----");
+        const elmentOne: HTMLElement | null = document.getElementById(hookId);
+        if (!elmentOne) return;
+        elmentOne.innerHTML = template;
+        const newElement: HTMLHeadingElement = document.createElement("h3");
+        newElement.innerHTML = this.nameUser;
+        document.body.appendChild(newElement);
+      }
+    };
+}
+
+@DecoratorWithTemplateReturValue(
+  "<p>Nuevo mensaje desde el Decorador</p>",
+  "decorator"
+)
+class NewPersonClass {
+  public nameUser: string = "JD";
+
+  constructor() {
+    console.log("Inside NewPersonClass");
+  }
+}
+
+const person1: NewPersonClass = new NewPersonClass();
+console.log(person1);
+
+//---------------------------------------------
+// crearing a bind without decorator with default JS
+//---------------------------------------------
+class PrinterWithOutDecorator{
+  public message: string = "This work!!";
+
+  public showMessage(){
+    console.log(this.message);
+  }
+}
+
+const print1: PrinterWithOutDecorator = new PrinterWithOutDecorator()
+
+const button: HTMLButtonElement | null = document.querySelector('button');
+button?.addEventListener('click',print1.showMessage.bind(print1));
+
+//---------------------------------------------
+// crearing a autobind with decorator 
+//---------------------------------------------
+
+function AutoBindDecorator(_target: any, _methodName: string | Symbol | number, descriptor: PropertyDescriptor) {
+  const originalMethod = descriptor.value;
+  return {
+    enumerable: false,
+    configurable: true,
+    get() {
+        return originalMethod.bind(this);
+    },
+  }
+}
+
+class PrinterDecorator{
+  public message: string = "This work again!!";
+
+  @AutoBindDecorator
+  public showMessage(){
+    console.log(this.message);
+  }
+}
+
+const print2: PrinterDecorator = new PrinterDecorator()
+
+button?.addEventListener('click',print2.showMessage);
+
+//---------------------------------------------
+// validation with decorator
+//---------------------------------------------
 
 
 
