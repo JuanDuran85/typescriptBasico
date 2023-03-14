@@ -184,53 +184,124 @@ console.log(person1);
 //---------------------------------------------
 // crearing a bind without decorator with default JS
 //---------------------------------------------
-class PrinterWithOutDecorator{
+class PrinterWithOutDecorator {
   public message: string = "This work!!";
 
-  public showMessage(){
+  public showMessage() {
     console.log(this.message);
   }
 }
 
-const print1: PrinterWithOutDecorator = new PrinterWithOutDecorator()
+const print1: PrinterWithOutDecorator = new PrinterWithOutDecorator();
 
-const button: HTMLButtonElement | null = document.querySelector('button');
-button?.addEventListener('click',print1.showMessage.bind(print1));
+const button: HTMLButtonElement | null = document.querySelector("button");
+button?.addEventListener("click", print1.showMessage.bind(print1));
 
 //---------------------------------------------
-// crearing a autobind with decorator 
+// crearing a autobind with decorator
 //---------------------------------------------
 
-function AutoBindDecorator(_target: any, _methodName: string | Symbol | number, descriptor: PropertyDescriptor) {
+function AutoBindDecorator(
+  _target: any,
+  _methodName: string | Symbol | number,
+  descriptor: PropertyDescriptor
+) {
   const originalMethod = descriptor.value;
   return {
     enumerable: false,
     configurable: true,
     get() {
-        return originalMethod.bind(this);
+      return originalMethod.bind(this);
     },
-  }
+  };
 }
 
-class PrinterDecorator{
+class PrinterDecorator {
   public message: string = "This work again!!";
 
   @AutoBindDecorator
-  public showMessage(){
+  public showMessage() {
     console.log(this.message);
   }
 }
 
-const print2: PrinterDecorator = new PrinterDecorator()
+const print2: PrinterDecorator = new PrinterDecorator();
 
-button?.addEventListener('click',print2.showMessage);
+button?.addEventListener("click", print2.showMessage);
 
 //---------------------------------------------
 // validation with decorator
 //---------------------------------------------
 
+interface ValidatorConfig {
+  [property: string]: {
+    [validatableProp: string]: string[] //['requird', 'positive', ...]
+  };
+}
 
+interface ObjectValidConfig {
+  [validatableProp: string]: string[];
+};
 
+const registeredValidators: ValidatorConfig = {};
+
+function RequiredValue(target: any, propertyName: string) {
+  // we dont get de descriptor for properties
+  registeredValidators[target.constructor.name] = {
+    [propertyName]:['required']
+  }
+}
+
+function PositiveNumber(target: any, propertyName: string) {
+  registeredValidators[target.constructor.name] = {
+    [propertyName]:['positive']
+  }
+}
+
+function validateProperties(objIn: any) {
+  const objValidatorConfig: ObjectValidConfig | undefined = registeredValidators[objIn.constructor.name];
+  if (!objValidatorConfig) return true;
+  for (const prop in objValidatorConfig) {
+    for (const validator of objValidatorConfig[prop]!) {
+      switch (validator) {
+        case 'required':
+          return !!objIn[prop];
+        case 'positive':
+          return objIn[prop] > 0;
+        default:
+          return false;
+      }
+    }
+  }
+  return true;
+}
+class Course {
+  @RequiredValue
+  public title: string;
+  @PositiveNumber 
+  public price: number
+  constructor(titleIn: string, priceIn: number) {
+    this.title = titleIn;
+    this.price = priceIn;
+  }
+}
+
+const getForm: HTMLFormElement | null = document.querySelector("form");
+getForm?.addEventListener("submit", (event: SubmitEvent) => {
+  event.preventDefault();
+  const titleElement = document.getElementById('title') as HTMLInputElement;
+  const priceElement = document.getElementById('price') as HTMLInputElement;
+
+  const title: string = titleElement.value;
+  const price: number = +priceElement.value;
+
+  const createdCourse: Course = new Course(title, price);
+  if (!validateProperties(createdCourse)){
+    console.error("Invalid input. Please try again");
+    return; 
+  }
+  console.log(createdCourse);
+});
 
 // ---------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------
