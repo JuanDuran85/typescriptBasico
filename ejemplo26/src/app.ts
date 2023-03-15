@@ -220,7 +220,7 @@ class PrinterDecorator {
   public message: string = "This work again!!";
 
   @AutoBindDecorator
-  public showMessage() {
+  public showMessage(): void {
     console.log(this.message);
   }
 }
@@ -245,35 +245,40 @@ interface ObjectValidConfig {
 
 const registeredValidators: ValidatorConfig = {};
 
-function RequiredValue(target: any, propertyName: string) {
+function RequiredValue(target: any, propertyName: string): void {
   // we dont get de descriptor for properties
   registeredValidators[target.constructor.name] = {
-    [propertyName]:['required']
+    ...registeredValidators[target.constructor.name],
+    [propertyName]:[...(registeredValidators[target.constructor.name]?.[propertyName] ?? []), 'required']
   }
 }
 
-function PositiveNumber(target: any, propertyName: string) {
+function PositiveNumber(target: any, propertyName: string): void {
   registeredValidators[target.constructor.name] = {
-    [propertyName]:['positive']
+    ...registeredValidators[target.constructor.name],
+    [propertyName]:[...(registeredValidators[target.constructor.name]?.[propertyName] ?? []), 'positive']
   }
 }
 
-function validateProperties(objIn: any) {
+function validateProperties(objIn: any): boolean {
   const objValidatorConfig: ObjectValidConfig | undefined = registeredValidators[objIn.constructor.name];
   if (!objValidatorConfig) return true;
+  let isValidFinal: boolean = true;
   for (const prop in objValidatorConfig) {
     for (const validator of objValidatorConfig[prop]!) {
       switch (validator) {
         case 'required':
-          return !!objIn[prop];
+          isValidFinal = isValidFinal && !!objIn[prop];
+          break;
         case 'positive':
-          return objIn[prop] > 0;
+          isValidFinal = isValidFinal && objIn[prop] > 0;
+          break;
         default:
           return false;
       }
     }
   }
-  return true;
+  return isValidFinal;
 }
 class Course {
   @RequiredValue
