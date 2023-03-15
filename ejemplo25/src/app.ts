@@ -491,3 +491,112 @@ statusTwo.emit({
 console.log(statusTwo.getAll());
 statusTwo.getAll().forEach((value: Code) => console.log(value));
 
+//-----------------------------------------------------------------------------------------------
+// Generic Interfaces
+//-----------------------------------------------------------------------------------------------
+
+// Declaring a generic interface
+
+interface ResultProcessError<T> {
+  wasSuccessful: boolean;
+  error: T;
+}
+
+const resultFinal: ResultProcessError<string> = {
+  wasSuccessful: false,
+  error: "Not found",
+};
+const error: string = resultFinal.error;
+console.log({ resultFinal, error });
+
+// Generic interface with multiple type parameters
+
+interface ResultProcessMain<T, U> {
+  getDataProcess(input: T): U;
+}
+
+const resultProcessMain: ResultProcessMain<number, string> = {
+  getDataProcess(input: number) {
+    return `El resultado es: ${input + 4}`;
+  },
+};
+const resultNumeric: string = resultProcessMain.getDataProcess(4);
+console.log(resultProcessMain.getDataProcess(5));
+console.log(resultNumeric);
+
+//Implementing a generic interface
+interface ResultProcess<T> {
+  susccessfull: boolean | null;
+  error: T;
+  clone(): ResultProcess<T>;
+}
+
+interface CodeError {
+  message: string;
+  code: number;
+}
+
+// Implement it with generic class
+class ResultMain<T> implements ResultProcess<T> {
+  public susccessfull: boolean | null;
+  public error: T;
+
+  public constructor(susccessIn: boolean | null, errorIn: T) {
+    this.susccessfull = susccessIn;
+    this.error = errorIn;
+  }
+
+  public clone(): ResultProcess<T> {
+    return new ResultMain<T>(this.susccessfull, this.error);
+  }
+}
+
+const errorCode: CodeError = {
+  message: "Ok",
+  code: 200,
+};
+
+const resutMainWithGeneric: ResultMain<CodeError> = new ResultMain(
+  true,
+  errorCode
+);
+console.log(resutMainWithGeneric);
+console.log(resutMainWithGeneric.error);
+console.log(resutMainWithGeneric.susccessfull);
+const cloneResultMain = resutMainWithGeneric.clone();
+console.log(cloneResultMain);
+
+// Type parameters as constraints
+
+function assignValues<T extends U, U>(target: T, source: U): T {
+  return {
+    ...target,
+    ...source,
+  };
+}
+const numOne = { a: 3, b: 1, c: 6 };
+console.log(assignValues(numOne, { a: -4, c: -6 }));
+
+//-----------------------------------------------------------------------------------------------
+// Workinng with Generic
+//-----------------------------------------------------------------------------------------------
+
+interface SumResult<T extends number> {
+  sumaProcess(valuesIn: T[]): number
+}
+
+type SSumResult = <T extends number>(valuesIn: T[]) => number;
+
+const sumaProcess: SSumResult = <T extends number>(valuesIn:T[]): number => {
+  let sum: number = 0;
+  for (const numberValue of valuesIn) {
+    sum += numberValue
+  }
+
+  return sum;
+}
+
+console.log(sumaProcess([3,5,1,9,1]));
+
+//-----------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------
