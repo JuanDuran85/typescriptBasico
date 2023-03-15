@@ -432,3 +432,62 @@ fetch("https://jsonplaceholder.typicode.com/todos/1")
     throw new Error("Unexected response format");
   })
   .catch(console.error);
+
+//  -----------------------------------------------------------------------------------
+// Declaring Generic Parameters on Interfaces, when two interfaces take some generic parameters, T and U
+interface IStatus<U> {
+  code: U;
+}
+
+interface Code {
+  message: string;
+  code: number;
+}
+
+interface IEvents<T> {
+  list: T[];
+  emit(event: T): void;
+  getAll(): T[];
+}
+
+// Implementing Generic Interfaces: implementing the interface IEvents.
+class States<T> implements IEvents<T> {
+  public list: T[];
+
+  constructor() {
+    this.list = [];
+  }
+
+  emit(event: T): void {
+    this.list.push(event);
+  }
+
+  getAll(): T[] {
+    return this.list;
+  }
+}
+
+// Now, Let's create some instances of our State class. In this case, the State class will handle a generic status by using IStatus<T>. In this way, the interface IEvent<T> will also handle a IStatus<T>. Here our State class is typed as IStatus<number>.
+
+const statusOne: States<IStatus<number>> = new States<IStatus<number>>();
+statusOne.emit({
+  code: 200,
+});
+statusOne.emit({
+  code: 500,
+});
+console.log(statusOne.getAll());
+statusOne.getAll().forEach((value: IStatus<number>) => console.log(value.code));
+
+const statusTwo: States<Code> = new States<Code>();
+statusTwo.emit({
+  message: "Ok",
+  code: 200,
+});
+statusTwo.emit({
+  message: "Page not found",
+  code: 404,
+});
+console.log(statusTwo.getAll());
+statusTwo.getAll().forEach((value: Code) => console.log(value));
+

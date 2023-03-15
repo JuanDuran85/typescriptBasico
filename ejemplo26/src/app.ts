@@ -235,13 +235,13 @@ button?.addEventListener("click", print2.showMessage);
 
 interface ValidatorConfig {
   [property: string]: {
-    [validatableProp: string]: string[] //['requird', 'positive', ...]
+    [validatableProp: string]: string[]; //['requird', 'positive', ...]
   };
 }
 
 interface ObjectValidConfig {
   [validatableProp: string]: string[];
-};
+}
 
 const registeredValidators: ValidatorConfig = {};
 
@@ -249,28 +249,35 @@ function RequiredValue(target: any, propertyName: string): void {
   // we dont get de descriptor for properties
   registeredValidators[target.constructor.name] = {
     ...registeredValidators[target.constructor.name],
-    [propertyName]:[...(registeredValidators[target.constructor.name]?.[propertyName] ?? []), 'required']
-  }
+    [propertyName]: [
+      ...(registeredValidators[target.constructor.name]?.[propertyName] ?? []),
+      "required",
+    ],
+  };
 }
 
 function PositiveNumber(target: any, propertyName: string): void {
   registeredValidators[target.constructor.name] = {
     ...registeredValidators[target.constructor.name],
-    [propertyName]:[...(registeredValidators[target.constructor.name]?.[propertyName] ?? []), 'positive']
-  }
+    [propertyName]: [
+      ...(registeredValidators[target.constructor.name]?.[propertyName] ?? []),
+      "positive",
+    ],
+  };
 }
 
 function validateProperties(objIn: any): boolean {
-  const objValidatorConfig: ObjectValidConfig | undefined = registeredValidators[objIn.constructor.name];
+  const objValidatorConfig: ObjectValidConfig | undefined =
+    registeredValidators[objIn.constructor.name];
   if (!objValidatorConfig) return true;
   let isValidFinal: boolean = true;
   for (const prop in objValidatorConfig) {
     for (const validator of objValidatorConfig[prop]!) {
       switch (validator) {
-        case 'required':
+        case "required":
           isValidFinal = isValidFinal && !!objIn[prop];
           break;
-        case 'positive':
+        case "positive":
           isValidFinal = isValidFinal && objIn[prop] > 0;
           break;
         default:
@@ -283,8 +290,8 @@ function validateProperties(objIn: any): boolean {
 class Course {
   @RequiredValue
   public title: string;
-  @PositiveNumber 
-  public price: number
+  @PositiveNumber
+  public price: number;
   constructor(titleIn: string, priceIn: number) {
     this.title = titleIn;
     this.price = priceIn;
@@ -294,16 +301,16 @@ class Course {
 const getForm: HTMLFormElement | null = document.querySelector("form");
 getForm?.addEventListener("submit", (event: SubmitEvent) => {
   event.preventDefault();
-  const titleElement = document.getElementById('title') as HTMLInputElement;
-  const priceElement = document.getElementById('price') as HTMLInputElement;
+  const titleElement = document.getElementById("title") as HTMLInputElement;
+  const priceElement = document.getElementById("price") as HTMLInputElement;
 
   const title: string = titleElement.value;
   const price: number = +priceElement.value;
 
   const createdCourse: Course = new Course(title, price);
-  if (!validateProperties(createdCourse)){
+  if (!validateProperties(createdCourse)) {
     console.error("Invalid input. Please try again");
-    return; 
+    return;
   }
   console.log(createdCourse);
 });
@@ -317,14 +324,39 @@ getForm?.addEventListener("submit", (event: SubmitEvent) => {
  * Generating metadata using a class decorator: This time we are going to declare a class decorator that will add some metadata to a class when we applied to it:
  */
 
-// ---------------------------------------------------------------------------------
-// ---------------------------------------------------------------------------------
-// ---------------------------------------------------------------------------------
+// The decorator is applied when the class is declared not when we create instances of the class. This means that the metadata is shared across all the instances of a class
 
-/**
- * Class Decorator
- * Generating metadata using a class decorator: This time we are going to declare a class decorator that will add some metadata to a class when we applied to it:
- */
+function getMetaDataFromClass(target: any) {
+  return target.__customMetadata;
+}
+
+function getMetaDataFromIstance(target: any) {
+  return target.constructor.__customMetaData;
+}
+
+function addMetaData(metadata:any) {
+  return (target: any) => {
+    target.__customMetadata = metadata;
+    return target;
+  }
+  
+}
+@addMetaData({msm:"Nuevo mensaje"})
+class PersonMetaData {
+  private _name: string;
+
+  public constructor(name: string = "JD") {
+    this._name = name;
+  }
+
+  public greet() {
+    return `Hello from ${this._name}`;
+  }
+}
+
+const personMetaData:PersonMetaData = new PersonMetaData("Juan");
+console.log({personMetaData});
+console.log(getMetaDataFromClass(PersonMetaData));
 
 // ---------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------
