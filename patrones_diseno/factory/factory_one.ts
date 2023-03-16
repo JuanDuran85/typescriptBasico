@@ -21,21 +21,30 @@ class Vehicle{};
 class Car{};
 class Truck{};
 
+interface IVehicle {
+    car: () => Car;
+    truck: () => Truck;
+}
+
+const vehicleType: IVehicle = {
+    'car': () => new Car(),
+    'truck': () => new Truck()
+}
+
+type KeysValues = keyof typeof vehicleType;
+type VehicleTypes = typeof vehicleType[KeysValues];
+type FinalInfo<T> = T extends new () => infer R ? R : T;
+
+
 class VehicleFactory {
-
-    private vehicleType = {
-        'car': () => new Car(),
-        'truck': () => new Truck()
-    }
-
-    public createVehicle(typeVehicle: string): Vehicle {
-        return this.vehicleType[typeVehicle] || new Error('No existe')
+    public createVehicle(key: KeysValues): FinalInfo<VehicleTypes> {
+        return vehicleType[key] || new Error('No se puede');
     }
 }
 
 const factoryCreation = new VehicleFactory();
-const carOne = factoryCreation.createVehicle('car');
-const truckOne = factoryCreation.createVehicle('truck');
+const carOne: Car | Truck = factoryCreation.createVehicle('car')();
+const truckOne: VehicleTypes = factoryCreation.createVehicle('truck');
 console.log(carOne);
 console.log(truckOne);
 

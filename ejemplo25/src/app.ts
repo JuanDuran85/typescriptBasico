@@ -582,21 +582,204 @@ console.log(assignValues(numOne, { a: -4, c: -6 }));
 //-----------------------------------------------------------------------------------------------
 
 interface SumResult<T extends number> {
-  sumaProcess(valuesIn: T[]): number
+  sumaProcess(valuesIn: T[]): number;
 }
 
 type SSumResult = <T extends number>(valuesIn: T[]) => number;
 
-const sumaProcess: SSumResult = <T extends number>(valuesIn:T[]): number => {
+const sumaProcess: SSumResult = <T extends number>(valuesIn: T[]): number => {
   let sum: number = 0;
   for (const numberValue of valuesIn) {
-    sum += numberValue
+    sum += numberValue;
   }
 
   return sum;
+};
+
+console.log(sumaProcess([3, 5, 1, 9, 1]));
+
+//-----------------------------------------------------------------------------------------------
+// Workinng with Functions and Classes with annd without Generic
+//-----------------------------------------------------------------------------------------------
+
+const arrayWithNumber: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8];
+
+//Functions without using generics
+function removeRandomArrayItemWithOutGeneric(
+  arrayIn: Array<number>
+): Array<number> {
+  const randomIndexToFind: number = Math.floor(Math.random() * arrayIn.length);
+  return arrayIn.splice(randomIndexToFind, 1);
 }
 
-console.log(sumaProcess([3,5,1,9,1]));
+console.log(removeRandomArrayItemWithOutGeneric(arrayWithNumber));
 
-//-----------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------
+// Functions using generics
+
+function removeRandomArrayItemWithGeneric<T>(arrayIn: Array<T>): Array<T> {
+  const randomIndexToFind: number = Math.floor(Math.random() * arrayIn.length);
+  return arrayIn.splice(randomIndexToFind, 1);
+}
+
+console.log(removeRandomArrayItemWithGeneric(arrayWithNumber));
+
+// Class without using generics
+
+class RemoverOnArray {
+  public items: Array<number>;
+
+  constructor(itemIn: Array<number>) {
+    this.items = itemIn;
+  }
+
+  public addValue(item: number): number {
+    return this.items.push(item);
+  }
+
+  public removeValue(arrayIn: Array<number>): Array<number> {
+    const randomIndexToFind: number = Math.floor(
+      Math.random() * arrayIn.length
+    );
+    return arrayIn.splice(randomIndexToFind, 1);
+  }
+}
+const arrayWithNumber2: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8];
+console.log(new RemoverOnArray(arrayWithNumber2).addValue(-4));
+console.log(new RemoverOnArray(arrayWithNumber2).removeValue(arrayWithNumber2));
+
+// Class with generics
+class RemoverOnArrayWithGenerics<T> {
+  public items: Array<T> = [];
+
+  constructor(itemIn: Array<T>) {
+    this.items = itemIn;
+  }
+
+  public addValueWithGeneric(item: T): string {
+    this.items.push(item);
+    return `Add value: ${item}`;
+  }
+
+  public removeValueWithGeneric(arrayIn: Array<T>): Array<T> {
+    const randomIndexWithGeneric: number = Math.floor(
+      Math.random() * arrayIn.length
+    );
+    return arrayIn.splice(randomIndexWithGeneric, 1);
+  }
+}
+
+const arrayWithNumber3: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8];
+const arrayWithNumber4: Array<string> = [
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+];
+console.log(
+  new RemoverOnArrayWithGenerics(arrayWithNumber3).addValueWithGeneric(-4)
+);
+console.log(
+  new RemoverOnArrayWithGenerics(arrayWithNumber3).removeValueWithGeneric(
+    arrayWithNumber3
+  )
+);
+console.log(
+  new RemoverOnArrayWithGenerics(arrayWithNumber4).addValueWithGeneric("-4")
+);
+console.log(
+  new RemoverOnArrayWithGenerics(arrayWithNumber4).removeValueWithGeneric(
+    arrayWithNumber4
+  )
+);
+
+// Using generics inside TypeScript interfaces
+
+const actualLoggedIn = <T extends object>(obj: T) => {
+  const userIsOnline: boolean = true;
+  return { ...obj, onLine: userIsOnline };
+};
+
+const userOne = actualLoggedIn({ name: "Juan", email: "juan@email.com" });
+userOne.onLine = false;
+console.log(userOne);
+
+interface UserLog<T> {
+  name: string;
+  email: string;
+  onLine: boolean;
+  skill: T;
+}
+
+const userNewOne: UserLog<string[]> = {
+  name: "Juan",
+  email: "juan@email.com",
+  onLine: true,
+  skill: ["a", "b"],
+};
+
+interface Greet<T> {
+  fullName: string;
+  messenge: string;
+  skills: T;
+}
+
+type MessageGreet = (objIn: Greet<string>) => Greet<string>;
+
+const messageGreet: MessageGreet = (objIn: Greet<string>): Greet<string> => {
+  return {
+    ...objIn,
+    messenge: `Hi ${objIn.fullName}`,
+    skills: "Dev",
+  };
+};
+
+console.log(
+  messageGreet({
+    fullName: "Juan",
+    messenge: "",
+    skills: "",
+  })
+);
+
+// Passing default generic values to generics: pass in a default generic type to our generic.
+
+function genericWithDefault<T = number>(arrayIn: T[]): T[] {
+  return arrayIn.splice(Math.floor(Math.random() * arrayIn.length), 1);
+}
+
+console.log(genericWithDefault([1, 6, 2, 1, 7]));
+
+// Passing multiple generic values
+function genericWithMultipleDefault<T = number, Y = number>(arrayIn: T[], multiply: Y): [T[],Y] {
+  return [(arrayIn.splice(Math.floor(Math.random() * arrayIn.length), 1)),multiply];
+}
+console.log(genericWithMultipleDefault([1, 6, 2, 1, 7],4));
+
+// Adding constraints to generics: We can, however, add constraints to the generic to limit it to a specific type.
+
+function getFromObjectAProperty<T, U extends keyof T>(objIn: T, keyIn: U){
+  return objIn[keyIn];
+}
+
+interface ObjectExample {
+  name: string;
+  status: boolean;
+  createAt: Date,
+  amount: number
+};
+
+const newObjectExample: ObjectExample = {
+  name: 'example',
+  status: true,
+  createAt: new Date(),
+  amount: 100
+};
+
+console.log(getFromObjectAProperty(newObjectExample, 'name'));
+console.log(getFromObjectAProperty(newObjectExample, 'createAt'));
+
+
