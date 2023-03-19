@@ -57,3 +57,7 @@ const superCX02 = concreteFactoryCar.produceSuperCX02();
 
 superCX01.run();
 superCX02.run();
+
+/* 
+The biggest difference between the abstract factory pattern and the factory method pattern is that the factory method pattern is aimed at a product hierarchy, while the abstract factory pattern needs to face multiple product hierarchy structures, and a factory hierarchy structure can be responsible for multiple different product hierarchy structures.
+*/
