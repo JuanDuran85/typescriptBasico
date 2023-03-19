@@ -1,5 +1,7 @@
 /**
  * 
+ * THE FACTORY METHOD PATTERN
+ * 
  * The factory method pattern, also known as the factory pattern, is also called the polymorphic
  * factory pattern, which belongs to the creational pattern.
  * 
