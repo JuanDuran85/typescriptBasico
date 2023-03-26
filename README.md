@@ -55,3 +55,17 @@ Ejemplos de TypeScript Básico.
    ```bash
    npm install -g tsun
    ```
+## Jest (unit test)
+
+1. Install dependencies
+   ```bash
+   npm i -D jest typescript ts-node ts-jest @types/node @types/jest
+   ```
+2. Create a config file for jest
+   ```bash
+   npx ts-jest config:init
+   ```
+   Next, change the extension file to ts
+   Next, change the content on the config file
+
+3. Create a config file for TS
