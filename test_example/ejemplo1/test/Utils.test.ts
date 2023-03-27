@@ -1,4 +1,4 @@
-import { dumpToUperCase } from "../src/Utils";
+import { dumpToUperCase, dumpGetStringInfo, stringInfo } from '../src/Utils';
 
 //--------------------------------------------
 /*   
@@ -23,5 +23,23 @@ describe("Dump Utils test suite", () => {
 
     // assert
     expect(actual).toBe(expected);
+  });
+
+  it('should be return info for a valid string', () => {
+    // arrange
+    const sut: (args: string) => stringInfo = dumpGetStringInfo;
+    const expected: stringInfo = {
+      lowerCase: '',
+      upperCase: '',
+      characters: [''],
+      length: 1,
+      extraInfo: {}
+    } 
+    // act
+    const actual: stringInfo = sut("My-Super-String");
+
+
+    // assert
+
   });
 });
