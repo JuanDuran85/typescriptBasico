@@ -29,17 +29,19 @@ describe("Dump Utils test suite", () => {
     // arrange
     const sut: (args: string) => stringInfo = dumpGetStringInfo;
     const expected: stringInfo = {
-      lowerCase: '',
-      upperCase: '',
+      lowerCase: 'my-super-string',
+      upperCase: 'MY-SUPER-STRING',
       characters: [''],
-      length: 1,
+      lengthTotal: 12,
       extraInfo: {}
     } 
     // act
-    const actual: stringInfo = sut("My-Super-String");
-
+    const actual: stringInfo = sut("Super-String");
 
     // assert
+    expect(actual.characters).toHaveLength(expected.lengthTotal);
+    expect(actual.extraInfo).toEqual({})
+    expect(actual.characters).toContain<string>('u');
 
   });
 });
