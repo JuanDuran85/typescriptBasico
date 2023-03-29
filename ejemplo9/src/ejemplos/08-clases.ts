@@ -48,3 +48,43 @@ class Empleado extends PersonaReal {
 
 const e1 = new Empleado('ED4e4FG',3,'Juan');
 console.log(e1);
+
+//--------------------------------------------------------------------------------------
+// clases abstractas
+export interface CriteriosNuevos {
+    from: string;
+    localField: string;
+    foreignField: string;
+    as: string;
+  }
+  
+  type newObjectType = { [key: string]: string };
+  
+  abstract class AgregandoFiltrosMongo {
+    public static iniciandoCriterios(modeloMongo: any) {
+      return AgregadoLookupCriterios;
+    }
+  }
+  
+  abstract class AgregadoLookupCriterios implements AgregandoFiltrosMongo {
+    public static agregandoCriteriosLook(criteriosLook?: CriteriosNuevos) {
+      return AgregandoCriteriosMatch;
+    }
+  }
+  
+  abstract class AgregandoCriteriosMatch implements AgregadoLookupCriterios{
+    public static agregandoCriteriosMatch(matchCriterials?: object) {
+      return EjecutandoCriteriosFinal;
+    }
+  }
+  
+  abstract class EjecutandoCriteriosFinal implements AgregandoCriteriosMatch{
+    public static ejecutando(): string {
+      return 'value all';
+    }
+  }
+  
+  const result = AgregandoFiltrosMongo.iniciandoCriterios('value').agregandoCriteriosLook({ from: 'x', localField: 'y', foreignField: 'w', as: 'z' }).agregandoCriteriosMatch().ejecutando();
+  console.log(result);
+
+
