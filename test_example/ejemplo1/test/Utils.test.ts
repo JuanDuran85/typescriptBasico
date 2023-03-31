@@ -42,6 +42,8 @@ describe("Dump Utils test suite", () => {
     expect(actual.characters).toHaveLength(expected.lengthTotal);
     expect(actual.extraInfo).toEqual({})
     expect(actual.characters).toContain<string>('u');
-
+    expect(actual.characters).toEqual(
+      expect.arrayContaining(['S','u','p','e','r'])
+    )
   });
 });
