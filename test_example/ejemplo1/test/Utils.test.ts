@@ -49,7 +49,7 @@ describe("Dump Utils test suite", () => {
 });
 
 // Parametrized test
-describe.only("Dump Utils test suitE 2", () => {
+describe("Dump Utils test suitE 2", () => {
   describe("ToUpperCase cases examples", () => {
     it.each([
       { input: "test", expected: "TEST" },

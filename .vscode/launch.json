@@ -12,5 +12,23 @@
         "preLaunchTask": "tsc: build - tsconfig.json",
         "outFiles": ["${workspaceFolder}/out/**/*.js"]
       }
+      // {
+      //   "type": "node",
+      //   "request": "launch",
+      //   "name": "Jest Current File",
+      //   "program": "${workspaceFolder}/node_modules/.bin/jest",
+      //   "args": [
+      //     "--runTestsByPath",
+      //     "${relativeFile}",
+      //     "--config",
+      //     "jest.config.ts"
+      //   ],
+      //   "console": "integratedTerminal",
+      //   "internalConsoleOptions": "neverOpen",
+      //   "disableOptimisticBPs": true,
+      //   "windows": {
+      //     "program": "${workspaceFolder}/node_modules/jest/bin/jest"
+      //   }
+      // }
     ]
   }

@@ -72,7 +72,7 @@ describe("Util test suite with jest hooks - String util test - StringToUpperCase
     expect(1).toEqual(1);
   });
 
-  xit('Skipping the test with xit aliases...',() => {
+  it('Skipping the test with xit aliases...',() => {
     expect(1).toEqual(1);
   });
 

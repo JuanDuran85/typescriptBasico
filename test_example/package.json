@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "jest",
-    "start":"lite-server"
+    "test-wat":"jest --watch",
+    "test-cov":"jest --coverage"
   },
   "keywords": [],
   "author": "",
