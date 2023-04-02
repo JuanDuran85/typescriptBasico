@@ -20,6 +20,50 @@ describe("Util test suite with jest hooks - String util test - StringToUpperCase
 
     // assert
     expect(actual).toBe(expected);
-    console.log('Actual test');
+    console.log("Actual test");
+  });
+
+  // testing error with a simple function
+  it("Should throw an error for invalid string - using simple function", () => {
+    // arrange
+
+    // act
+    function functionToUpperCase(): void {
+      sut.callingDumpToUperCaseFunction("");
+    }
+
+    // assert
+    expect(functionToUpperCase).toThrow();
+    expect(functionToUpperCase).toThrowError(
+      "Invalid string - no args provided"
+    );
+  });
+
+  // testing error with an arrow function
+  it("Should throw an error for invalid string - using arrow funtion", () => {
+    // arrange
+    // act
+    // assert
+    expect(() => {
+      sut.callingDumpToUperCaseFunction("");
+    }).toThrowError("Invalid string - no args provided");
+  });
+
+  // testinng error with try/catch block
+  it("Should throw an error for invalid string - using try/catch block", (done) => {
+    // arrange
+    // act
+    // assert
+    try {
+      sut.callingDumpToUperCaseFunction(""); // be carefull, becouse if the function not throw an error, the test pass. For this reason, you should use the done() function
+      done("Error here: callingDumpToUperCaseFunction");
+    } catch (error) {
+      expect(error).toBeInstanceOf(Error);
+      expect(error).toHaveProperty(
+        "message",
+        "Invalid string - no args provided"
+      );
+      done();
+    }
   });
 });
