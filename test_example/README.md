@@ -63,4 +63,15 @@ These are principles, not rules, that we can follow when writing tests:
   }
   ```
 - Make sure at the jest.config have the testEnvironment with value equal to "node".
-- 
+
+
+## Coverage
+- You need to add on jest.config file the next line:
+```
+  collectCoverage: true,
+  collectCoverageFrom: [
+    '<rootDir>/ejemplo*/**/*.ts'
+  ]
+```
+- Change the path on collectCoverageFrom if you want to collect all ts file.
+- You can use the istanbul library to ignore some part of code to show on covarege
