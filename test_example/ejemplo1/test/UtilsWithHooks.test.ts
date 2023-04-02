@@ -66,4 +66,14 @@ describe("Util test suite with jest hooks - String util test - StringToUpperCase
       done();
     }
   });
+
+  it.todo('For to do!!');
+  it.skip('Skipping the test...',() => {
+    expect(1).toEqual(1);
+  });
+
+  xit('Skipping the test with xit aliases...',() => {
+    expect(1).toEqual(1);
+  });
+
 });

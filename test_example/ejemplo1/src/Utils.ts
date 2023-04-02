@@ -4,7 +4,7 @@
 
 export class StringToUpperCaseDump {
   public callingDumpToUperCaseFunction(args: string){
-    //if(!args) throw new Error('Invalid string - no args provided');
+    if(!args) throw new Error('Invalid string - no args provided');
     return dumpToUperCase(args);
   }
 }
