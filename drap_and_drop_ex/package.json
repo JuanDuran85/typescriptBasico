@@ -1,17 +1,9 @@
 {
   "name": "drag_and_drop_project_example",
-  "jest": {
-    "testPathIgnorePatterns": [
-      "src"
-    ]
-  },
   "version": "1.0.0",
   "description": "Drag and Drop Project Example - Understanding TypeScript Course Setup",
   "main": "app.js",
   "scripts": {
-    "test": "jest",
-    "test-wat": "jest --watch",
-    "test-cov": "jest --coverage",
     "start": "http-server --log-ip"
   },
   "keywords": [
