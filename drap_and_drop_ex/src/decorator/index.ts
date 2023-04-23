@@ -1,1 +1,1 @@
-export { autoBind } from "./autobind.decorator";
+export { autoBind } from "./autobind.decorator.js";

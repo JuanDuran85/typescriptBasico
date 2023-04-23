@@ -1,1 +1,1 @@
-export { validateInput } from "./validator.util";
+export { validateInput } from "./validator.util.js";
