@@ -1,5 +1,5 @@
-import { ListenersType } from "../interfaces/validationTypes.interfaces";
-import { Project, StatusEnum } from "../model/projectModel.model";
+import { ListenersType } from "../interfaces/validationTypes.interfaces.js";
+import { Project, StatusEnum } from "../model/projectModel.model.js";
 
 class State<T> {
   protected listeners: ListenersType<T>[] = [];

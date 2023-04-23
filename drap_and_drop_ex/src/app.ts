@@ -1,6 +1,5 @@
-import { ProjectInput } from "./component/projectInput.component.js";
-import { ProjectList } from "./component/projectList.component.js";
-
+import { ProjectInput } from './component/projectInput.component.js';
+import { ProjectList } from './component/projectList.component.js';
 
 const projectRenderForm: ProjectInput = new ProjectInput();
 const activeProjectRenderList = new ProjectList("active");

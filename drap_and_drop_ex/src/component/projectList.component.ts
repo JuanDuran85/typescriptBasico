@@ -1,4 +1,4 @@
-import { autoBind } from "../decorator";
+import { autoBind } from "../decorator/autobind.decorator.js";
 import { DragTarget } from "../interfaces/dargDrog.Interfaces.js";
 import { Project, StatusEnum } from "../model/projectModel.model.js";
 import { Component } from "./base.component.js";
