@@ -1,19 +1,11 @@
-/// <reference path="./model/projectModel.model.ts" />
-/// <reference path="./interfaces/dargDrog.Interfaces.ts" />
-/// <reference path="./interfaces/validationTypes.interfaces.ts" />
-/// <reference path="./state/project.state.ts" />
-/// <reference path="./util/validator.util.ts" />
-/// <reference path="./decorator/autobind.decorator.ts" />
-/// <reference path="./component/projectList.component.ts" />
-/// <reference path="./component/projectInput.component.ts" />
-/// <reference path="./component/base.component.ts" />
-/// <reference path="./component/projectInput.component.ts" />
+import { ProjectInput } from "./component/projectInput.component";
+import { ProjectList } from "./component/projectList.component";
 
-namespace App {
-  const projectRenderForm: ProjectInput = new ProjectInput();
-  console.log(projectRenderForm);
-  const activeProjectRenderList = new ProjectList("active");
-  console.log(activeProjectRenderList);
-  const finishedProjectRenderList = new ProjectList("finished");
-  console.log(finishedProjectRenderList);
-}
+
+const projectRenderForm: ProjectInput = new ProjectInput();
+const activeProjectRenderList = new ProjectList("active");
+const finishedProjectRenderList = new ProjectList("finished");
+
+console.log(projectRenderForm);
+console.log(activeProjectRenderList);
+console.log(finishedProjectRenderList);
