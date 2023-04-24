@@ -1,4 +1,4 @@
-import { ValidationTypes } from "../interfaces/validationTypes.interfaces.js";
+import { ValidationTypes } from "../interfaces/validationTypes.interfaces";
 
 export function validateInput(dataOnValidation: ValidationTypes): boolean {
   const { value, typeRef, required, minLength, maxLength, min, max } =
