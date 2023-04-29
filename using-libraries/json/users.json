@@ -4,7 +4,14 @@
       "id": 1,
       "firstName": "Johny",
       "lastName": "Cage",
-      "age": 27
+      "age": 27,
+      "name": "foo",
+      "topPhoto": {
+        "id": 9,
+        "filename": "cool_wale.jpg",
+        "depth": 1245,
+        "__type": "underwater"
+      }
     },
     {
       "id": 2,

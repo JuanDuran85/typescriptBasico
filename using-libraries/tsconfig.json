@@ -4,7 +4,8 @@
       "target": "es5",
       "sourceMap": true,
       "watch": true,
-      "outDir": "build"
+      "outDir": "build",
+      "experimentalDecorators": true
   },
   "exclude": [
       "node_modules"
