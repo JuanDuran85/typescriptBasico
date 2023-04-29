@@ -21,39 +21,38 @@ class UserClassTransformet {
 }
 
 export abstract class Photo {
-    id: number;
-    filename: string;
-  }
+  id: number;
+  filename: string;
+}
 
-  export class Landscape extends Photo {
-    panorama: boolean;
-  }
+export class Landscape extends Photo {
+  panorama: boolean;
+}
 
-  export class Portrait extends Photo {
-    person: UserClassTransformet;
-  }
+export class Portrait extends Photo {
+  person: UserClassTransformet;
+}
 
-  export class UnderWater extends Photo {
-    depth: number;
-  }
+export class UnderWater extends Photo {
+  depth: number;
+}
 
-  export class Album {
-    id: number;
-    name: string;
+export class Album {
+  id: number;
+  name: string;
 
-    @Type(() => Photo, {
-      discriminator: {
-        property: '__type',
-        subTypes: [
-          { value: Landscape, name: 'landscape' },
-          { value: Portrait, name: 'portrait' },
-          { value: UnderWater, name: 'underwater' },
-        ],
-      },
-    })
-    topPhoto: Landscape | Portrait | UnderWater;
-  }
-
+  @Type(() => Photo, {
+    discriminator: {
+      property: "__type",
+      subTypes: [
+        { value: Landscape, name: "landscape" },
+        { value: Portrait, name: "portrait" },
+        { value: UnderWater, name: "underwater" },
+      ],
+    },
+  })
+  topPhoto: Landscape | Portrait | UnderWater;
+}
 
 async function resultGetApi() {
   const result: AxiosResponse<UserClassTransformet[], any> = await axios.get(
@@ -66,13 +65,13 @@ async function resultGetApi() {
 }
 
 async function resultGetApiTwo() {
-    const result: AxiosResponse<Album[], any> = await axios.get(
-      "http://localhost:3000/users"
-    );
+  const result: AxiosResponse<Album[], any> = await axios.get(
+    "http://localhost:3000/users"
+  );
 
-    const instanceUserFull = plainToInstance(Album, result.data);
-    console.log(instanceUserFull);
-  }
+  const instanceUserFull = plainToInstance(Album, result.data);
+  console.log(instanceUserFull);
+}
 
 //resultGetApi();
 resultGetApiTwo();
