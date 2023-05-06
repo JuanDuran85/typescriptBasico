@@ -52,4 +52,16 @@ describe("PasswordServiceCheck", () => {
     expect(actual.valid).toBeTruthy();
     expect(actual.reasons).toHaveLength(0);
   });
+
+  it('Admin password with no number is invalid', () => {
+    const actual: CheckResult = sut.checkAdminPassword('dsdfADFG');
+    expect(actual.valid).toBeFalsy();
+    expect(actual.reasons).toContain(PassworErrorEnum.NO_NUMBER);
+  });
+
+  it('Admin password with number is valid', () => {
+    const actual: CheckResult = sut.checkAdminPassword('d4556FG45346');
+    expect(actual.valid).toBeTruthy();
+    expect(actual.reasons).not.toContain(PassworErrorEnum.NO_NUMBER);
+  });
 });
