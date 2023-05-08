@@ -26,3 +26,31 @@ export function toUpperCaseWithCallBack(
   callback(`Called function with: ${arg}`);
   return arg.toUpperCase();
 }
+
+
+//------------------------------------------------------------------------------------------
+
+export type ClassOut = {
+  values: string[];
+  times: number;
+}
+
+export class OtherUtilsBasic {
+
+  private callBackArgs: string[] = [];
+  private timesCallBack: number = 0;
+
+  public toLowerCaseMethod(arg: string): string{
+    return arg.toLowerCase();
+  }
+
+  public loggerString(arg: string): ClassOut {
+    console.log(arg);
+    this.callBackArgs.push(arg);
+    this.timesCallBack++;
+    return {
+      values: this.callBackArgs,
+      times: this.timesCallBack
+    }
+  }
+}

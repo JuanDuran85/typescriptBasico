@@ -1,5 +1,6 @@
 import {
   calculateComplexity,
+  OtherUtilsBasic,
   StringInfo,
   toUpperCaseWithCallBack,
 } from "../../app/doubles/otherUtils";
@@ -79,5 +80,25 @@ describe("OtherUtils test suits - Tracking callback - Jest Mock", () => {
     expect(actual).toEqual("ABCDEF");
     expect(callBackJestMock).toBeCalledWith("Called function with: abcDEF");
     expect(callBackJestMock).toBeCalledTimes(1);
+  });
+});
+
+describe('OtherUtils test suits - Test with spies', () => {
+
+  let sut: OtherUtilsBasic;
+
+  beforeEach(() => {
+    sut = new OtherUtilsBasic();
+  })
+  test('Use spy to track calls', () => {
+    const toLowerCaseSpy = jest.spyOn(sut, 'toLowerCaseMethod');
+    sut.toLowerCaseMethod('new msg');
+    expect(toLowerCaseSpy).toBeCalledWith('new msg');
+  });
+
+  test('Use spy to track calls loggerString', () => {
+    const loggerStringSpy = jest.spyOn(sut, 'loggerString');
+    sut.loggerString('new msg');
+    expect(loggerStringSpy).toBeCalledWith('new msg');
   });
 });
