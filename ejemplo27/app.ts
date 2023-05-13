@@ -33,6 +33,24 @@ function operationFunction(funIn: Function, a: number, b: number): number {
 const resultOp = operationFunction(addFunction, 6, 6);
 console.log(resultOp);
 
-console.log(`Working with arrow function: ${operationFunction((x: number,y: number)=>x*y,4,4)}`);
+console.log(
+  `Working with arrow function: ${operationFunction(
+    (x: number, y: number) => x * y,
+    4,
+    4
+  )}`
+);
 
 //-------------------------------------------------------------------------------
+
+const numberAcumulation: number[] = [4, 6, 3, 2, 7, 1];
+const total: number = numberAcumulation.reduce(
+  (acc: number, numbers: number) => {
+    acc += numbers;
+    console.log(numbers);
+    console.log(acc);
+    return acc;
+  },
+  0
+);
+console.log(total);
