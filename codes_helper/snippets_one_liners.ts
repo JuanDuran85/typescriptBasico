@@ -1,5 +1,5 @@
 /**
- * Snippets (one-liners) we can use with JS or TS
+ * Simple Snippets (one-liners) we can use with JS or TS
  */
 
 // 1. Generate a random number between two values:
