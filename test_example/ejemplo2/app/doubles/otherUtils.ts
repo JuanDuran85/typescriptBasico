@@ -44,6 +44,10 @@ export class OtherUtilsBasic {
     return arg.toLowerCase();
   }
 
+  public usingOtherMethod(arg: string){
+    console.log(arg);
+  }
+
   public loggerString(arg: string): ClassOut {
     console.log(arg);
     this.callBackArgs.push(arg);
@@ -52,5 +56,9 @@ export class OtherUtilsBasic {
       values: this.callBackArgs,
       times: this.timesCallBack
     }
+  }
+
+  public callingExternalService(){
+    console.log('Calling External Service!!!');
   }
 }

@@ -75,3 +75,8 @@ These are principles, not rules, that we can follow when writing tests:
 ```
 - Change the path on collectCoverageFrom if you want to collect all ts file.
 - You can use the istanbul library to ignore some part of code to show on covarege
+
+## Different between Spies and Mock.
+- spies are not directly injected into SUT.
+- Original functionality is preserved with spies
+- Spies usually track method calls
