@@ -27,3 +27,33 @@ console.log(
   "🚀 ~ file: snippets_one_liners.ts:17 ~ isNullOrUndefined:",
   isNullOrUndefined(null)
 );
+
+// 4. Check if a value is a truthy value
+const isTruthyValue: (obj: any) => boolean = (obj: any) => !!obj;
+console.log(
+  "🚀 ~ file: snippets_one_liners.ts:33 ~ isTruthyValue:",
+  isTruthyValue(0)
+);
+
+// 5. Check if a value is a falsy value
+const isFalsyValue: (obj: any) => boolean = (obj: any) => !obj;
+console.log(
+  "🚀 ~ file: snippets_one_liners.ts:37 ~ isFalsyValue:",
+  isFalsyValue(1)
+);
+
+// 6. Check if a value is a valid credit card number
+const isCreditCardNumber: (valueIn: string) => boolean = (valueIn: string) => {
+  const visaRegEx = /^(?:4\d{12}(?:\d{3})?)$/;
+  const mastercardRegEx = /^(?:5[1-5]\d{14})$/;
+  const amexRegEx = /^(?:3[47]\d{13})$/;
+  const discoverRegEx = /^(?:6(?:011|5\d\d)\d{12})$/;
+
+  const creditCards = [visaRegEx, mastercardRegEx, amexRegEx, discoverRegEx]
+
+  for (const iterator of creditCards) {
+    if (iterator.test(valueIn)) return true;
+  }
+  return false;
+};
+console.log("🚀 ~ file: snippets_one_liners.ts:59 ~ isCreditCardNumber:", isCreditCardNumber('4444565456555545'));
