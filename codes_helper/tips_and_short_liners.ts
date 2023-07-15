@@ -53,37 +53,57 @@ console.log(nameProduct);
 // Intersection types allow you to combine multiple types into a single type, creating a new type that has all the properties and methods of the intersected types.
 
 interface LogShow {
-    log: () => void;
+  log: () => void;
 }
 
 interface SerialOut {
-    serialize: () => string;
+  serialize: () => string;
 }
 
 // intersection
 type LoggerFinal = LogShow & SerialOut;
 
 class ConsoleLogger implements LogShow {
-    log() {
-        console.log('Logging into console...');
-    };
+  log() {
+    console.log("Logging into console...");
+  }
 }
 
 class FileLogger implements LogShow, SerialOut {
-    log() {
-        console.log("Logging to file ...");
-    }
+  log() {
+    console.log("Logging to file ...");
+  }
 
-    serialize() {
-        return "Serialized log data method";
-    }
+  serialize() {
+    return "Serialized log data method";
+  }
 }
 
 const loggerOne: ConsoleLogger = new ConsoleLogger();
-console.log(loggerOne);
+console.debug(loggerOne);
 loggerOne.log();
 
 const loggerTwo: LoggerFinal = new FileLogger();
-console.log(loggerTwo);
+console.debug(loggerTwo);
 loggerTwo.log();
-console.log(loggerTwo.serialize());
+console.debug(loggerTwo.serialize());
+
+// 5. Mapped Types:
+// Mapped types allow you to create new types by transforming the properties of an existing type.
+
+interface UserFinal {
+  id: number;
+  name: string;
+  email: string;
+  year: number;
+}
+
+type PartialUser = {
+  [K in keyof UserFinal]?: UserFinal[K];
+};
+
+const partialUserFinal: PartialUser = {
+    name: 'Foo',
+    year: 2020
+}
+console.debug({partialUserFinal})
