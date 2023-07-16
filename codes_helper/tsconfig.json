@@ -97,9 +97,5 @@
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
-  },
-  "exclude": [],// you can use * for include all that files with a espeific extension "*.dev.ts" or use ** to include any file with that parent in any folder "**/*.dev.ts". node_modules is default
-  "include": [
-    "ejemplo18/*.ts",
-  ],
+  }
 }

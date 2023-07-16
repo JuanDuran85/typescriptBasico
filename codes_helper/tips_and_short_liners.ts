@@ -103,7 +103,26 @@ type PartialUser = {
 };
 
 const partialUserFinal: PartialUser = {
-    name: 'Foo',
-    year: 2020
+  name: "Foo",
+  year: 2020,
+};
+console.debug({ partialUserFinal });
+
+// 6. Decorators:
+// Decorators allow you to modify or extend the behavior of classes, methods, properties, and other declarations.
+
+function upperCaseUtility(target: any, propertyName: string) {
+
+  console.debug("Property Class Decorator...");
+  console.debug(target);
+  console.debug(propertyName);
+};
+
+class Letters {
+  @upperCaseUtility
+  letter: string;
 }
-console.debug({partialUserFinal})
+
+const finalLetter = new Letters();
+finalLetter.letter = "abcdefg";
+console.log({finalLetter});
