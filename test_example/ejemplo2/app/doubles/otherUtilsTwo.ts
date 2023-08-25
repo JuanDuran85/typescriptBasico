@@ -15,12 +15,13 @@ export class WhatEverDataBase {
    */
   public addUser(user: User): void {
     this.elements.push(user);
+    this.elements.push(user);
   }
 
   /**
-   * getuserByName
+   * getUserByName
    */
-  public getuserByName(name: string): User {
+  public getUserByName(name: string): User {
     return this.elements.find((e) => e.name === name);
   }
 }
