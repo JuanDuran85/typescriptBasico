@@ -83,35 +83,36 @@ describe("OtherUtils test suits - Tracking callback - Jest Mock", () => {
   });
 });
 
-describe('OtherUtils test suits - Test with spies', () => {
+describe("OtherUtils test suits - Test with spies", () => {
   //System Under Test
   let sut: OtherUtilsBasic;
 
   beforeEach(() => {
     sut = new OtherUtilsBasic();
-  })
-  test('Use spy to track calls', () => {
-    const toLowerCaseSpy: jest.SpyInstance<string, [arg: string], any> = jest.spyOn(sut, 'toLowerCaseMethod');
-    sut.toLowerCaseMethod('new msg');
-    expect(toLowerCaseSpy).toBeCalledWith('new msg');
+  });
+  test("Use spy to track calls", () => {
+    const toLowerCaseSpy: jest.SpyInstance<string, [arg: string], any> =
+      jest.spyOn(sut, "toLowerCaseMethod");
+    sut.toLowerCaseMethod("new msg");
+    expect(toLowerCaseSpy).toBeCalledWith("new msg");
   });
 
-  test('Use spy to track calls to other module', () => {
-    const consoleLogModule = jest.spyOn(console, 'log');
-    sut.usingOtherMethod('new msg');
-    expect(consoleLogModule).toBeCalledWith('new msg');
+  test("Use spy to track calls to other module", () => {
+    const consoleLogModule = jest.spyOn(console, "log");
+    sut.usingOtherMethod("new msg");
+    expect(consoleLogModule).toBeCalledWith("new msg");
   });
 
-  test('Use spy to track calls loggerString', () => {
-    const loggerStringSpy = jest.spyOn(sut, 'loggerString');
-    sut.loggerString('new msg');
-    expect(loggerStringSpy).toBeCalledWith('new msg');
+  test("Use spy to track calls loggerString", () => {
+    const loggerStringSpy = jest.spyOn(sut, "loggerString");
+    sut.loggerString("new msg");
+    expect(loggerStringSpy).toBeCalledWith("new msg");
   });
 
-  test('Use spy to replace the implementation of a method',()=> {
-    jest.spyOn(sut, "callingExternalService").mockImplementation(()=>{
-      console.log("Calling mocked implementation with spy");
+  test("Use spy to replace the implementation of a method", () => {
+    jest.spyOn(sut, "callingExternalService").mockImplementation(() => {
+      console.debug(`Calling mocked implementation with spy`);
     });
     sut.callingExternalService();
-  })
+  });
 });
