@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "test-wat": "jest --watch",
-    "test-cov": "jest --coverage"
+    "test-cov": "jest --coverage",
+    "start": "ts-node server_app/Launcher.ts"
   },
   "keywords": [],
   "author": "",
