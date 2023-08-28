@@ -118,6 +118,72 @@ const toggleBoolean = (val: boolean): boolean => !val;
 console.debug(toggleBoolean(true));
 console.debug(toggleBoolean(false));
 
-// 17.
+// 17. Convert an array to a single object based on a specific key
+const toSingleObjectValue = <
+  T extends Record<PropertyKey, unknown>,
+  K extends keyof T
+>(
+  arrayIn: T[],
+  key: K
+): Record<string, T> =>
+  Object.fromEntries(arrayIn.map((item) => [item[key], item]));
 
-// 18.
+const arrayToConver = [
+  { name: "Juan", year: "2023" },
+  { name: "Maria", year: "2021" },
+];
+
+console.debug(toSingleObjectValue(arrayToConver, "name"));
+
+// 18. Convert decimal to binary
+const decimalToBinaryConversion: (num: number) => number = (
+  num: number
+): number =>
+  num === 0 ? 0 : (num % 2) + 10 * decimalToBinaryConversion(~~(num / 2));
+console.debug(decimalToBinaryConversion(0));
+console.debug(decimalToBinaryConversion(2));
+console.debug(decimalToBinaryConversion(15));
+console.debug(decimalToBinaryConversion(20));
+console.debug(decimalToBinaryConversion(30));
+
+// 19. Generate fake IP
+const randomIpGenerator: () => string = (): string =>
+  [...new Array(4)]
+    .map((_, index) => Math.floor(Math.random() * 255) + Number(Boolean(index)))
+    .join(".");
+console.debug(randomIpGenerator());
+console.debug(randomIpGenerator());
+
+// 20. Check if the code is running in Node.js
+const isNodeCodeRunning = (): boolean =>
+  typeof process !== "undefined" &&
+  Object.prototype.toString.call(process) === "[object process]";
+console.debug(isNodeCodeRunning());
+
+// 21. Check whether a value is a plain object
+const isPlainObjectResult: (val: unknown) => val is Record<string, any> = (
+  val: unknown
+): val is Record<string, any> =>
+  Object.prototype.toString.call(val) === "[object Object]" &&
+  [Object.prototype, null].includes(Object.getPrototypeOf(val));
+console.debug(isPlainObjectResult(2));
+console.debug(isPlainObjectResult("2"));
+console.debug(isPlainObjectResult([]));
+console.debug(isPlainObjectResult(["34", 565]));
+console.debug(isPlainObjectResult({}));
+console.debug(isPlainObjectResult({ foo: "bar" }));
+
+// 22. Format seconds as hh:mm:ss
+const formatSecondsResult = (sec: number): string =>
+  new Date(sec * 1000).toISOString().slice(11, 19);
+console.debug(formatSecondsResult(1000));
+console.debug(formatSecondsResult(100));
+console.debug(formatSecondsResult(3600));
+
+// 23. Get all subsets of the array
+const getSubsetsResult: <T>(arrayIn: T[]) => T[][] = <T>(arrayIn: T[]): T[][] =>
+  arrayIn.reduce(
+    (acc, cur) => acc.concat(acc.map((k) => k.concat(cur))),
+    [[] as T[]]
+  );
+console.debug(getSubsetsResult([1, 2, 3]));
