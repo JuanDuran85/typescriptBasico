@@ -42,12 +42,12 @@ function addNumbers(x1: Combinable, x2: Combinable): string | number {
 type UnknownEmployee = Employee | Admin;
 
 function printEmployeeInformation(employeeIn: UnknownEmployee): void {
-  console.log(`Nombre: ${employeeIn.name}`);
+  console.debug(`Nombre: ${employeeIn.name}`);
   if ("privileges" in employeeIn)
-    console.log(`Privileges to ${employeeIn.name}: ${employeeIn.privileges}`);
+    console.debug(`Privileges to ${employeeIn.name}: ${employeeIn.privileges}`);
 
   if ("startDate" in employeeIn)
-    console.log(`Start Date for ${employeeIn.name}: ${employeeIn.startDate}`);
+    console.debug(`Start Date for ${employeeIn.name}: ${employeeIn.startDate}`);
 }
 
 printEmployeeInformation({ name: "Juan", startDate: new Date(), active: true });
@@ -57,17 +57,17 @@ printEmployeeInformation(employeeOne);
 
 class Car {
   drive() {
-    console.log("Driving a car...");
+    console.debug("Driving a car...");
   }
 }
 
 class Truck {
   drive() {
-    console.log("Driving a truck...");
+    console.debug("Driving a truck...");
   }
 
   loadCargo(amount: number) {
-    console.log(`Loading cargo... ${amount}`);
+    console.debug(`Loading cargo... ${amount}`);
   }
 }
 
@@ -118,7 +118,7 @@ const moveAnimal: GetSwitchParameter = (animal: Animal) => {
   return `Moving at speed: ${speed}`;
 };
 
-console.log(
+console.debug(
   moveAnimal({
     type: "bird",
     flyingSpeed: 45,
@@ -173,7 +173,7 @@ function overloadCalculator(a: CombinableIn, b: CombinableIn) {
 }
 
 const resultOverload = overloadCalculator("one","two");
-console.log(resultOverload.split(' - '));
+console.debug(resultOverload.split(' - '));
 
 //--------------------------------------------------------------------------------------------
 // Optional Chaining
@@ -187,7 +187,7 @@ const fetchUserDataOne = {
   }
 }
 
-console.log(fetchUserDataOne?.job?.description);
+console.debug(fetchUserDataOne?.job?.description);
 
 //--------------------------------------------------------------------------------------------
 // Nullish coalescing
@@ -195,4 +195,4 @@ console.log(fetchUserDataOne?.job?.description);
 
 const inputOne = undefined;
 const storeData = inputOne ?? 'Default values';
-console.log(storeData);
+console.debug(storeData);

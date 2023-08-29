@@ -5,12 +5,12 @@ describe("Util test suite with jest hooks - String util test - StringToUpperCase
 
   beforeEach(() => {
     sut = new StringToUpperCaseDump();
-    console.log("SETUP");
+    console.debug("SETUP");
   });
 
   afterEach(() => {
     //clearing mocks
-    console.log("Teardown");
+    console.debug("Teardown");
   });
   it("Should return correct uppercase", () => {
     // arrange
@@ -20,7 +20,7 @@ describe("Util test suite with jest hooks - String util test - StringToUpperCase
 
     // assert
     expect(actual).toBe(expected);
-    console.log("Actual test");
+    console.debug("Actual test");
   });
 
   // testing error with a simple function

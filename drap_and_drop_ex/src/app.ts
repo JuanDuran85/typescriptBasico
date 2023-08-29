@@ -5,6 +5,6 @@ const projectRenderForm: ProjectInput = new ProjectInput();
 const activeProjectRenderList = new ProjectList("active");
 const finishedProjectRenderList = new ProjectList("finished");
 
-console.log(projectRenderForm);
-console.log(activeProjectRenderList);
-console.log(finishedProjectRenderList);
+console.debug(projectRenderForm);
+console.debug(activeProjectRenderList);
+console.debug(finishedProjectRenderList);

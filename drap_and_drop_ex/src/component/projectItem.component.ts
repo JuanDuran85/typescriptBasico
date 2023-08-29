@@ -31,7 +31,7 @@ export class ProjectItem
 
   @autoBind
   public dragEndHandler(_event: DragEvent): void {
-    console.log("Drag End Handler");
+    console.debug("Drag End Handler");
   }
 
   public configure(): void {

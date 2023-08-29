@@ -9,8 +9,8 @@
  */
 
 function LoggerDecorator(param: Function) {
-  console.log("Inside Logger Decorator");
-  console.log(param);
+  console.debug("Inside Logger Decorator");
+  console.debug(param);
 }
 
 @LoggerDecorator
@@ -18,8 +18,8 @@ class Person {
   public name = "Juan";
 
   constructor() {
-    console.log("Inside of constructor class");
-    console.log("Creating Person object...");
+    console.debug("Inside of constructor class");
+    console.debug("Creating Person object...");
   }
 }
 
@@ -29,8 +29,8 @@ class Person {
 
 function LoggerDecoratorFactory(messageLog: string) {
   return (param: Function) => {
-    console.log(messageLog);
-    console.log(param);
+    console.debug(messageLog);
+    console.debug(param);
   };
 }
 
@@ -39,8 +39,8 @@ class PersonClass {
   public name = "Juan";
 
   constructor() {
-    console.log("Inside of constructor class");
-    console.log("Creating Person object...");
+    console.debug("Inside of constructor class");
+    console.debug("Creating Person object...");
   }
 }
 
@@ -67,7 +67,7 @@ class PersonForDecorator {
   public name: string = "Juan";
 
   constructor() {
-    console.log("Inside PersonForDecorator");
+    console.debug("Inside PersonForDecorator");
   }
 }
 
@@ -77,9 +77,9 @@ class PersonForDecorator {
 
 // adding decorator to a property
 function LogPropertyClasss(targetProperty: any, propertyName: string | Symbol) {
-  console.log("Property Class Decorator...");
-  console.log(targetProperty);
-  console.log(propertyName);
+  console.debug("Property Class Decorator...");
+  console.debug(targetProperty);
+  console.debug(propertyName);
 }
 
 // adding decorator to an Accesor
@@ -88,10 +88,10 @@ function LogAccesorClass(
   nameAccesor: string,
   descriptor: PropertyDescriptor
 ) {
-  console.log("Accesor Class Decorator...");
-  console.log(target);
-  console.log(nameAccesor);
-  console.log(descriptor);
+  console.debug("Accesor Class Decorator...");
+  console.debug(target);
+  console.debug(nameAccesor);
+  console.debug(descriptor);
 }
 
 // adding decorator to a Method
@@ -100,10 +100,10 @@ function LogMethodClasss(
   nameMethod: string,
   descriptor: PropertyDescriptor
 ) {
-  console.log("Method Class Decorator...");
-  console.log(target);
-  console.log(nameMethod);
-  console.log(descriptor);
+  console.debug("Method Class Decorator...");
+  console.debug(target);
+  console.debug(nameMethod);
+  console.debug(descriptor);
 }
 
 function LogParameterMethodClass(
@@ -111,10 +111,10 @@ function LogParameterMethodClass(
   nameMethod: string,
   positionArgument: number
 ) {
-  console.log("Parametor Class Decorator...");
-  console.log(target);
-  console.log(nameMethod);
-  console.log(positionArgument);
+  console.debug("Parametor Class Decorator...");
+  console.debug(target);
+  console.debug(nameMethod);
+  console.debug(positionArgument);
 }
 
 class Product {
@@ -147,7 +147,7 @@ class Product {
 // adding a decorator with template and returning some value
 
 function DecoratorWithTemplateReturValue(template: string, hookId: string) {
-  console.log("---- DecoratorWithTemplateReturValue ----");
+  console.debug("---- DecoratorWithTemplateReturValue ----");
   return <T extends { new (...args: any[]): { nameUser: string } }>(
     originalConstruct: T
   ) =>
@@ -155,7 +155,7 @@ function DecoratorWithTemplateReturValue(template: string, hookId: string) {
       //adding new functionality
       constructor(..._: any[]) {
         super();
-        console.log("---- Rendering tamplate ----");
+        console.debug("---- Rendering tamplate ----");
         const elmentOne: HTMLElement | null = document.getElementById(hookId);
         if (!elmentOne) return;
         elmentOne.innerHTML = template;
@@ -174,12 +174,12 @@ class NewPersonClass {
   public nameUser: string = "JD";
 
   constructor() {
-    console.log("Inside NewPersonClass");
+    console.debug("Inside NewPersonClass");
   }
 }
 
 const person1: NewPersonClass = new NewPersonClass();
-console.log(person1);
+console.debug(person1);
 
 //---------------------------------------------
 // crearing a bind without decorator with default JS
@@ -188,7 +188,7 @@ class PrinterWithOutDecorator {
   public message: string = "This work!!";
 
   public showMessage() {
-    console.log(this.message);
+    console.debug(this.message);
   }
 }
 
@@ -221,7 +221,7 @@ class PrinterDecorator {
 
   @AutoBindDecorator
   public showMessage(): void {
-    console.log(this.message);
+    console.debug(this.message);
   }
 }
 
@@ -312,7 +312,7 @@ getForm?.addEventListener("submit", (event: SubmitEvent) => {
     console.error("Invalid input. Please try again");
     return;
   }
-  console.log(createdCourse);
+  console.debug(createdCourse);
 });
 
 // ---------------------------------------------------------------------------------
@@ -339,7 +339,7 @@ function addMetaData(metadata:any) {
     target.__customMetadata = metadata;
     return target;
   }
-  
+
 }
 @addMetaData({msm:"Nuevo mensaje"})
 class PersonMetaData {
@@ -355,8 +355,8 @@ class PersonMetaData {
 }
 
 const personMetaData:PersonMetaData = new PersonMetaData("Juan");
-console.log({personMetaData});
-console.log(getMetaDataFromClass(PersonMetaData));
+console.debug({personMetaData});
+console.debug(getMetaDataFromClass(PersonMetaData));
 
 // ---------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------

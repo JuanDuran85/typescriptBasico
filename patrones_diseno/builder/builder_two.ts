@@ -83,7 +83,7 @@ const filterResult: string = new EventFilterBuilder()
   .setStatusFilter(orderFilter.status)
   .setOpenOnlyFilter(orderFilter.openOnly)
   .build();
-console.log(filterResult);
+console.debug(filterResult);
 
 //------------------------------------------------------
 // Make the internal state immutable
@@ -138,4 +138,4 @@ const filterResult2 = new EventFilterBuilder2()
   .setStatusFilter2(orderFilter.status)
   .setOpenOnlyFilter2(orderFilter.openOnly)
   .build2();
-console.log(filterResult2);
+console.debug(filterResult2);

@@ -77,7 +77,7 @@ export class ProjectList
         this.elementAny.querySelector("ul")!.id,
         projectItem
       );
-      console.log(itemProject);
+      console.debug(itemProject);
     }
   }
 }

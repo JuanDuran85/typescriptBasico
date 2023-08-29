@@ -31,5 +31,5 @@ validate(istanceOne).then((result: ValidationError[]) => {
     console.info(result);
     throw new Error("Errores");
   }
-  console.log(istanceOne);
+  console.debug(istanceOne);
 });

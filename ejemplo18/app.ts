@@ -1,6 +1,6 @@
 
 
-/* 
+/*
     Funcion generica: puede recibir cualquier tipo de argumento y retornar el mismo tipo de argumento
     Por lo tanto, la funcion retornara el mismo tipo del valor enviado en el argumento, esto si se agrega en el retorno el generico
 */
@@ -13,10 +13,10 @@ function genericTwo<T>(argument: T): T {
     return argument;
 }
 
-console.log(genericOne(35.687435).toFixed(2));
-console.log(genericTwo(35.687435).toFixed(2));
-console.log(genericOne("Nuevo valor").toUpperCase());
-console.log(genericTwo(new Date()).getTime());
+console.debug(genericOne(35.687435).toFixed(2));
+console.debug(genericTwo(35.687435).toFixed(2));
+console.debug(genericOne("Nuevo valor").toUpperCase());
+console.debug(genericTwo(new Date()).getTime());
 
 /* --------------------------------------------------------------------------------- */
 
@@ -36,4 +36,4 @@ const deadPoll = {
     dangerlavel: 100
 }
 
-console.log(genericOne<Hero>(deadPoll).name);
+console.debug(genericOne<Hero>(deadPoll).name);

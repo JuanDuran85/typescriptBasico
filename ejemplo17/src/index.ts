@@ -14,8 +14,8 @@ const getPokemon = async (pokemonId: number): Promise<Pokemon> => {
 
 getPokemon(1)
   .then((pokemon: Pokemon) => {
-    console.log(pokemon);
-    console.log(pokemon.name);
-    console.log(pokemon.sprites.front_default);
+    console.debug(pokemon);
+    console.debug(pokemon.name);
+    console.debug(pokemon.sprites.front_default);
   })
   .catch((error) => error);

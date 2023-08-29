@@ -10,7 +10,7 @@ const addressInput = document.getElementById("address")! as HTMLInputElement;
 function searchAddressHandler(event: Event) {
   event.preventDefault();
   const enteredAddress = addressInput.value;
-  console.log(enteredAddress);
+  console.debug(enteredAddress);
   axios
     .get<GoogleMapGeolocation>(
       `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURI(

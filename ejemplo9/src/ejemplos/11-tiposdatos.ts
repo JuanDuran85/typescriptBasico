@@ -11,9 +11,9 @@ function isString(valor : number | string): valor is string {
 
 function printAge(age2: number | string) {
     if (isNumber(age2)) {
-        console.log("es un numero");
+        console.debug("es un numero");
     } else {
-        console.log("Es una cadena");
+        console.debug("Es una cadena");
     }
 }
 
@@ -28,7 +28,7 @@ interface AJAXSettings {
 let options = {} as AJAXSettings; // sin modificar el objeto
 options.url = "https://www.alirafael.com";
 
-// Type Aliases y Intersection Type 
+// Type Aliases y Intersection Type
 
 type NumberOrString = number | string;
 
@@ -48,12 +48,12 @@ let user: UserAdmin;
 type FuncString = (title : string) => string;
 
 function executor(valor : FuncString) : string{
-    console.log(valor);
+    console.debug(valor);
     return valor("hola 2");
 }
 
 let retorno : string = executor(()=>"hola");
-console.log(retorno);
+console.debug(retorno);
 
 // enums
 
@@ -69,7 +69,7 @@ enum PaymenState {
     EnDeuda
 }
 
-console.log(PaymenState.EnDeuda);
+console.debug(PaymenState.EnDeuda);
 
 class Pedido {
     tallas: number = 0;

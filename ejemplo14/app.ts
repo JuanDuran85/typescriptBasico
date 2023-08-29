@@ -29,11 +29,11 @@ class XMan extends Avengers {
 }
 
 const antman = new Avengers("Antman", "Cap");
-console.log(antman);
-console.log(Avengers.avgAge);
-console.log(Avengers.showTeam());
+console.debug(antman);
+console.debug(Avengers.avgAge);
+console.debug(Avengers.showTeam());
 const mutanteXMan = new XMan("Antman", "Cap", true);
-console.log(mutanteXMan.getMutante());
+console.debug(mutanteXMan.getMutante());
 
 
 /* ---------------------------------------------------------------------- */
@@ -63,4 +63,4 @@ const apoca3 = Apocalipsis.getInstance();
 
 apoca1.changeName('New Apocalipsis now');
 
-console.log(apoca1, apoca2, apoca3);
+console.debug(apoca1, apoca2, apoca3);

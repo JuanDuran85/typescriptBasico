@@ -1,12 +1,12 @@
 /**
- * 
+ *
  * Simple Factory Pattern
- * 
+ *
  * The simple factory pattern is also called the static method pattern, because a static method is
  * defined in the factory class to create an object. Simple factories allow users to create the desired
  * “product” class without knowing the specific parameters, that is, the user can directly consume the
  * product without knowing the specific production details of the product.
- * 
+ *
  */
 
 
@@ -20,13 +20,13 @@ abstract class Vehicle {
 
 class VehicleSuperX01 extends Vehicle {
     run(): void {
-        console.log("VehicleSuperX01");
+        console.debug("VehicleSuperX01");
     }
 }
 
 class VehicleSuperX02 extends Vehicle {
     run(): void {
-        console.log("VehicleSuperX02");
+        console.debug("VehicleSuperX02");
     }
 }
 
@@ -38,7 +38,7 @@ const vhSx02: VehicleSuperX02 = new VehicleSuperX02();
 vhSx02.run();
 
 
-/*  
+/*
 The usage scenarios of the simple factory pattern:
 
 - The factory class is responsible for creating fewer objects: Since there are fewer objects created, the business logic in the factory method will not be too complicated.

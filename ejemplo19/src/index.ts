@@ -11,4 +11,4 @@ nuevoPoke.publicApi = 'https//alirafael.com';
 nuevoPoke.savaPokemonToDb(11);
 
 
-console.log(nuevoPoke);
+console.debug(nuevoPoke);

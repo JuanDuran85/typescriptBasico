@@ -4,9 +4,9 @@
 
 let habilidades : (boolean | string | number)[] = ["a","b","c", 100, true];
 
-habilidades.push(20);   
+habilidades.push(20);
 
-console.log(habilidades);
+console.debug(habilidades);
 
 interface Personaje {
     nombre: string;

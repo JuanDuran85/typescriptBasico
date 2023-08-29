@@ -61,4 +61,4 @@ export class ProjectState extends State<Project> {
 }
 
 export const projectState: ProjectState = ProjectState.getInstance();
-console.log(projectState);
+console.debug(projectState);

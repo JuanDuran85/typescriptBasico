@@ -7,7 +7,7 @@ let objetoNuevo: { nombre: string; edad: number; arregloString: string[], getNom
 };
 
 
-objetoNuevo = { 
+objetoNuevo = {
     nombre: "Maria",
     edad: 33,
     arregloString: ["uno", "dos", "tres"],
@@ -34,7 +34,7 @@ personas = {
   lastname: "Perez",
   age: 20,
   getNombre(){
-    return this.name;  
+    return this.name;
   }
 }
 
@@ -64,7 +64,7 @@ const bumblebee: Vehiculo = {
   antibalas: true,
   pasajeros:4,
   disparar(){ // El metodo disparar es opcional
-    console.log("Disparando");
+    console.debug("Disparando");
   }
 };
 
@@ -122,6 +122,6 @@ mystique = charles;
 mystique = apocalipsis;
 
 let mutable: number | string[];
-     
+
 mutable = ["Adios","Hola"];
 mutable = 123;

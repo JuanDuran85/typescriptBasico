@@ -1,4 +1,4 @@
-/* 
+/*
 
 A factory is a method or function that creates an object, or a set of objects, without exposing the creation logic to the client.
 
@@ -45,8 +45,8 @@ class VehicleFactory {
 const factoryCreation = new VehicleFactory();
 const carOne: Car | Truck = factoryCreation.createVehicle('car')();
 const truckOne: VehicleTypes = factoryCreation.createVehicle('truck');
-console.log(carOne);
-console.log(truckOne);
+console.debug(carOne);
+console.debug(truckOne);
 
 
 

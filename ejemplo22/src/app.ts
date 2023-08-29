@@ -7,8 +7,8 @@ class Departament {
   constructor(public name: string, private readonly idUser: string) {}
 
   describe(this: Departament) {
-    console.log(`Department: ${this.name}`);
-    console.log(`Id User: ${this.idUser}`);
+    console.debug(`Department: ${this.name}`);
+    console.debug(`Id User: ${this.idUser}`);
   }
 
   addEmployees(employee: string) {
@@ -16,7 +16,7 @@ class Departament {
   }
 
   showEmployeeInformation() {
-    console.log(`Employees: ${this.employees}`);
+    console.debug(`Employees: ${this.employees}`);
   }
 }
 
@@ -50,7 +50,7 @@ class AccountingDepartament extends Departament {
   }
 
   getReports() {
-    console.log(this.reports);
+    console.debug(this.reports);
   }
 
   addBudget(newBudget: number) {
@@ -77,8 +77,8 @@ const accounting = new AccountingDepartament("43Fdd3sD", []);
 
 accounting.addBudget(3456);
 accounting.addReports("Errors number one");
-console.log({ accounting });
+console.debug({ accounting });
 
 // accountingCopy.describe();
 
-console.log({ iTDepart });
+console.debug({ iTDepart });

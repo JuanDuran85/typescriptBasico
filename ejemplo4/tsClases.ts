@@ -8,7 +8,7 @@ class User2 {
     }
 
     get fullName():string {
-        return `${this._nombre} ${this._apellido}`; 
+        return `${this._nombre} ${this._apellido}`;
     }
 
     set fullName(nuevo: string) {
@@ -21,4 +21,4 @@ class User2 {
 let usuario : User2 = new User2("","");
 
 usuario.fullName = "Juan Duran";
-console.log(usuario.fullName);
+console.debug(usuario.fullName);

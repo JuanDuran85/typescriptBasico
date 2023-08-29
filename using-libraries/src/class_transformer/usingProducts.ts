@@ -17,6 +17,6 @@ const procutsJsonDummy = [
 
 const finalAllProducts = plainToInstance(Products, procutsJsonDummy)
 for (const prod of finalAllProducts) {
-    console.log(prod);
-    console.log(`Info product: ${prod.getInformation()}`);
+    console.debug(prod);
+    console.debug(`Info product: ${prod.getInformation()}`);
 }

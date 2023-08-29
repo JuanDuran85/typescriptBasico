@@ -12,7 +12,7 @@ contar(superHeroes);
 //Parametros por defecto
 const llamarBatman: Function = (llamar: boolean = true): void => {
   if (llamar) {
-    console.log("Batiseñal activada");
+    console.debug("Batiseñal activada");
   }
 };
 
@@ -30,7 +30,7 @@ const noHaceNada = (
   booleano: boolean,
   arreglo: string[]
 ): void => {
-  console.log("No hace nada");
+  console.debug("No hace nada");
 };
 
 // Crear el tipo de funcion que acepte la funcion "noHaceNada"

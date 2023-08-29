@@ -16,6 +16,6 @@ const carroCompra: Producto[] = [
 
 const [total, impuesto] = calculoImpuestoVentas(carroCompra);
 
-console.log(`El subtotal del carro de compra es: ${total}`);
-console.log(`El total de impuesto es: ${impuesto}`);
-console.log(`El total de la compra es: ${total + impuesto}`);
+console.debug(`El subtotal del carro de compra es: ${total}`);
+console.debug(`El total de impuesto es: ${impuesto}`);
+console.debug(`El total de la compra es: ${total + impuesto}`);

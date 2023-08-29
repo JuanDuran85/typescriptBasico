@@ -12,9 +12,9 @@ function merge<T, U>(objOne: T, objTwo: U) {
 }
 
 const mergeResult = merge({ name: "Juan" }, { age: 37 });
-console.log({ mergeResult });
-console.log(mergeResult.age);
-console.log(mergeResult.name);
+console.debug({ mergeResult });
+console.debug(mergeResult.age);
+console.debug(mergeResult.name);
 
 // Type contrains
 //we’ll create an interface that implement a constraint to avoid other types of elements
@@ -30,9 +30,9 @@ const mergeResultWithContrains = mergeWithContrains(
   { name: "Juan" },
   { age: 37 }
 );
-console.log({ mergeResultWithContrains });
-console.log(mergeResultWithContrains.age);
-console.log(mergeResultWithContrains.name);
+console.debug({ mergeResultWithContrains });
+console.debug(mergeResultWithContrains.age);
+console.debug(mergeResultWithContrains.name);
 
 // creating a generic function
 // generic function with interface and constrains
@@ -50,8 +50,8 @@ function countAndDescribe<T extends Lengthy>(element: T) {
   return [element, descriptionText];
 }
 
-console.log(countAndDescribe("texto numero 1"));
-console.log(countAndDescribe(["elemento 1"]));
+console.debug(countAndDescribe("texto numero 1"));
+console.debug(countAndDescribe(["elemento 1"]));
 
 // the keyof contrains
 
@@ -62,7 +62,7 @@ function extractAndConvert<T extends object, U extends keyof T>(
   return `Value: ${obj[key]}`;
 }
 
-console.log(extractAndConvert({ name: "Juan" }, "name"));
+console.debug(extractAndConvert({ name: "Juan" }, "name"));
 
 // using object literal a move it to an interface
 interface GeneritTypeIdentifier {
@@ -73,8 +73,8 @@ const result: GeneritTypeIdentifier = (value) => {
   return value;
 };
 
-console.log(result(3));
-console.log(result("hola"));
+console.debug(result(3));
+console.debug(result("hola"));
 
 //Using Class Types in Generics
 // When creating factories in TypeScript using generics, it is necessary to refer to class types by their constructor functions.
@@ -91,7 +91,7 @@ function createInstanceStatus<T>(instance: { new (): T }): T {
   return new instance();
 }
 
-console.log(createInstanceStatus(Activeted));
+console.debug(createInstanceStatus(Activeted));
 
 // Working with generic classes
 
@@ -119,16 +119,16 @@ textStorage.addItems(4);
 textStorage.addItems("5");
 textStorage.addItems("Texto");
 textStorage.removeItem(4);
-console.log(textStorage.getItems());
+console.debug(textStorage.getItems());
 
 const numberStorage = new DataStoregeGeneric<number>();
 numberStorage.addItems(3);
 numberStorage.addItems(4);
 numberStorage.removeItem(4);
-console.log(numberStorage.getItems());
+console.debug(numberStorage.getItems());
 
 // Make a dictionary with Generic Type.
-console.log("---------------------------------------------------------");
+console.debug("---------------------------------------------------------");
 interface DataNewInterface {
   id: number;
   name: string;
@@ -153,11 +153,11 @@ function makeDictionary<T>(
   }, {});
 }
 
-console.log(makeDictionary(dataNew, (el: DataNewInterface) => el.id));
-console.log("---------------------------------------------------------");
+console.debug(makeDictionary(dataNew, (el: DataNewInterface) => el.id));
+console.debug("---------------------------------------------------------");
 
 // Itersected with type and generics.
-console.log("---------------------------------------------------------");
+console.debug("---------------------------------------------------------");
 
 type Intersected = {
   a: number;
@@ -199,7 +199,7 @@ type UserData = Awaited<ReturnType<typeof fetchUserData>>;
 async function displayUserData(): Promise<void> {
   const userData: UserData = await fetchUserData();
   const { id, userId, title, completed } = userData;
-  console.log(
+  console.debug(
     `User ${title} has idUser ${id} and id ${userId} and is completed: ${completed}`
   );
 }
@@ -223,14 +223,14 @@ const infoUsurio: UsersInfo = {
   age: 0,
 };
 
-console.log(infoUsurio);
+console.debug(infoUsurio);
 // type Partial<T> = { [P in keyof T]?: T[P]; }
 // Make all properties in T optional
 const usuarios = (infoIn: UsersInfo, infoToUpdate: Partial<UsersInfo>) => {
   return { ...infoIn, ...infoToUpdate };
 };
 
-console.log(usuarios(infoUsurio, { name: "Juan", lastName: "Duran", age: 37 }));
+console.debug(usuarios(infoUsurio, { name: "Juan", lastName: "Duran", age: 37 }));
 
 // -------------------------------- Required<Type> --------------------------------
 // Constructs a type consisting of all properties of Type set to required. The opposite of Partial.
@@ -275,7 +275,7 @@ const book1: Readonly<Books> = {
 
 // if you try to assign a new value to a property, you will get an error: Cannot assign to 'pages' because it is a read-only property.
 //book1.pages = 56;
-console.log(book1);
+console.debug(book1);
 
 // -------------------------------- ReadonlyArray<Type> --------------------------------
 // Create a readonly version of your array.
@@ -285,7 +285,7 @@ const copyArrayReadOnly: ReadonlyArray<number> = arrayValues;
 // Now, all mutating methods are removed and will throw a compile-time error.
 // copyArrayReadOnly.push(4);
 // copyArrayReadOnly[2] = 4;
-console.log(copyArrayReadOnly);
+console.debug(copyArrayReadOnly);
 
 // -------------------------------- Record<Keys, Type> --------------------------------
 // Constructs an object type whose property keys are Keys and whose property values are Type. This utility can be used to map the properties of a type to another type.
@@ -371,7 +371,7 @@ type UpdateUser = (user: Pick<UserXY, "id" | "isBlocked">) => void;
 
 // you can use Pick to construct a variable with some properties of the interface. For example:
 const updateUser: UpdateUser = (user: Pick<UserXY, "id" | "isBlocked">) => {
-  console.log(`Values in to update: ${user.id}`);
+  console.debug(`Values in to update: ${user.id}`);
 };
 
 updateUser({
@@ -425,7 +425,7 @@ const isPersonValid = (data: any): data is PersonGeneral => {
 fetch("https://jsonplaceholder.typicode.com/todos/1")
   .then((response: any) => response.json())
   .then((jsonResponse: unknown) => {
-    console.log({ jsonResponse });
+    console.debug({ jsonResponse });
     if (isPersonValid(jsonResponse)) {
       console.info({ jsonResponse });
     }
@@ -476,8 +476,8 @@ statusOne.emit({
 statusOne.emit({
   code: 500,
 });
-console.log(statusOne.getAll());
-statusOne.getAll().forEach((value: IStatus<number>) => console.log(value.code));
+console.debug(statusOne.getAll());
+statusOne.getAll().forEach((value: IStatus<number>) => console.debug(value.code));
 
 const statusTwo: States<Code> = new States<Code>();
 statusTwo.emit({
@@ -488,8 +488,8 @@ statusTwo.emit({
   message: "Page not found",
   code: 404,
 });
-console.log(statusTwo.getAll());
-statusTwo.getAll().forEach((value: Code) => console.log(value));
+console.debug(statusTwo.getAll());
+statusTwo.getAll().forEach((value: Code) => console.debug(value));
 
 //-----------------------------------------------------------------------------------------------
 // Generic Interfaces
@@ -507,7 +507,7 @@ const resultFinal: ResultProcessError<string> = {
   error: "Not found",
 };
 const error: string = resultFinal.error;
-console.log({ resultFinal, error });
+console.debug({ resultFinal, error });
 
 // Generic interface with multiple type parameters
 
@@ -521,8 +521,8 @@ const resultProcessMain: ResultProcessMain<number, string> = {
   },
 };
 const resultNumeric: string = resultProcessMain.getDataProcess(4);
-console.log(resultProcessMain.getDataProcess(5));
-console.log(resultNumeric);
+console.debug(resultProcessMain.getDataProcess(5));
+console.debug(resultNumeric);
 
 //Implementing a generic interface
 interface ResultProcess<T> {
@@ -560,11 +560,11 @@ const resutMainWithGeneric: ResultMain<CodeError> = new ResultMain(
   true,
   errorCode
 );
-console.log(resutMainWithGeneric);
-console.log(resutMainWithGeneric.error);
-console.log(resutMainWithGeneric.susccessfull);
+console.debug(resutMainWithGeneric);
+console.debug(resutMainWithGeneric.error);
+console.debug(resutMainWithGeneric.susccessfull);
 const cloneResultMain = resutMainWithGeneric.clone();
-console.log(cloneResultMain);
+console.debug(cloneResultMain);
 
 // Type parameters as constraints
 
@@ -575,7 +575,7 @@ function assignValues<T extends U, U>(target: T, source: U): T {
   };
 }
 const numOne = { a: 3, b: 1, c: 6 };
-console.log(assignValues(numOne, { a: -4, c: -6 }));
+console.debug(assignValues(numOne, { a: -4, c: -6 }));
 
 //-----------------------------------------------------------------------------------------------
 // Workinng with Generic
@@ -596,7 +596,7 @@ const sumaProcess: SSumResult = <T extends number>(valuesIn: T[]): number => {
   return sum;
 };
 
-console.log(sumaProcess([3, 5, 1, 9, 1]));
+console.debug(sumaProcess([3, 5, 1, 9, 1]));
 
 //-----------------------------------------------------------------------------------------------
 // Workinng with Functions and Classes with annd without Generic
@@ -612,7 +612,7 @@ function removeRandomArrayItemWithOutGeneric(
   return arrayIn.splice(randomIndexToFind, 1);
 }
 
-console.log(removeRandomArrayItemWithOutGeneric(arrayWithNumber));
+console.debug(removeRandomArrayItemWithOutGeneric(arrayWithNumber));
 
 // Functions using generics
 
@@ -621,7 +621,7 @@ function removeRandomArrayItemWithGeneric<T>(arrayIn: Array<T>): Array<T> {
   return arrayIn.splice(randomIndexToFind, 1);
 }
 
-console.log(removeRandomArrayItemWithGeneric(arrayWithNumber));
+console.debug(removeRandomArrayItemWithGeneric(arrayWithNumber));
 
 // Class without using generics
 
@@ -644,8 +644,8 @@ class RemoverOnArray {
   }
 }
 const arrayWithNumber2: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8];
-console.log(new RemoverOnArray(arrayWithNumber2).addValue(-4));
-console.log(new RemoverOnArray(arrayWithNumber2).removeValue(arrayWithNumber2));
+console.debug(new RemoverOnArray(arrayWithNumber2).addValue(-4));
+console.debug(new RemoverOnArray(arrayWithNumber2).removeValue(arrayWithNumber2));
 
 // Class with generics
 class RemoverOnArrayWithGenerics<T> {
@@ -679,18 +679,18 @@ const arrayWithNumber4: Array<string> = [
   "7",
   "8",
 ];
-console.log(
+console.debug(
   new RemoverOnArrayWithGenerics(arrayWithNumber3).addValueWithGeneric(-4)
 );
-console.log(
+console.debug(
   new RemoverOnArrayWithGenerics(arrayWithNumber3).removeValueWithGeneric(
     arrayWithNumber3
   )
 );
-console.log(
+console.debug(
   new RemoverOnArrayWithGenerics(arrayWithNumber4).addValueWithGeneric("-4")
 );
-console.log(
+console.debug(
   new RemoverOnArrayWithGenerics(arrayWithNumber4).removeValueWithGeneric(
     arrayWithNumber4
   )
@@ -705,7 +705,7 @@ const actualLoggedIn = <T extends object>(obj: T) => {
 
 const userOne = actualLoggedIn({ name: "Juan", email: "juan@email.com" });
 userOne.onLine = false;
-console.log(userOne);
+console.debug(userOne);
 
 interface UserLog<T> {
   name: string;
@@ -737,7 +737,7 @@ const messageGreet: MessageGreet = (objIn: Greet<string>): Greet<string> => {
   };
 };
 
-console.log(
+console.debug(
   messageGreet({
     fullName: "Juan",
     messenge: "",
@@ -751,13 +751,13 @@ function genericWithDefault<T = number>(arrayIn: T[]): T[] {
   return arrayIn.splice(Math.floor(Math.random() * arrayIn.length), 1);
 }
 
-console.log(genericWithDefault([1, 6, 2, 1, 7]));
+console.debug(genericWithDefault([1, 6, 2, 1, 7]));
 
 // Passing multiple generic values
 function genericWithMultipleDefault<T = number, Y = number>(arrayIn: T[], multiply: Y): [T[],Y] {
   return [(arrayIn.splice(Math.floor(Math.random() * arrayIn.length), 1)),multiply];
 }
-console.log(genericWithMultipleDefault([1, 6, 2, 1, 7],4));
+console.debug(genericWithMultipleDefault([1, 6, 2, 1, 7],4));
 
 // Adding constraints to generics: We can, however, add constraints to the generic to limit it to a specific type.
 
@@ -779,7 +779,7 @@ const newObjectExample: ObjectExample = {
   amount: 100
 };
 
-console.log(getFromObjectAProperty(newObjectExample, 'name'));
-console.log(getFromObjectAProperty(newObjectExample, 'createAt'));
+console.debug(getFromObjectAProperty(newObjectExample, 'name'));
+console.debug(getFromObjectAProperty(newObjectExample, 'createAt'));
 
 

@@ -6,5 +6,5 @@ namespace Validations {
     export const validateDate = (date: Date): boolean => (isNaN(date.valueOf())) ? true : false;
 }
 
-console.log(Validations.validateText("Juan"));
-console.log(Validations.validateDate(new Date("2022-02-21")));
+console.debug(Validations.validateText("Juan"));
+console.debug(Validations.validateDate(new Date("2022-02-21")));

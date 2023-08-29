@@ -1,11 +1,11 @@
 class Solicitudes {
     static url: string = "https://www.typescriptlang.org";
     getAyuda() {
-        console.log(`${Solicitudes.url}/help`);
+        console.debug(`${Solicitudes.url}/help`);
     }
 
     static getCompila() {
-        console.log(`${Solicitudes.url}/playground`);
+        console.debug(`${Solicitudes.url}/playground`);
     }
 }
 

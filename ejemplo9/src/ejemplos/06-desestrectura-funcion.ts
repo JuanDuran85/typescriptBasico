@@ -33,5 +33,5 @@ const articulos = [tableta,telefono]
 
 const [total, impuesto] = calculoImpuestoVentas(articulos);
 
-console.log(`El total de la venta es: ${total}`);
-console.log(`El total del impuesto es: ${impuesto}`);
+console.debug(`El total de la venta es: ${total}`);
+console.debug(`El total del impuesto es: ${impuesto}`);

@@ -1,5 +1,5 @@
 function printToConsole(constructor: Function) {
-  console.log(constructor);
+  console.debug(constructor);
 }
 
 @printToConsole
@@ -15,7 +15,7 @@ const blockPrototype = function(constructor:Function){
 
 const prinrToConsoleConditional = (print: boolean = false): Function => {
   if (print) return printToConsole;
-  return () => console.log("No print");
+  return () => console.debug("No print");
 };
 
 /* --------------------- factory decorator --------------------- */
@@ -58,12 +58,12 @@ export class Pokemon2 {
 
   @readOnly(true)
   public publicApi = "https://pokeapi.co";
-  
+
   constructor(public name: string) {}
 
   @ValidateNumberOfPokemonId()
   savaPokemonToDb(id: number){
-    console.log(`Saving pokemon with id: ${id}`);
+    console.debug(`Saving pokemon with id: ${id}`);
   }
 }
 

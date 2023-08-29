@@ -14,13 +14,13 @@ export class Server {
 
     public async startServer() {
         this.server = createServer(async (req, res) => {
-            console.log(`Got request from ${req.headers['user-agent']}`);
-            console.log(`Got request for ${req.url}`);
+            console.debug(`Got request from ${req.headers['user-agent']}`);
+            console.debug(`Got request for ${req.url}`);
             await this.handleRequest(req, res);
             res.end();
         });
         this.server.listen(8080);
-        console.log('server started')
+        console.debug('server started')
     }
 
     private async handleRequest(request: IncomingMessage, response: ServerResponse) {
@@ -42,7 +42,7 @@ export class Server {
             }
         } catch (error) {
             response.writeHead(HTTP_CODES.INTERNAL_SERVER_ERROR, JSON.stringify(`Internal server error: ${error.message}`))
-            console.log(error);
+            console.debug(error);
         }
     }
 
@@ -56,7 +56,7 @@ export class Server {
     public async stopServer() {
         if (this.server) {
             this.server.close();
-            console.log('server closed')
+            console.debug('server closed')
         }
     }
 }

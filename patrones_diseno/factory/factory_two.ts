@@ -53,5 +53,5 @@ class UserService {
   }
 }
 
-console.log("manager", new UserService().getSalaryByUser("Manager"));
-console.log("Developer", new UserService().getSalaryByUser("Developer"));
+console.debug("manager", new UserService().getSalaryByUser("Manager"));
+console.debug("Developer", new UserService().getSalaryByUser("Developer"));

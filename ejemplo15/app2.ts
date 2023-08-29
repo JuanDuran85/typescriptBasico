@@ -17,7 +17,7 @@ const batimovil: Coche = {
   encender:false,
   velocidadMaxima:0,
   acelear(){
-    console.log("...... gogogo!!!");
+    console.debug("...... gogogo!!!");
   }
 }
 
@@ -38,7 +38,7 @@ const guason: Villano = {
 
 const reir = ( guasonEntry: Villano ):void => {
   if( guasonEntry.reir ){
-    console.log("JAJAJAJA");
+    console.debug("JAJAJAJA");
   }
 }
 

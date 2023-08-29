@@ -60,8 +60,8 @@ async function resultGetApi() {
   );
 
   const instanceUserFull = plainToInstance(UserClassTransformet, result.data);
-  console.log(instanceUserFull);
-  console.log(instanceUserFull[0].getName());
+  console.debug(instanceUserFull);
+  console.debug(instanceUserFull[0].getName());
 }
 
 async function resultGetApiTwo() {
@@ -70,7 +70,7 @@ async function resultGetApiTwo() {
   );
 
   const instanceUserFull = plainToInstance(Album, result.data);
-  console.log(instanceUserFull);
+  console.debug(instanceUserFull);
 }
 
 //resultGetApi();

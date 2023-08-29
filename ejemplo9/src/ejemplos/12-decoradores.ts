@@ -1,7 +1,7 @@
 // decoradores de clases
 
 function Decorador(cls : Function) {
-    console.log("decorador en ejecucion");
+    console.debug("decorador en ejecucion");
     cls.prototype.className = cls.name;
 }
 
@@ -10,4 +10,4 @@ class Speaker { }
 
 let speaker : Speaker = new Speaker();
 
-console.log((speaker as any).className);
+console.debug((speaker as any).className);

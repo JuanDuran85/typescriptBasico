@@ -1,15 +1,15 @@
 /**
- * 
+ *
  * THE ABSTRACT FACTORY PATTERN
- * 
+ *
  * The abstract factory pattern provides an interface for creating a series of related or interdependent
  * objects without specifying their concrete classes.
- * 
- * In the factory method pattern, a specific factory is responsible for producing specific products, each 
- * specific factory corresponds to a specific product, and the factory method is also unique. In general, 
- * there is only one factory method or a group of overloaded factory methods in a specific factory. But 
+ *
+ * In the factory method pattern, a specific factory is responsible for producing specific products, each
+ * specific factory corresponds to a specific product, and the factory method is also unique. In general,
+ * there is only one factory method or a group of overloaded factory methods in a specific factory. But
  * sometimes we need a factory that can supply multiple products, not a single product.
- * 
+ *
  */
 
 
@@ -21,13 +21,13 @@ abstract class VehicleThree {
 
 class VehicleThreeSuperX01 extends VehicleThree {
     run(): void {
-        console.log("VehicleThreeSuperX01 init");
+        console.debug("VehicleThreeSuperX01 init");
     }
 }
 
 class VehicleThreeSuperX02 extends VehicleThree {
     run(): void {
-        console.log("VehicleThreeSuperX02 init");
+        console.debug("VehicleThreeSuperX02 init");
     }
 }
 
@@ -58,6 +58,6 @@ const superCX02 = concreteFactoryCar.produceSuperCX02();
 superCX01.run();
 superCX02.run();
 
-/* 
+/*
 The biggest difference between the abstract factory pattern and the factory method pattern is that the factory method pattern is aimed at a product hierarchy, while the abstract factory pattern needs to face multiple product hierarchy structures, and a factory hierarchy structure can be responsible for multiple different product hierarchy structures.
 */

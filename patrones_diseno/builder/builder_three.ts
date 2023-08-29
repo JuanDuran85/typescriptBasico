@@ -49,7 +49,7 @@ class ProductFinal {
   public parts: string[] = [];
 
   public listParts(): void {
-    console.log(`Products Part: ${this.parts.join(", ")}\n`);
+    console.debug(`Products Part: ${this.parts.join(", ")}\n`);
   }
 }
 
@@ -74,15 +74,15 @@ function constructorProduct(directoIn: Director) {
   const builder: ConcreteBuilder = new ConcreteBuilder();
   directoIn.setBuilder(builder);
 
-  console.log("Basic Product Init");
+  console.debug("Basic Product Init");
   directoIn.buildMinimalProduct();
   builder.getProduct().listParts();
 
-  console.log("Full Products Init");
+  console.debug("Full Products Init");
   directoIn.buildAllProducts();
   builder.getProduct().listParts();
 
-  console.log("Custom Products");
+  console.debug("Custom Products");
   builder.producePartaA();
   builder.producePartaB();
   builder.getProduct().listParts();

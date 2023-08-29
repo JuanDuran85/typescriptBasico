@@ -26,7 +26,7 @@
   }
 
   const mutan = new Mutant(45,"Logan","James");
-  console.log(mutan.mutanPower(10));
+  console.debug(mutan.mutanPower(10));
 
 
   /* ------------------------------------------------------------------------------- */
@@ -37,6 +37,6 @@
 
   const addTwoNumbers: AddTwoNumbers = (a: number, b: number) => a + b;
 
-  console.log(addTwoNumbers(1,2));
+  console.debug(addTwoNumbers(1,2));
 
 })();

@@ -47,10 +47,10 @@ class Observer<T> implements ObserverInterface<T>{
 
 const subjectNumber = new Subject<number>();
 const obs1 = new Observer<number>((val) => {
-    console.log(`Value Obs1: ${val}`);
+    console.debug(`Value Obs1: ${val}`);
 });
 const obs2 = new Observer<number>((val) => {
-    console.log(`Value Obs2: ${val}`);
+    console.debug(`Value Obs2: ${val}`);
 });
 
 subjectNumber.subscribe(obs1);
@@ -59,6 +59,6 @@ subjectNumber.notify(53.61);
 subjectNumber.notify(111.3333);
 
 const subjectString = new Subject<string>();
-const obsStringOne = new Observer<string>((val: string) => console.log(`Value string observer 1: ${val.toUpperCase()}`));
+const obsStringOne = new Observer<string>((val: string) => console.debug(`Value string observer 1: ${val.toUpperCase()}`));
 subjectString.subscribe(obsStringOne);
 subjectString.notify("Observador string one");

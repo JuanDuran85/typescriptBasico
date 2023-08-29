@@ -5,7 +5,7 @@
  *
  */
 
-/* 
+/*
 In this case, we need to create a new class using the builder pattern. For that, we can use the next class:
 class User {
   constructor(
@@ -72,5 +72,5 @@ const newUserBuilder: User = new UserBuilderPattern()
   .setEmail("email@email.com")
   .setPhoto("dir/photos")
   .build();
-console.log(newUserBuilder);
-console.log({...newUserBuilder});
+console.debug(newUserBuilder);
+console.debug({...newUserBuilder});

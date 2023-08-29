@@ -46,7 +46,7 @@ const productOne: Product = {
 };
 
 const nameProduct = getProductProperty(productOne, "name");
-console.log(nameProduct);
+console.debug(nameProduct);
 //const notProperty = getProductProperty(productOne, "year"); Argument of type '"year"' is not assignable to parameter of type 'keyof Product'.
 
 // 4. Intersection Types:
@@ -65,13 +65,13 @@ type LoggerFinal = LogShow & SerialOut;
 
 class ConsoleLogger implements LogShow {
   log() {
-    console.log("Logging into console...");
+    console.debug("Logging into console...");
   }
 }
 
 class FileLogger implements LogShow, SerialOut {
   log() {
-    console.log("Logging to file ...");
+    console.debug("Logging to file ...");
   }
 
   serialize() {
@@ -125,4 +125,23 @@ class Letters {
 
 const finalLetter = new Letters();
 finalLetter.letter = "abcdefg";
-console.log({finalLetter});
+console.debug({finalLetter});
+
+// 7. Using keyof and Mapped Types to Dynamically Build Types
+/* The keyof operator takes an object type and produces a string or numeric literal union of its keys. Combined with mapped types, you can generate new types from existing ones, while preserving the original structure. */
+type Point = {
+  x: number;
+  y: number;
+}
+
+type NullablePoint = {
+  [K in keyof Point]: Point[K] | null;
+}
+
+const otherPointValues: NullablePoint = {
+  x: 45,
+  y: null
+}
+
+console.debug(otherPointValues);
+

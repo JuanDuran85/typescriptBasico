@@ -5,7 +5,7 @@
 interface SuperHeroe {
     nombre: string;
     edad: number;
-    direccion: Direccion; 
+    direccion: Direccion;
     mostrarDireccion: () => string;
 }
 
@@ -29,4 +29,4 @@ const superHeroe: SuperHeroe = {
 }
 
 const direccion = superHeroe.mostrarDireccion();
-console.log(direccion);
+console.debug(direccion);

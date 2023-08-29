@@ -14,7 +14,7 @@ class Heroe {
 }
 
 const ironMan = new Heroe();
-console.log(ironMan);
+console.debug(ironMan);
 
 class SuperHerue2 {
   constructor(
@@ -25,7 +25,7 @@ class SuperHerue2 {
 }
 
 const ironMan2 = new SuperHerue2("Iron Man", "Tony", 45);
-console.log(ironMan2);
+console.debug(ironMan2);
 
 //--------------------------------------------------------------------------
 
@@ -44,7 +44,7 @@ class Empleado extends PersonaReal {
 }
 
 const e1 = new Empleado("ED4e4FG", 3, "Juan");
-console.log(e1);
+console.debug(e1);
 
 //--------------------------------------------------------------------------------------
 // clases abstractas
@@ -81,10 +81,10 @@ abstract class EjecutandoCriteriosFinal implements AgregandoCriteriosMatch {
   }
 }
 
-console.log(AgregandoFiltrosMongo.arguments());
+console.debug(AgregandoFiltrosMongo.arguments());
 
 const result = AgregandoFiltrosMongo.iniciandoCriterios("value").agregandoCriteriosLook({ a: "x", b: "y", c: "w", d: "z" }).agregandoCriteriosMatch().ejecutando();
-console.log(result);
+console.debug(result);
 
 //-------------------------------------------------------------------------------------------------
 // another option

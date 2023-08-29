@@ -5,7 +5,7 @@ function add(n1: number, n2: number){
 }
 
 function printResult(num: number){
-    console.log(`Result: ${num}`);
+    console.debug(`Result: ${num}`);
 }
 
 // we can use a function as types to describe a function
@@ -13,7 +13,7 @@ function printResult(num: number){
 let combineValuesFunction: (a: number, b: number) => number;
 combineValuesFunction = add;
 //combineValuesFunction = printResult;
-console.log(combineValuesFunction(2,5));
+console.debug(combineValuesFunction(2,5));
 
 // we can use a function as types to implements types in callback functions
 
@@ -22,10 +22,10 @@ function addAndHandleCallback(n1: number, n2: number, callFunc: (num: number)=>v
     callFunc(result);
 }
 
-addAndHandleCallback(3,5,(result: number)=> console.log(result));
+addAndHandleCallback(3,5,(result: number)=> console.debug(result));
 
 /**
- * 
+ *
  * using never on function
  */
 // Some functions never return a value. The never type represents values which are never observed. In a return type, this means that the function throws an exception or terminates execution of the program.
@@ -41,7 +41,7 @@ generateErrorMessage("Error de prueba not found",404)
 const buttonInPage = document.querySelector('button')!;
 
 function clickHandler(message: string){
-    console.log(`Click ${message}`);
+    console.debug(`Click ${message}`);
 }
 
 buttonInPage.addEventListener('click', clickHandler.bind(null,'messaje'))
@@ -54,7 +54,7 @@ const addListNumbers = (...numbers: number[]): number => {
     },0)
 }
 
-console.log(`Result: ${addListNumbers(1,3,4,5,6,2)}`);
+console.debug(`Result: ${addListNumbers(1,3,4,5,6,2)}`);
 
 
 

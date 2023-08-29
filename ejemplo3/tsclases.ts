@@ -5,22 +5,22 @@ class Video2 {
         this.titulo = titulo;
     }
     play(){
-        console.log("playing");;
+        console.debug("playing");;
     }
     stop(){
-        console.log("stopped");;
+        console.debug("stopped");;
     }
 }
 
 class YoutubeVideo extends Video2{
     constructor(titulo : string){
         super(titulo);
-        console.log("Iniciando Youtube");
+        console.debug("Iniciando Youtube");
     }
     play(){
         super.play();
-        console.log("Playing a YouTube Video");
-    }   
+        console.debug("Playing a YouTube Video");
+    }
 }
 
 let miVideo2 : YoutubeVideo = new YoutubeVideo("TS, clases y objetos");

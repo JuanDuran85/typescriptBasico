@@ -14,26 +14,24 @@ function addFunction(a: number, b: number): number {
 }
 
 const rest = addFunction(1, 2);
-console.log(rest);
+console.debug(rest);
 
-// guardando la funcion en una variable
-const addVariable = addFunction;
-const result = addVariable(3, 5);
-console.log(result);
+const result = addFunction(3, 5);
+console.debug(result);
 
 //------------------------------------------------------------------------------
 // Funciones de orden superior
 
 function operationFunction(funIn: Function, a: number, b: number): number {
-  console.log("Working");
-  console.log(`Result: ${funIn(a, b)}`);
+  console.debug("Working");
+  console.debug(`Result: ${funIn(a, b)}`);
   return funIn(a, b);
 }
 
 const resultOp = operationFunction(addFunction, 6, 6);
-console.log(resultOp);
+console.debug(resultOp);
 
-console.log(
+console.debug(
   `Working with arrow function: ${operationFunction(
     (x: number, y: number) => x * y,
     4,
@@ -47,10 +45,10 @@ const numberAcumulation: number[] = [4, 6, 3, 2, 7, 1];
 const total: number = numberAcumulation.reduce(
   (acc: number, numbers: number) => {
     acc += numbers;
-    console.log(numbers);
-    console.log(acc);
+    console.debug(numbers);
+    console.debug(acc);
     return acc;
   },
   0
 );
-console.log(total);
+console.debug(total);

@@ -14,5 +14,5 @@ class SingletonThree {
 
 const singletonClass = SingletonThree.getInstance();
 const singletonClass2 = SingletonThree.getInstance();
-console.log(singletonClass);
-console.log(singletonClass2);
+console.debug(singletonClass);
+console.debug(singletonClass2);

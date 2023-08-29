@@ -12,14 +12,14 @@ class Video {
     setTitulo(tituloNuevo : string) {
         this.titulo = tituloNuevo;
     }
-    
+
     printTitulo(){
-        console.log(this.titulo);
+        console.debug(this.titulo);
     }
 }
 
 let miVideo : Video = new Video("TS, clases y objetos");
 miVideo.printTitulo();
-console.log(miVideo.getTitulo());
+console.debug(miVideo.getTitulo());
 miVideo.setTitulo("Nuevo titulo con TS");
 miVideo.printTitulo();

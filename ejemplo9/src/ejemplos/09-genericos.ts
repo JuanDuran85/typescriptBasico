@@ -18,7 +18,7 @@ let explicito = tipoDeFuncion<number>(200);
 
 
 function printAll<T>(valor : T[]) {
-    console.log(valor)
+    console.debug(valor)
 }
 
 printAll<string>(["uno","dos"]);
