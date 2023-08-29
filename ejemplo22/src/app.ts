@@ -79,6 +79,7 @@ accounting.addBudget(3456);
 accounting.addReports("Errors number one");
 console.debug({ accounting });
 
+//@ts-nocheck
 // accountingCopy.describe();
 
 console.debug({ iTDepart });

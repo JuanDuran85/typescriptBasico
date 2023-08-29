@@ -10,8 +10,7 @@ function printResult(num: number){
 
 // we can use a function as types to describe a function
 
-let combineValuesFunction: (a: number, b: number) => number;
-combineValuesFunction = add;
+const combineValuesFunction: (a: number, b: number) => number = add;
 //combineValuesFunction = printResult;
 console.debug(combineValuesFunction(2,5));
 

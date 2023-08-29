@@ -72,6 +72,6 @@ async function resultGetApiTwo() {
   const instanceUserFull = plainToInstance(Album, result.data);
   console.debug(instanceUserFull);
 }
-
+//@ts-nocheck
 //resultGetApi();
 resultGetApiTwo();
