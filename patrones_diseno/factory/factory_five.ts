@@ -41,7 +41,7 @@ interface PersonalClasess {
 }
 class PersonalFactory {
   public static personClassName: PersonalClasess = {
-    'NP': (name: string) => {
+    'NP': (name: string = "noilmbvre") => {
       console.log(name);
       return new NaturalPerson(name)},
     'LP': (name: string) => new LegalPerson(name),
@@ -54,7 +54,7 @@ class PersonalFactory {
 
     console.debug('llego 2x................');
     console.log(type);
-    console.log(this.personClassName[type]);
+    console.log(this.personClassName['NP'](name));
     //console.debug(this.personClassName[type](name));
     //return this.personClassName[type](name) instanceof (NaturalPerson || LegalPerson) ?  this.personClassName[type](name) : "Error...";
   }
