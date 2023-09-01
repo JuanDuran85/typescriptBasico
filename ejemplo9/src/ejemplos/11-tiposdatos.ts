@@ -25,7 +25,7 @@ interface AJAXSettings {
     url : string;
 }
 
-let options = {} as AJAXSettings; // sin modificar el objeto
+const options = {} as AJAXSettings; // sin modificar el objeto
 options.url = "https://www.alirafael.com";
 
 // Type Aliases y Intersection Type
@@ -52,7 +52,7 @@ function executor(valor : FuncString) : string{
     return valor("hola 2");
 }
 
-let retorno : string = executor(()=>"hola");
+const retorno : string = executor(()=>"hola");
 console.debug(retorno);
 
 // enums
@@ -75,5 +75,5 @@ class Pedido {
     tallas: number = 0;
 }
 
-let pedido : Pedido = new Pedido();
+const pedido : Pedido = new Pedido();
 pedido.tallas = Tallas.Grande;
