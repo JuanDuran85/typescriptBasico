@@ -36,35 +36,33 @@ class LegalPerson implements PersonInterface {
 //------------ clasess Factory---------------//
 
 interface PersonalClasess {
-  NP: (name: string) => NaturalPerson,
-  LP: (name: string) => LegalPerson,
+  NP: (name: string) => NaturalPerson;
+  LP: (name: string) => LegalPerson;
 }
 class PersonalFactory {
   public static personClassName: PersonalClasess = {
-    'NP': (name: string = "noilmbvre") => {
-      console.log(name);
-      return new NaturalPerson(name)},
-    'LP': (name: string) => new LegalPerson(name),
+    NP: (name: string) => new NaturalPerson(name),
+    LP: (name: string) => new LegalPerson(name),
   };
 
-  public static createPersonMethod(
-    type: string,
-    name: string
-  ) {
-
-    console.debug('llego 2x................');
-    console.log(type);
-    console.log(this.personClassName['NP'](name));
-    //console.debug(this.personClassName[type](name));
-    //return this.personClassName[type](name) instanceof (NaturalPerson || LegalPerson) ?  this.personClassName[type](name) : "Error...";
+  public static createPersonMethod(type: string, name: string): NaturalPerson | LegalPerson {
+    return typeof this.personClassName[type](name) === "object"
+      ? this.personClassName[type](name)
+      : "Error...";
   }
 }
 
 class Main {
-  public mainMethod(){
-    console.log("llego.............................");
-    console.debug(PersonalFactory.createPersonMethod("NP","Juan"));
+  public mainMethod() {
+    const npResult = PersonalFactory.createPersonMethod("NP", "Juan") as NaturalPerson;
+    const ldResult = PersonalFactory.createPersonMethod("LP","Maria") as LegalPerson;
+    return {
+      npResult,
+      ldResult,
+    }
   }
 }
 
-new Main().mainMethod();
+console.debug(new Main().mainMethod());
+console.debug(new Main().mainMethod().ldResult.identifier());
+console.debug(new Main().mainMethod().ldResult.name);
