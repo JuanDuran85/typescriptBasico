@@ -1,7 +1,7 @@
 import { randomBytes } from 'crypto'
 
 export function generateRandomId() {
-    const randomId = randomBytes(10).toString('hex');
+    const randomId: string = randomBytes(10).toString('hex');
     return randomId;
 }
 
