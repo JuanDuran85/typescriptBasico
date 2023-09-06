@@ -31,9 +31,7 @@
 
   /* ------------------------------------------------------------------------------- */
 
-  interface AddTwoNumbers {
-      (a: number, b: number): number;
-  }
+  type AddTwoNumbers = (a: number, b: number) => number;
 
   const addTwoNumbers: AddTwoNumbers = (a: number, b: number) => a + b;
 
