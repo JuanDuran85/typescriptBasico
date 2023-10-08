@@ -9,26 +9,23 @@ export function processLogsX(logs: string[], threshold: number){
 
     const firstIDCount = {};
     const secondIDCount = {};
+    let countResult = {};
     const finalCountResult = []
 
     for (const log of logs) {
         const [sender_user_id, recipient_user_id, amount_of_transactions] = log.split(" ");
-        console.log(sender_user_id, recipient_user_id, amount_of_transactions);
+
+        if(!sender_user_id || !recipient_user_id || !amount_of_transactions) {
+            throw new Error()
+        }
+
         firstIDCount[sender_user_id] = (firstIDCount[sender_user_id] || 0) + 1;
         secondIDCount[recipient_user_id] = (secondIDCount[recipient_user_id] || 0) + 1;
     }
 
-    for (const [key, value] of Object.entries(firstIDCount)) {
-        //@ts-ignore
-        if (value >= threshold) {
-            finalCountResult.push({
-                id: key,
-                count: value
-            });
-        }
-    }
+    countResult = { ...firstIDCount, ...secondIDCount };
 
-    for (const [key, value] of Object.entries(secondIDCount)) {
+    for (const [key, value] of Object.entries(countResult)) {
         //@ts-ignore
         if (value >= threshold) {
             finalCountResult.push({
@@ -41,4 +38,6 @@ export function processLogsX(logs: string[], threshold: number){
     return finalCountResult.map(({id, count}) => id);
 }
 
-const result = processLogsX(["1 2 50","1 7 70", "1 3 20", "2 2 17"],2)
+const result = processLogsX(["1 2 50","1 7 70", "1 3 20", "2 2 17"],2);
+console.debug("🚀 ~ file: ejemplo.ts:49 ~ result:", result)
+
