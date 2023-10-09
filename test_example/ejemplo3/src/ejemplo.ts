@@ -1,5 +1,5 @@
 export function processLogsX(logs: string[], threshold: number) {
-  if (!Number(threshold) && threshold < 1) {
+  if (!Number(threshold) || threshold < 1) {
     throw new Error("Error...");
   }
 
@@ -25,8 +25,11 @@ export function processLogsX(logs: string[], threshold: number) {
     )
       throw new Error("Error...");
 
-
-    if(sender_user_id.startsWith('0') || recipient_user_id.startsWith('0') || amount_of_transactions.startsWith('0')) {
+    if (
+      sender_user_id.startsWith("0") ||
+      recipient_user_id.startsWith("0") ||
+      amount_of_transactions.startsWith("0")
+    ) {
       throw new Error("Error...");
     }
 
@@ -52,6 +55,3 @@ export function processLogsX(logs: string[], threshold: number) {
 
   return finalCountResult.map(({ id, count }) => id);
 }
-
-// const result = processLogsX(["1 2 50","1 7 70", "1 3 20", "2 2 17"],2);
-// console.debug("🚀 ~ file: ejemplo.ts:49 ~ result:", result)
