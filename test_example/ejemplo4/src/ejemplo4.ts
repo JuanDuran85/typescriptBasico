@@ -2,20 +2,60 @@ export function numberOfItems(
   s: string,
   startIndices: number[],
   endIndices: number[]
-): number[] {
-  if (s.length < 1 || s.split("").length < 1) {
-    throw new Error("Error...");
-  }
+): number {
+  validationStringIn(s, startIndices, endIndices);
 
-  Array.from(s).forEach((item) => {
-    if (item !== "*" && item !== "|") {
-      throw new Error("Error...");
+  let countMultiple = 0;
+  let counPipe = 0;
+
+  // "* | * * | *" start[1], end[5]
+  //  0 1 2 3 4 5 ->
+
+  const subString = s.slice(startIndices[0] - 1, endIndices[0]);
+
+  for (const iterator of subString) {
+    if (iterator === "|") {
+      counPipe++;
     }
-  });
+    if (iterator === "*" && counPipe >= 1) {
+      countMultiple++;
+    }
+    if (counPipe === 2) {
+      counPipe = 0;
+    }
 
-  if (!Array.isArray(startIndices) || !Array.isArray(endIndices)) {
+    if (counPipe === 1 && iterator === "*" && countMultiple !== 0) {
+      counPipe = 0;
+      countMultiple = 0;
+    }
+  }
+
+  return countMultiple;
+}
+function validationStringIn(
+  s: string,
+  startIndices: number[],
+  endIndices: number[]
+) {
+  if (s.length === 0 || !/^[*|]*$/.test(s)) {
     throw new Error("Error...");
   }
 
-  return [];
+  if (
+    startIndices.length !== endIndices.length ||
+    startIndices.length === 0 ||
+    endIndices.length === 0
+  ) {
+    throw new Error("Error...");
+  }
+
+  if (
+    !Number.isInteger(startIndices[0]) ||
+    !Number.isInteger(endIndices[0]) ||
+    startIndices[0] < 1 ||
+    endIndices[0] <= startIndices[0] ||
+    endIndices[0] > s.length
+  ) {
+    throw new Error("Error...");
+  }
 }
