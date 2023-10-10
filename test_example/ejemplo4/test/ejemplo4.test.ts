@@ -31,10 +31,10 @@ describe("Ejemplo4 unit test suit", () => {
   })
 
   it('should return an array of numbers', () => {
-    const sItems: string = "*|**|*";
+    const sItems: string = "*|**|**|";
     const startIndices: number[] = [1];
-    const endIndices: number[] = [6];
+    const endIndices: number[] = [8];
     const actual: number = sut(sItems, startIndices, endIndices);
-    expect(actual).toEqual(0);  
+    expect(actual).toEqual(4);  
   });
 });
