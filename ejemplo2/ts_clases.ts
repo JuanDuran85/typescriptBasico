@@ -18,7 +18,7 @@ class Video {
     }
 }
 
-let miVideo : Video = new Video("TS, clases y objetos");
+const miVideo : Video = new Video("TS, clases y objetos");
 miVideo.printTitulo();
 console.debug(miVideo.getTitulo());
 miVideo.setTitulo("Nuevo titulo con TS");
