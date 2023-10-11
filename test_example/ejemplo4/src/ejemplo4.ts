@@ -2,31 +2,39 @@ export function numberOfItems(
   s: string,
   startIndices: number[],
   endIndices: number[]
-): number {
+): number | number[] {
   validationStringIn(s, startIndices, endIndices);
-  // "* | * * | *" start[1], end[5]
-  //  0 1 2 3 4 5 -> count of "*" between | is 2
   
-  const subString = s.slice(startIndices[0] - 1, endIndices[0]);
-  
-  if (subString.indexOf('|') === -1) return 0;
-  
-  const regularExpresionTest: RegExp = /\*[^|]*\|/g;
-  const pipeRegularExpExist: RegExpMatchArray = subString.match(regularExpresionTest);
+  let subString: string = s.slice(startIndices[0] - 1, endIndices[0]);
+
+  if (subString.indexOf("|") === -1) {
+    return 0;
+  }
+
+  while (subString.startsWith("*")) {
+    subString = subString.slice(1);
+  }
+  while (subString.endsWith("*")) {
+    subString = subString.slice(0, subString.length - 1);
+  }
+
+  const regularExpressionTest: RegExp = /(?<=\|)\*+(?=\|)/g;
+  const pipeRegularExpExist: RegExpMatchArray = subString.match(
+    regularExpressionTest
+  );
   let countMultiple: number = 0;
 
-  if (pipeRegularExpExist) {
-    for (const findedReg of pipeRegularExpExist) {
-      const resultX = findedReg.match(/\*/g);
-      console.debug(countMultiple);
-      countMultiple += (findedReg.match(/\*/g) || []).length;
-      console.debug(countMultiple);
+  if (!pipeRegularExpExist) {
+    return 0;
+  }
 
-    }
+  for (const strictFound of pipeRegularExpExist) {
+    countMultiple += strictFound.length;
   }
 
   return countMultiple;
 }
+
 function validationStringIn(
   s: string,
   startIndices: number[],
