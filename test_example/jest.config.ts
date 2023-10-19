@@ -1,7 +1,7 @@
 import type { Config } from "@jest/types";
 
-const baseDir = '<rootDir>/ejemplo4/src';
-const baseTestDir = '<rootDir>/ejemplo4/test';
+const baseDir = '<rootDir>/ejemplo6/src';
+const baseTestDir = '<rootDir>/ejemplo6/test';
 
 
 const config: Config.InitialOptions = {
