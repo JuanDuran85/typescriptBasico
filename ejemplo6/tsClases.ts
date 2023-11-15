@@ -57,6 +57,7 @@ class ExampleClassToDecored {
 
   public displayNickName() {
     console.debug(this.nickName);
+    return this.nickName;
   }
 }
 

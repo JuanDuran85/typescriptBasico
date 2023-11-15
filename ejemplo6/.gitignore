@@ -1,7 +1,7 @@
-/node_module
+node_modules
+./node_modules
 /dist
 node_module
-/ejemplo21/node_modules
 .vscode/
 
 # Logs
