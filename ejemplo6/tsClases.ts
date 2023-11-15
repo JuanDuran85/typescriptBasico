@@ -17,9 +17,9 @@
  * - Allow you to modify or extend the behavior of a class or its constructor, and can even replace the entire class with a new one.
  * - They receive the class constructor as their target and can be used to add properties, methods, or modify metadata.
  * - Class decorators are executed at runtime when the class is defined. By having access to the class constructor, they enable behavior manipulation before any instances are created.
- * 
- * @param target 
- * @returns 
+ *
+ * @param target
+ * @returns
  */
 
 function decoratorClassFunction<T extends new (...args: any[]) => any>(
@@ -64,3 +64,49 @@ class ExampleClassToDecored {
 const resultExample = new ExampleClassToDecored("Juan", "Juanito");
 resultExample.displayNickName();
 console.debug(resultExample.getName());
+
+//------------------------------------------------------------------
+/**
+ * * Method Decorators: are a type of decorator that can be applied to class methods (both instance methods and static methods), allowing you to modify or extend the behavior of a specific method.
+
+- They Have the ability to access and modify method arguments, return values, or even replace the method entirely.
+- They are functions that receive three parameters: the target object (class prototype), the method name, and the property descriptor (an object that describes the attributes and behavior of a property).
+- They are executed when the class is defined, allowing for modification of method behavior before any instances are created.
+ */
+
+function loggerMethodDecorator(
+  _target: any,
+  _propertyKey: any,
+  descriptor: PropertyDescriptor
+): PropertyDescriptor {
+  const originalMethod = descriptor.value;
+
+  function modifiedOrReplacedMethod(this: any, ...args: any[]): any {
+    console.info(`Calling method: ${_propertyKey}`);
+    const result = originalMethod.call(this, ...args);
+    console.info(`Result: ${result}`);
+    console.info(`End of method: ${_propertyKey}`);
+    return result;
+  }
+
+  descriptor.value = modifiedOrReplacedMethod;
+  return descriptor;
+}
+
+class PersonDecoratorMethod {
+  public namePerson: string;
+
+  public constructor(name: string) {
+    this.namePerson = name;
+  }
+
+  @loggerMethodDecorator
+  public getName(): string {
+    console.debug(`Name: ${this.namePerson}.`);
+    return this.namePerson;
+  }
+}
+
+const result = new PersonDecoratorMethod("Juan");
+result.getName();
+console.debug(result);
