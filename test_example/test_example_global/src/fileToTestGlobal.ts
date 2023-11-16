@@ -40,3 +40,42 @@ export class ExampleClassToDecored {
 const resultExample = new ExampleClassToDecored("Juan", "Juanito");
 resultExample.displayNickName();
 console.debug(resultExample.getName());
+
+
+//------------------------------------------------------------------
+function loggerMethodDecorator(
+  _target: any,
+  _propertyKey: any,
+  descriptor: PropertyDescriptor
+): PropertyDescriptor {
+  const originalMethod = descriptor.value;
+
+  function modifiedOrReplacedMethod(this: any, ...args: any[]): any {
+    console.info(`Calling method: ${_propertyKey}`);
+    const result = originalMethod.call(this, ...args);
+    console.info(`Result: ${result}`);
+    console.info(`End of method: ${_propertyKey}`);
+    return result;
+  }
+
+  descriptor.value = modifiedOrReplacedMethod;
+  return descriptor;
+}
+
+class PersonDecoratorMethod {
+  public namePerson: string;
+
+  public constructor(name: string) {
+    this.namePerson = name;
+  }
+
+  @loggerMethodDecorator
+  public getName(): string {
+    console.debug(`Name: ${this.namePerson}.`);
+    return this.namePerson;
+  }
+}
+
+const result: PersonDecoratorMethod = new PersonDecoratorMethod("Juan");
+result.getName();
+console.debug(result);

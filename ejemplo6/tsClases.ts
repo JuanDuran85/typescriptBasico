@@ -107,6 +107,6 @@ class PersonDecoratorMethod {
   }
 }
 
-const result = new PersonDecoratorMethod("Juan");
+const result: PersonDecoratorMethod = new PersonDecoratorMethod("Juan");
 result.getName();
 console.debug(result);
