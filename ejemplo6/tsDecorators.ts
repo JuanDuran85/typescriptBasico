@@ -82,10 +82,10 @@ function loggerMethodDecorator(
   const originalMethod = descriptor.value;
 
   function modifiedOrReplacedMethod(this: any, ...args: any[]): any {
-    console.info(`Calling method: ${_propertyKey}`);
+    console.info(`Calling method in decorator: ${_propertyKey}`);
     const result = originalMethod.call(this, ...args);
-    console.info(`Result: ${result}`);
-    console.info(`End of method: ${_propertyKey}`);
+    console.info(`Result in decorator: ${result}`);
+    console.info(`End of method in decorator: ${_propertyKey}`);
     return result;
   }
 
@@ -102,7 +102,7 @@ class PersonDecoratorMethod {
 
   @loggerMethodDecorator
   public getName(): string {
-    console.debug(`Name: ${this.namePerson}.`);
+    console.debug(`Name in class method: ${this.namePerson}.`);
     return this.namePerson;
   }
 }
@@ -110,3 +110,75 @@ class PersonDecoratorMethod {
 const result: PersonDecoratorMethod = new PersonDecoratorMethod("Juan");
 result.getName();
 console.debug(result);
+
+// ------------------------------------------------------------------
+
+/**
+ * Decorator composition: is the concept of applying multiple decorators to a target in a specific order to achieve a desired behavior or functionality. It allows you to combine and chain decorators to modify or extend a behavior.
+ *
+ * Multiple decorators can be applied to a declaration in TypeScript either on a single line or on multiple lines. The order of the decorators matters because each decorator builds upon the modifications made by the previous decorator.
+ */
+
+function firstDecorator() {
+  console.debug("First decorator evaluated");
+  return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+    console.debug("First decorator called");
+  };
+}
+
+function secondDecorator() {
+  console.debug("Second decorator evaluated");
+  return function (
+    target: any,
+    propertyKey: string,
+    descriptor: PropertyDescriptor
+  ) {
+    console.debug("Second decorator called");
+  };
+}
+
+class ExampleMultipleDocorators {
+  public name: string;
+
+  public constructor(name: string) {
+    this.name = name;
+  }
+
+  @firstDecorator()
+  @secondDecorator()
+  public getNameUser(): string {
+    return this.name;
+  }
+}
+
+const resultMultiple: ExampleMultipleDocorators = new ExampleMultipleDocorators(
+  "Juan"
+);
+resultMultiple.getNameUser();
+
+
+//-----------------------------------------------------------------
+
+/**
+ * Property Decorators: are a type of decorator that can be applied to class properties (both instance and static).
+ */
+
+function propertyDecoratorReadOnlyExample(target: any, propertyName: string) {
+  console.debug({
+        target,
+        propertyName
+    })
+}
+
+
+class PropertyDecoratorExample {
+  @propertyDecoratorReadOnlyExample
+  public name: string = "Juan";
+}
+
+const instancePropertyDecorator: PropertyDecoratorExample = new PropertyDecoratorExample();
+console.debug(instancePropertyDecorator.name);
+instancePropertyDecorator.name = "Juanito";
+console.debug(instancePropertyDecorator.name);
+
+
