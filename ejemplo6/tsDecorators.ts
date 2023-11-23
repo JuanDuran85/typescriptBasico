@@ -25,10 +25,8 @@
 function decoratorClassFunction<T extends new (...args: any[]) => any>(
   target: T
 ): T {
-  const OriginalConstrucutor = target;
-
   function modifiedConstructor(...args: any[]) {
-    const instance = new OriginalConstrucutor(...args);
+    const instance = new target(...args);
 
     Object.keys(instance).forEach((key) => {
       if (typeof instance[key] === "string") {
@@ -39,7 +37,7 @@ function decoratorClassFunction<T extends new (...args: any[]) => any>(
     return instance;
   }
 
-  modifiedConstructor.prototype = OriginalConstrucutor.prototype;
+  modifiedConstructor.prototype = target.prototype;
   return modifiedConstructor as unknown as T;
 }
 
@@ -64,6 +62,34 @@ class ExampleClassToDecored {
 const resultExample = new ExampleClassToDecored("Juan", "Juanito");
 resultExample.displayNickName();
 console.debug(resultExample.getName());
+
+//---------------------------------------------
+// The decorator class is a function and gets the constructor as a parameter,
+function BaseEntity(functionIn: Function) {
+  console.debug(`Function in: ${functionIn}`);
+  functionIn.prototype.id = Math.floor(1000 * Math.random());
+  functionIn.prototype.createdAt = new Date().toLocaleString("es-Es");
+  console.debug(`Function out: ${functionIn}`);
+}
+
+// The decorator class is a function and gets the constructor as a parameter
+
+@BaseEntity
+class UserWithDecorator {
+  public constructor(public name: string) {}
+}
+
+@BaseEntity
+class CityWithDecorator {
+  public constructor(public code: string) {}
+}
+
+const user = new UserWithDecorator("juan");
+const city = new CityWithDecorator("madrid");
+console.debug(user);
+console.debug(city);
+console.debug(user.name);
+console.debug(city.code);
 
 //------------------------------------------------------------------
 /**
@@ -128,11 +154,7 @@ function firstDecorator() {
 
 function secondDecorator() {
   console.debug("Second decorator evaluated");
-  return function (
-    target: any,
-    propertyKey: string,
-    descriptor: PropertyDescriptor
-  ) {
+  return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
     console.debug("Second decorator called");
   };
 }
@@ -156,7 +178,6 @@ const resultMultiple: ExampleMultipleDocorators = new ExampleMultipleDocorators(
 );
 resultMultiple.getNameUser();
 
-
 //-----------------------------------------------------------------
 
 /**
@@ -165,20 +186,28 @@ resultMultiple.getNameUser();
 
 function propertyDecoratorReadOnlyExample(target: any, propertyName: string) {
   console.debug({
-        target,
-        propertyName
-    })
+    target,
+    propertyName,
+  });
+  Object.defineProperty(target, propertyName, {
+    writable: false,
+  });
+  Object.freeze(target);
+  Object.freeze(propertyName);
 }
-
 
 class PropertyDecoratorExample {
   @propertyDecoratorReadOnlyExample
-  public name: string = "Juan";
+  public name: string;
+
+  constructor(name: string) {
+    console.debug(this.name);
+    this.name = name;
+  }
 }
 
-const instancePropertyDecorator: PropertyDecoratorExample = new PropertyDecoratorExample();
+const instancePropertyDecorator: PropertyDecoratorExample =
+  new PropertyDecoratorExample("Juan");
 console.debug(instancePropertyDecorator.name);
 instancePropertyDecorator.name = "Juanito";
 console.debug(instancePropertyDecorator.name);
-
-
