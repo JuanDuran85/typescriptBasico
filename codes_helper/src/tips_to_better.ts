@@ -67,15 +67,15 @@ But avoid doing it, for that reason, a more elegant solution is to change isCirc
 */
 
 function isCircle(shape: Shape): shape is Circle {
-    return shape.kind === 'circle';
+  return shape.kind === "circle";
 }
 
 function isRect(shape: Shape): shape is Rect {
-    return shape.kind === "rect";
+  return shape.kind === "rect";
 }
 
 function getShapes(): Shape[] {
-    return [circle, rect];
+  return [circle, rect];
 }
 
 const myShape: Shape[] = getShapes();
@@ -86,3 +86,34 @@ console.debug(circles);
 
 const rects: Rect[] = myShape.filter(isRect);
 console.debug(rects);
+
+/**
+ * *Utilize Union Types and Type Guards
+
+Union types allow you to define a variable that can have multiple types. This is useful when dealing with situations where a variable may have different possible values. Type guards like typeof and instanceof, help you narrow down the type in a conditional block.
+ */
+
+type ShapeType = "circle" | "squere" | "triangle";
+const circleFunction: (size: number) => number = (size: number): number =>
+  Math.PI * size ** 2;
+const squareFunction: (size: number) => number = (size: number): number =>
+  size ** 2;
+const triangleFunction: (size: number) => number = (size: number): number =>
+  (Math.sqrt(3) / 4) * size ** 2;
+
+const shapeFunctions = {
+  circle: circleFunction,
+  squere: squareFunction,
+  triangle: triangleFunction,
+};
+
+const getArea: (shape: ShapeType, size: number) => number = (
+  shape: ShapeType,
+  size: number
+): number => {
+  return shapeFunctions[shape](size);
+};
+
+console.debug(getArea("circle", 10));
+console.debug(getArea("squere", 10));
+console.debug(getArea("triangle", 10));
