@@ -117,3 +117,32 @@ const getArea: (shape: ShapeType, size: number) => number = (
 console.debug(getArea("circle", 10));
 console.debug(getArea("squere", 10));
 console.debug(getArea("triangle", 10));
+
+/**
+ * *Use Intersection Types for Flexible Type Composition
+
+Intersection types allow you to combine multiple types into a single type, creating a new type that has all the properties and methods of each type. This provides flexibility when typing and can be particularly useful when dealing with complex object structures
+ */
+
+type Greetings = {
+  greetSomeone: (name: string) => void;
+};
+
+type Farewell = {
+  sayGoodbye: (name: string) => void;
+};
+
+type GreetingsAndFarewell = Greetings & Farewell;
+
+class PersonToKnow implements GreetingsAndFarewell {
+  greetSomeone: (name: string) => void = (name: string) => {
+    console.debug(`Hello ${name}`);
+  };
+
+  sayGoodbye: (name: string) => void = (name: string) => {
+    console.debug(`Goodbye ${name}`);
+  };
+}
+
+const personToSayGoodbye: GreetingsAndFarewell = new PersonToKnow();
+personToSayGoodbye.sayGoodbye("John");
