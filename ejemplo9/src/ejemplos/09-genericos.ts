@@ -10,11 +10,11 @@ function tipoDeFuncion<ABC>(argumento: ABC) {
     return argumento;
 }
 
-let soyString = tipoDeFuncion("Hola Mundo");
-let soyNumero = tipoDeFuncion(134);
-let soyArreglo = tipoDeFuncion([1,"34", true]);
+const soyString = tipoDeFuncion("Hola Mundo");
+const soyNumero = tipoDeFuncion(134);
+const soyArreglo = tipoDeFuncion([1,"34", true]);
 
-let explicito = tipoDeFuncion<number>(200);
+const explicito = tipoDeFuncion<number>(200);
 
 
 function printAll<T>(valor : T[]) {

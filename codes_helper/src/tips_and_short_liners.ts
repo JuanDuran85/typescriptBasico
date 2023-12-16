@@ -145,3 +145,4 @@ const otherPointValues: NullablePoint = {
 
 console.debug(otherPointValues);
 
+// 8. 

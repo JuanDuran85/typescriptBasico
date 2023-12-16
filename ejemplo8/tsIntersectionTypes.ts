@@ -3,12 +3,13 @@ interface Variables {
     apellido: string
 }
 
-let datos = {} as Variables;
+const datos = {} as Variables;
 datos.nombre = "Juan";
 datos.apellido = "Duran";
 
 type NumberOrString2 = number | string;
-let age2 : NumberOrString2;
+const age2 : NumberOrString2 = Number(5);
+console.debug(age2);
 
 class User5 {
     name: string;
@@ -28,7 +29,7 @@ function ejecutor (f: FuncString2) {
 
 ejecutor(()=>"casa");
 
-let tupla: [string,number] = ["casa",5];
+const tupla: [string,number] = ["casa",5];
 
 console.debug(tupla);
 

@@ -176,6 +176,26 @@ type Result = PrettifyInterseted<Intersected>;
 //---------------------------------------------------------------------------------------------------
 //    -------------------------------- Generic Utility types --------------------------------
 //---------------------------------------------------------------------------------------------------
+// -------------------------------- ReturnType<Type> --------------------------------
+// Constructs a type consisting of the return type of function Type. For overloaded functions, this will be the return type of the last signature
+
+// returning type of a function
+declare function functOne(): {
+  a: number;
+  b: string;
+};
+
+type T1 = ReturnType<typeof functOne>;
+
+type T2 = ReturnType<() => string>;
+
+type T3 = ReturnType<() => () => string>;
+
+type T4 = ReturnType<(value: string) => void>;
+
+type T5 = ReturnType<<T>() => T>
+
+type T6 = ReturnType<<T extends U, U extends number[]>() => T>
 
 // -------------------------------- Awaited<Type> --------------------------------
 // This type is meant to model operations like await in async functions, or the .then() method on Promises - specifically, the way that they recursively unwrap Promises.
@@ -230,7 +250,9 @@ const usuarios = (infoIn: UsersInfo, infoToUpdate: Partial<UsersInfo>) => {
   return { ...infoIn, ...infoToUpdate };
 };
 
-console.debug(usuarios(infoUsurio, { name: "Juan", lastName: "Duran", age: 37 }));
+console.debug(
+  usuarios(infoUsurio, { name: "Juan", lastName: "Duran", age: 37 })
+);
 
 // -------------------------------- Required<Type> --------------------------------
 // Constructs a type consisting of all properties of Type set to required. The opposite of Partial.
@@ -477,7 +499,9 @@ statusOne.emit({
   code: 500,
 });
 console.debug(statusOne.getAll());
-statusOne.getAll().forEach((value: IStatus<number>) => console.debug(value.code));
+statusOne
+  .getAll()
+  .forEach((value: IStatus<number>) => console.debug(value.code));
 
 const statusTwo: States<Code> = new States<Code>();
 statusTwo.emit({
@@ -645,7 +669,9 @@ class RemoverOnArray {
 }
 const arrayWithNumber2: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8];
 console.debug(new RemoverOnArray(arrayWithNumber2).addValue(-4));
-console.debug(new RemoverOnArray(arrayWithNumber2).removeValue(arrayWithNumber2));
+console.debug(
+  new RemoverOnArray(arrayWithNumber2).removeValue(arrayWithNumber2)
+);
 
 // Class with generics
 class RemoverOnArrayWithGenerics<T> {
@@ -754,32 +780,36 @@ function genericWithDefault<T = number>(arrayIn: T[]): T[] {
 console.debug(genericWithDefault([1, 6, 2, 1, 7]));
 
 // Passing multiple generic values
-function genericWithMultipleDefault<T = number, Y = number>(arrayIn: T[], multiply: Y): [T[],Y] {
-  return [(arrayIn.splice(Math.floor(Math.random() * arrayIn.length), 1)),multiply];
+function genericWithMultipleDefault<T = number, Y = number>(
+  arrayIn: T[],
+  multiply: Y
+): [T[], Y] {
+  return [
+    arrayIn.splice(Math.floor(Math.random() * arrayIn.length), 1),
+    multiply,
+  ];
 }
-console.debug(genericWithMultipleDefault([1, 6, 2, 1, 7],4));
+console.debug(genericWithMultipleDefault([1, 6, 2, 1, 7], 4));
 
 // Adding constraints to generics: We can, however, add constraints to the generic to limit it to a specific type.
 
-function getFromObjectAProperty<T, U extends keyof T>(objIn: T, keyIn: U){
+function getFromObjectAProperty<T, U extends keyof T>(objIn: T, keyIn: U) {
   return objIn[keyIn];
 }
 
 interface ObjectExample {
   name: string;
   status: boolean;
-  createAt: Date,
-  amount: number
-};
+  createAt: Date;
+  amount: number;
+}
 
 const newObjectExample: ObjectExample = {
-  name: 'example',
+  name: "example",
   status: true,
   createAt: new Date(),
-  amount: 100
+  amount: 100,
 };
 
-console.debug(getFromObjectAProperty(newObjectExample, 'name'));
-console.debug(getFromObjectAProperty(newObjectExample, 'createAt'));
-
-
+console.debug(getFromObjectAProperty(newObjectExample, "name"));
+console.debug(getFromObjectAProperty(newObjectExample, "createAt"));
