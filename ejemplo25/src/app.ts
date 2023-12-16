@@ -177,8 +177,10 @@ type Result = PrettifyInterseted<Intersected>;
 //    -------------------------------- Generic Utility types --------------------------------
 //---------------------------------------------------------------------------------------------------
 // -------------------------------- ReturnType<Type> --------------------------------
-// Constructs a type consisting of the return type of function Type. For overloaded functions, this will be the return type of the last signature
-
+// Constructs a type consisting of the return type of function Type. For overloaded functions, this will be the return type of the last signature. The ReturnType utility type is very useful in situations where the output of a specific function needs to be taken in by another function. In that scenario, you might create a new, custom type, that the output of a function constrains itself to.
+console.debug(
+  "-------------------------ReturnType<Type>--------------------------------"
+);
 // returning type of a function
 declare function functOne(): {
   a: number;
@@ -193,10 +195,39 @@ type T3 = ReturnType<() => () => string>;
 
 type T4 = ReturnType<(value: string) => void>;
 
-type T5 = ReturnType<<T>() => T>
+type T5 = ReturnType<<T>() => T>;
 
-type T6 = ReturnType<<T extends U, U extends number[]>() => T>
+type T6 = ReturnType<<T extends U, U extends number[]>() => T>;
 
+// The ReturnType<T> type is a generic type that takes a function type T and returns the return type of that function type.
+
+function addNumbers(a: number, b: number): number {
+  return a + b;
+}
+
+type T7 = ReturnType<typeof addNumbers>;
+
+// If we have a function called getUserInfo that makes a request to an API and returns a promise that resolves to a user object, to extract the return type of this function to have more information about the returned user object, we can use ReturnType.
+
+async function getUserInfo(): Promise<{
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+}> {
+  const response: Response = await fetch(
+    "https://jsonplaceholder.typicode.com/todos/1"
+  );
+  const data = await response.json();
+   console.debug("Data to Show-------111111");
+  console.debug({ ...data });
+  return data;
+}
+
+type UserReturnType = ReturnType<typeof getUserInfo>;
+console.debug(
+  "-----------------------Awaited<Type>----------------------------------"
+);
 // -------------------------------- Awaited<Type> --------------------------------
 // This type is meant to model operations like await in async functions, or the .then() method on Promises - specifically, the way that they recursively unwrap Promises.
 
@@ -226,6 +257,20 @@ async function displayUserData(): Promise<void> {
 
 displayUserData();
 
+//To unwrap the promise from the return type, you need to use the Awaited type. This type works similarly to the await keyword.
+
+const getDataUser = async (idUser: number) => {
+  const response: Response = await fetch(
+    `https://reqres.in/api/users/${idUser}`
+  );
+  const data = await response.json();
+  console.debug("Data to Show-------222222");
+  console.debug(data);
+  return data;
+};
+
+type NewTypeUser = Awaited<ReturnType<typeof getDataUser>>;
+console.debug("---------------------------------------------------------");
 // -------------------------------- Partial<Type> --------------------------------
 // Constructs a type with all properties of Type set to optional. This utility will return a type that represents all subsets of a given type.
 
