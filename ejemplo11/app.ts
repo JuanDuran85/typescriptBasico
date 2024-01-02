@@ -5,7 +5,7 @@
     const superman:string = 'Clark';
 
     const existe: boolean = false;
-
+    console.debug(existe);
     // Tuplas
     const parejaHeroes: [string, string] = [batman,superman];
     const villano: [string, number, boolean] = ['Lex Lutor',5,true];

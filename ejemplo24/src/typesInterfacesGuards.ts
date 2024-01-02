@@ -100,9 +100,7 @@ interface Horse {
 
 type Animal = Bird | Horse;
 
-interface GetSwitchParameter {
-  (animal: Animal): string;
-}
+type GetSwitchParameter = (animal: Animal) => string;
 
 const moveAnimal: GetSwitchParameter = (animal: Animal) => {
   let speed: number = 0;

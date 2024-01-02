@@ -6,9 +6,9 @@ function sumar(a:number, b:number) : number {
     return a+b;
 }
 
-let sumarFlecha = (a:number, b:number) : number => a+b;
+const sumarFlecha = (a:number, b:number) : number => a+b;
 
-let resultado : number = sumar(4,6);
+const resultado : number = sumar(4,6);
 console.debug(resultado);
 console.debug(sumarFlecha(3,7));
 

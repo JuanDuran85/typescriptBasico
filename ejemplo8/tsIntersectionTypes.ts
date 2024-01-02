@@ -20,7 +20,6 @@ class Admin2 {
 }
 
 type UserAdmin2 = User5 & Admin2;
-let user2: UserAdmin2;
 
 type FuncString2 = () => string;
 function ejecutor (f: FuncString2) {

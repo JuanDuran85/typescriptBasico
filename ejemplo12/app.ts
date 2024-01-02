@@ -23,6 +23,8 @@ const unirheroes: Function = ( ...personas: string[] ): string => {
   return personas.join(", ");
 };
 
+console.debug(unirheroes());
+
 // Tipo funcion
 const noHaceNada = (
   numero: number,
@@ -34,5 +36,5 @@ const noHaceNada = (
 };
 
 // Crear el tipo de funcion que acepte la funcion "noHaceNada"
-let noHaceNadaTampoco: (n: number, t:string, b:boolean, a:string[]) => void;
-noHaceNadaTampoco = noHaceNada;
+const noHaceNadaTampoco: (n: number, t:string, b:boolean, a:string[]) => void = noHaceNada;
+console.debug(noHaceNadaTampoco);

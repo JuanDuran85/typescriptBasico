@@ -12,6 +12,6 @@ export class Hero {
   }
 
   get power(): string{
-    return powers.find(power => power.id === this.powerId)?.desc || "not description";
+    return powers.find(power => power.id === this.powerId)?.desc ?? "not description";
   }
 }

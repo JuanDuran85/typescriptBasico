@@ -2,7 +2,7 @@
     ===== Código de TypeScript =====
 */
 
-let habilidades : (boolean | string | number)[] = ["a","b","c", 100, true];
+const habilidades : (boolean | string | number)[] = ["a","b","c", 100, true];
 
 habilidades.push(20);
 

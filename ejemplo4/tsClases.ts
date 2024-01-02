@@ -12,13 +12,13 @@ class User2 {
     }
 
     set fullName(nuevo: string) {
-        let words = nuevo.split(' ');
+        const words = nuevo.split(' ');
         this._nombre = words[0];
         this._apellido = words[1];
     }
 }
 
-let usuario : User2 = new User2("","");
+const usuario : User2 = new User2("","");
 
 usuario.fullName = "Juan Duran";
 console.debug(usuario.fullName);

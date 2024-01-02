@@ -45,9 +45,7 @@ const reir = ( guasonEntry: Villano ):void => {
 reir(guason);
 // Cree una interfaz para la siguiente funcion
 
-interface Gotica {
-  ( ciudadanos:string[] ):number;
-}
+type Gotica = ( ciudadanos:string[] ) =>number;
 
 const ciudadGotica: Gotica = ( ciudadanos:string[] ):number => {
   return ciudadanos.length;

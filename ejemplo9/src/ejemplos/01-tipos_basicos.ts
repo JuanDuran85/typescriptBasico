@@ -1,5 +1,5 @@
-let nombre : string = "Juan";
-let numero : number = 5;
-let varias : number | string = "5555";
+const nombre : string = "Juan";
+const numero : number = 5;
+const varias : number | string = "5555";
 
 console.debug(nombre, numero, varias);

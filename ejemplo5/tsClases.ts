@@ -9,6 +9,6 @@ class Solicitudes {
     }
 }
 
-let nuevaS : Solicitudes = new Solicitudes();
+const nuevaS : Solicitudes = new Solicitudes();
 nuevaS.getAyuda();
 Solicitudes.getCompila();

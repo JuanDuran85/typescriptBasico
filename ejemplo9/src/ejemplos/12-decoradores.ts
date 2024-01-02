@@ -8,6 +8,6 @@ function Decorador(cls : Function) {
 @Decorador
 class Speaker { }
 
-let speaker : Speaker = new Speaker();
+const speaker : Speaker = new Speaker();
 
 console.debug((speaker as any).className);

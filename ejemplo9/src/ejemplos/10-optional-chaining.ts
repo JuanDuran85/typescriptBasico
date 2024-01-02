@@ -23,11 +23,6 @@ const pasajero1 : Pasajero = {
     nombre: "Juan"
 }
 
-const pasajero2 : Pasajero = {
-    nombre: "Yecenia",
-    hijos: ["Ali", "Coromoto"]
-}
-
 function imprimeHijos(pasajero: Pasajero) : void {
     const numeroHijos = pasajero.hijos?.length || 0;
     console.debug(numeroHijos);
