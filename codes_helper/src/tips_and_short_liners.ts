@@ -140,7 +140,9 @@ const finalLetter = new Letters();
 finalLetter.letter = "abcdefg";
 console.debug({ finalLetter });
 
-// 7. Using keyof and Mapped Types to Dynamically Build Types
+/**
+ * !7. Using keyof and Mapped Types to Dynamically Build Types
+ */
 /* The keyof operator takes an object type and produces a string or numeric literal union of its keys. Combined with mapped types, you can generate new types from existing ones, while preserving the original structure. */
 type Point = {
   x: number;
@@ -158,9 +160,7 @@ const otherPointValues: NullablePoint = {
 
 console.debug(otherPointValues);
 
-// 8. keyof
 // The keyof is slightly similar to Object.keys, except that keyof takes the keys of the interface.
-
 const dataExample = {
   x: 45,
   another: "Foo",
@@ -175,7 +175,9 @@ function getDataExample<T extends object, K extends keyof T>(
 
 console.debug(getDataExample(dataExample, "x"));
 
-// 9. Required & Partial & Pick (manual construction)
+/**
+ * !8. Required & Partial & Pick (manual construction)
+ */
 // If you know the keyof, you can use it to do some extensions to the properties, such as implementing Partial and Pick manually.
 
 type PartialManually<T> = {
@@ -190,4 +192,33 @@ type RequiredManually<T> = {
 type PickManually<T, K extends keyof T> = {
   [P in K]: T[P];
 }
+
+interface UserWithManualTypes {
+  id: number;
+  name: string;
+  email: string;
+}
+
+type PartialUserWithManualTypes = PartialManually<UserWithManualTypes>;
+type RequiredUserWithManualTypes = RequiredManually<UserWithManualTypes>;
+type PickUserWithManualTypes = PickManually<UserWithManualTypes, "id" | "name">;
+
+/**
+ * !9. Condition Type
+ */
+// It is similar to the ?: operator, you can use it to extend some basic types. T extends U ? X : Y
+
+type isTrue<T> = T extends true ?  true : false;
+type ex1 = isTrue<true>;
+type ex2 = isTrue<false>;
+type ex3 = isTrue<number>;
+
+type isNumber<T> = T extends number ? true : false;
+type ex4 = isNumber<number>;
+type ex5 = isNumber<string>;
+
+/**
+ * !10. never & Exclude & Omit. (manual construction)
+ */
+// The never type represents the type of values that never occur. There are many interesting and useful types that can be introduced by combining never and conditional type, such as Omit
 
