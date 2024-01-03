@@ -68,7 +68,8 @@ waitTime(2000);
 console.debug("End time");
 
 // 8. Check if a date is a weekday.
-const isWeekDay = (fullDate: Date): boolean => fullDate.getDay() % 6 !== 0;
+const isWeekDay: (fullDate: Date) => boolean = (fullDate: Date): boolean =>
+  fullDate.getDay() % 6 !== 0;
 console.debug(isWeekDay(new Date(2023, 10, 23)));
 console.debug(isWeekDay(new Date(2023, 11, 23)));
 
@@ -96,25 +97,28 @@ console.debug(isEmptyArray([""]));
 console.debug(isEmptyArray([2, 4, "g"]));
 
 // 13. Check if an object/array is empty.
-const isEmptyObject = (obj: any): boolean =>
+const isEmptyObject: (obj: any) => boolean = (obj: any): boolean =>
   obj && Object.keys(obj).length === 0;
 console.debug(isEmptyObject({}));
 console.debug(isEmptyObject({ foo: "bar" }));
 
 // 14.Generating a random integer based on two arguments.
-const randomNumberInteger = (minNum: number, maxNum: number): number =>
-  Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
+const randomNumberInteger: (minNum: number, maxNum: number) => number = (
+  minNum: number,
+  maxNum: number
+): number => Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
 console.debug(randomNumberInteger(1, 10));
 console.debug(randomNumberInteger(30, 100));
 
 // 15.Generating a random boolean.
-const randomBoolean = (): boolean => Math.random() >= 0.5;
+const randomBoolean: () => boolean = (): boolean => Math.random() >= 0.5;
 console.debug(randomBoolean());
 console.debug(randomBoolean());
 console.debug(randomBoolean());
 
 // 16. Toggling a boolean. Turning a false to true and a true to false.
-const toggleBoolean = (val: boolean): boolean => !val;
+const toggleBoolean: (val: boolean) => boolean = (val: boolean): boolean =>
+  !val;
 console.debug(toggleBoolean(true));
 console.debug(toggleBoolean(false));
 
@@ -156,7 +160,9 @@ console.debug(randomIpGenerator());
 
 // 20. Check if the code is running in Node.js
 const isNodeCodeRunning = (): boolean =>
+  //@ts-ignore
   typeof process !== "undefined" &&
+  //@ts-ignore
   Object.prototype.toString.call(process) === "[object process]";
 console.debug(isNodeCodeRunning());
 
