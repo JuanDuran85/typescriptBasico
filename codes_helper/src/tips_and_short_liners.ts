@@ -220,5 +220,38 @@ type ex5 = isNumber<string>;
 /**
  * !10. never & Exclude & Omit. (manual construction)
  */
-// The never type represents the type of values that never occur. There are many interesting and useful types that can be introduced by combining never and conditional type, such as Omit
+// The never type represents the type of values that never occur. There are many interesting and useful types that can be introduced by combining never and conditional type, such as Omit manually.
+
+type ExcludeManually<T,U> = T extends U ? never : T;
+type A = ExcludeManually<"x" | "a", "x" | "y" | "z">;
+
+// In combination with Exclude, we can introduce Omit’s writing style
+type OmitManually<T, K extends keyof any> = PickManually<T, ExcludeManually<keyof T, K>>;
+
+interface UserDefinedManually {
+  id: number;
+  name: string;
+  email: string;
+  age: number;
+  city: string;
+  country: string;
+  gender: string;
+}
+
+type OmitUserManually = OmitManually<UserDefinedManually, "city" | "country">;
+
+/**
+ * !11. use "is" to determine the type of the value.
+ */
+
+function isString(value: any): value is string {
+  return typeof value === "string";
+}
+const valueX: any = "foo";
+console.debug(isString(valueX));
+
+/**
+ * !12. Record (manually) & Dictionary & Many
+ */
+
 
