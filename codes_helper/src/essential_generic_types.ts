@@ -9,7 +9,6 @@
 /**
  * !1. Array<T>
  */
-
 // The Array<T> type is a generic type that represents an array of elements of type T. It provides a number of methods for working with arrays, such as map, filter, reduce, and sort.
 
 const numberOfItems: Array<number> = [3, 6, 1, 8, 4, 9, 12];
@@ -24,7 +23,6 @@ console.debug( averageOfNumbers / numberOfItems.length );
 /**
  * !2. Map<K, V>
  */
-
 // The Map<K, V> type is a generic type that represents a collection of key-value pairs. It provides a way to store and retrieve values based on a key.
 
 interface MapData {
@@ -54,7 +52,6 @@ console.debug(newMapData.values());
 /**
  * !3. Set<T>
  */
-
 // The Set<T> type is a generic type that represents a collection of unique values of type T. It provides a way to add and remove values and to check if a value is in the set.
 
 const setValuesData = new Set<number>();
@@ -69,3 +66,50 @@ setValuesData.add(1);//NOSONAR
 setValuesData.add(4);//NOSONAR
 console.debug(setValuesData);
 
+/**
+ * !4. Pick<T, K>
+ */
+// The Pick<T, K> type creates a new type by picking only the specified properties from the original type. Note that Pick<T,K> is a shorthand of {[k in K]: T<k>}
+
+interface UserDataFull {
+  id: string;
+  username: string;
+  followers: number;
+  isBlocked: boolean;
+}
+
+type TypeUserWithPick = Pick<UserDataFull, "id" | "isBlocked">
+const newUser: TypeUserWithPick = {
+  id: "23dff32",
+  isBlocked: true
+} 
+console.debug({newUser});
+
+/**
+ * !5. Omit<T, K>
+ */
+// The Omit<T, K> type creates a new type by omitting the specified properties from the original type.
+
+type TypeUserWithOmit = Omit<UserDataFull, "isBlocked">;
+const newUserII: TypeUserWithOmit = {
+  id: "23dff32",
+  username: "John Doe",
+  followers: 100
+}
+console.debug({newUserII});
+
+/**
+ * !6. Partial<T>
+ */
+// The Partial<T> type creates a new type by making all properties of T optional.
+type UserWithPartial = Partial<UserDataFull>;
+const newUserIII: UserWithPartial = {
+  id: "23dff32",
+  username: "John Doe"
+}
+console.debug({newUserIII});
+
+/**
+ * !6. ReturnType<T>
+ */
+// The ReturnType<T> type is a generic type that takes a function type T and returns the return type of that function type.
