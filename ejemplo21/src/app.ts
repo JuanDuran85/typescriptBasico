@@ -46,7 +46,13 @@ function clickHandler(message: string){
 buttonInPage.addEventListener('click', clickHandler.bind(null,'messaje'))
 
 //-----------------------------------------------------------------------------
-
+/* The `reduce` function is used to iterate over an array and accumulate a single
+    value based on the elements of the array. It takes a callback function as an
+    argument, which is executed for each element in the array. The callback function
+    takes two parameters: the accumulated value (also known as the result) and the
+    current element of the array. The callback function returns the updated
+    accumulated value, which is then passed as the first parameter in the next
+    iteration. Finally, the `reduce` function returns the final accumulated value. */
 const addListNumbers = (...numbers: number[]): number => {
     return numbers.reduce((result:  number,value: number)=> {
         return result + value;
