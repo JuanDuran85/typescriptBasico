@@ -251,7 +251,32 @@ const valueX: any = "foo";
 console.debug(isString(valueX));
 
 /**
- * !12. Record (manually) & Dictionary & Many
+ * !12. Record (manually) - Dictionary & Many interface
  */
+
+type RecordManually<K extends keyof any, T> = {
+  [P in K]: T;
+}
+
+interface DictionaryString {
+  [key: string]: string;
+}
+
+interface DictionaryNumber {
+  [key: string]: number;
+}
+
+const dictionaryString: DictionaryString = {
+  foo: "foo",
+  bar: "bar",
+};
+
+const dictionaryNumber: DictionaryNumber = {
+  foo: 1,
+  bar: 2,
+};
+
+console.debug(dictionaryString.foo);
+console.debug(dictionaryNumber.foo);
 
 
