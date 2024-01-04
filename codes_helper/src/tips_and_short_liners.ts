@@ -279,4 +279,13 @@ const dictionaryNumber: DictionaryNumber = {
 console.debug(dictionaryString.foo);
 console.debug(dictionaryNumber.foo);
 
+function getValue(
+  valueIn: DictionaryString,
+  keyIn: string
+): RecordManually<string, string> {
+  return {
+    "1": valueIn[keyIn]
+  };
+}
 
+console.debug(getValue(dictionaryString, "foo"));

@@ -397,6 +397,7 @@ interface UserForAvoid {
 const usersForAvoid: {
   [key: string]: UserForAvoid;
 } = {};
+console.debug(usersForAvoid);
 
 // Instead the pass iterface, you can use the Record Type, for example:
 interface UserToUse {
@@ -406,7 +407,7 @@ interface UserToUse {
 const userToUse: Record<string, UserToUse> = {
   x: { name: "44" },
 };
-
+console.debug(userToUse);
 // -------------------------------- Pick<Type, Keys> --------------------------------
 // Constructs a type by picking the set of properties Keys (string literal or union of string literals) from Type.
 interface Store2 {
