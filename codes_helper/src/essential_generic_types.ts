@@ -113,3 +113,24 @@ console.debug({newUserIII});
  * !6. ReturnType<T>
  */
 // The ReturnType<T> type is a generic type that takes a function type T and returns the return type of that function type.
+
+function addTwoNumbers(a: number, b: number): number {
+  return a + b;
+}
+
+type AddTwoNumbersType = ReturnType<typeof addTwoNumbers>;
+
+/**
+ * !7. Exclude<T, U>
+ */
+// The Exclude<T, U> type creates a new type that excludes any types from T that are assignable to any type in U.
+
+type AOne = 'a' | 'b' | 'c';
+type BOne = 'a' | 'c' | 'd';
+
+type DifferenceOne = Exclude<AOne, BOne>;
+
+/**
+ * !8. Record<K, T>
+ */
+// The Record<K, T> type creates a new type that represents an object with keys of type K and values of type T.
