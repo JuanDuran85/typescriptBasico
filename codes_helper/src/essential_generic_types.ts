@@ -17,8 +17,7 @@ const averageOfNumbers: number = numberOfItems.reduce(
   (prev, curr, index, arr) => prev + curr,
   0
 );
-console.debug( averageOfNumbers / numberOfItems.length );
-
+console.debug(averageOfNumbers / numberOfItems.length);
 
 /**
  * !2. Map<K, V>
@@ -31,16 +30,16 @@ interface MapData {
 }
 const dataOne = {
   name: "New York",
-  population: 8_000_000
-}
+  population: 8_000_000,
+};
 const dataTwo = {
   name: "Los Angeles",
-  population: 4_000_000
-}
+  population: 4_000_000,
+};
 const dataThree = {
   name: "Chicago",
-  population: 3_000_000
-}
+  population: 3_000_000,
+};
 
 const newMapData: Map<string, MapData> = new Map<string, MapData>();
 newMapData.set(dataOne.name, dataTwo);
@@ -58,12 +57,12 @@ const setValuesData = new Set<number>();
 setValuesData.add(1);
 setValuesData.add(4);
 setValuesData.add(6);
-setValuesData.add(1);//NOSONAR
+setValuesData.add(1); //NOSONAR
 setValuesData.add(7);
 setValuesData.add(11);
 setValuesData.add(10);
-setValuesData.add(1);//NOSONAR
-setValuesData.add(4);//NOSONAR
+setValuesData.add(1); //NOSONAR
+setValuesData.add(4); //NOSONAR
 console.debug(setValuesData);
 
 /**
@@ -78,12 +77,12 @@ interface UserDataFull {
   isBlocked: boolean;
 }
 
-type TypeUserWithPick = Pick<UserDataFull, "id" | "isBlocked">
+type TypeUserWithPick = Pick<UserDataFull, "id" | "isBlocked">;
 const newUser: TypeUserWithPick = {
   id: "23dff32",
-  isBlocked: true
-} 
-console.debug({newUser});
+  isBlocked: true,
+};
+console.debug({ newUser });
 
 /**
  * !5. Omit<T, K>
@@ -94,9 +93,9 @@ type TypeUserWithOmit = Omit<UserDataFull, "isBlocked">;
 const newUserII: TypeUserWithOmit = {
   id: "23dff32",
   username: "John Doe",
-  followers: 100
-}
-console.debug({newUserII});
+  followers: 100,
+};
+console.debug({ newUserII });
 
 /**
  * !6. Partial<T>
@@ -105,12 +104,12 @@ console.debug({newUserII});
 type UserWithPartial = Partial<UserDataFull>;
 const newUserIII: UserWithPartial = {
   id: "23dff32",
-  username: "John Doe"
-}
-console.debug({newUserIII});
+  username: "John Doe",
+};
+console.debug({ newUserIII });
 
 /**
- * !6. ReturnType<T>
+ * !7. ReturnType<T>
  */
 // The ReturnType<T> type is a generic type that takes a function type T and returns the return type of that function type.
 
@@ -125,8 +124,8 @@ type AddTwoNumbersType = ReturnType<typeof addTwoNumbers>;
  */
 // The Exclude<T, U> type creates a new type that excludes any types from T that are assignable to any type in U.
 
-type AOne = 'a' | 'b' | 'c';
-type BOne = 'a' | 'c' | 'd';
+type AOne = "a" | "b" | "c";
+type BOne = "a" | "c" | "d";
 
 type DifferenceOne = Exclude<AOne, BOne>;
 
@@ -134,3 +133,30 @@ type DifferenceOne = Exclude<AOne, BOne>;
  * !8. Record<K, T>
  */
 // The Record<K, T> type creates a new type that represents an object with keys of type K and values of type T.
+
+type UserRecord = {
+  id: number;
+  name: string;
+  age: number;
+};
+
+type UserRecordMap = Record<string, UserRecord>;
+
+const userOne: UserRecordMap = {
+  "1": {
+    id: 1,
+    name: "John",
+    age: 30,
+  },
+  "2": {
+    id: 2,
+    name: "Jane",
+    age: 25,
+  },
+}
+console.debug({ userOne });
+
+/**
+ * !9. ReturnType<T>
+ */
+// The ReturnType<T> type is a generic type that takes a function type T and returns the return type of that function type.
