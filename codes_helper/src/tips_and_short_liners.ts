@@ -147,6 +147,7 @@ console.debug({ finalLetter });
 type Point = {
   x: number;
   y: number;
+  z: number;
 };
 
 type NullablePoint = {
@@ -156,6 +157,7 @@ type NullablePoint = {
 const otherPointValues: NullablePoint = {
   x: 45,
   y: null,
+  z: 20,
 };
 
 console.debug(otherPointValues);

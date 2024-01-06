@@ -2,7 +2,9 @@
  * Tips That Make You a Better Typescript Programmer
  */
 
-// ? 1. Use discriminated union instead of optional fields
+//------------------------------------------------------------------------
+
+// ! 1. Use discriminated union instead of optional fields
 
 /*
 When defining a set of polymorphic types like Shape, it’s easy to start with this type:
@@ -41,7 +43,9 @@ const rect: Rect = {
 console.debug(getAreaFinal(circle));
 console.debug(getAreaFinal(rect));
 
-// ? 2. Use type predicate to avoid type assertion "as"
+//------------------------------------------------------------------------
+
+// ! 2. Use type predicate to avoid type assertion "as"
 
 /*
 If you use typescript in the right way, you should rarely find yourself using explicit type assertion (like value as SomeType).
@@ -87,10 +91,11 @@ console.debug(circles);
 const rects: Rect[] = myShape.filter(isRect);
 console.debug(rects);
 
-/**
- * *Utilize Union Types and Type Guards
+//------------------------------------------------------------------------
 
-Union types allow you to define a variable that can have multiple types. This is useful when dealing with situations where a variable may have different possible values. Type guards like typeof and instanceof, help you narrow down the type in a conditional block.
+// ! 3. Utilize Union Types and Type Guards
+/**
+ Union types allow you to define a variable that can have multiple types. This is useful when dealing with situations where a variable may have different possible values. Type guards like typeof and instanceof, help you narrow down the type in a conditional block.
  */
 
 type ShapeType = "circle" | "squere" | "triangle";
@@ -118,9 +123,8 @@ console.debug(getArea("circle", 10));
 console.debug(getArea("squere", 10));
 console.debug(getArea("triangle", 10));
 
+// ! 4. Use Intersection Types for Flexible Type Composition
 /**
- * *Use Intersection Types for Flexible Type Composition
-
 Intersection types allow you to combine multiple types into a single type, creating a new type that has all the properties and methods of each type. This provides flexibility when typing and can be particularly useful when dealing with complex object structures
  */
 
@@ -146,3 +150,56 @@ class PersonToKnow implements GreetingsAndFarewell {
 
 const personToSayGoodbye: GreetingsAndFarewell = new PersonToKnow();
 personToSayGoodbye.sayGoodbye("John");
+
+//------------------------------------------------------------------------
+
+// ! 5. Conditional Types for Flexible Typing
+/**
+ * Conditional types enable the creation of complex types that depend on other types. This can lead to more flexible and reusable type definitions.
+ * 
+ * The `FlattenType` conditional type is used to flatten an array type. It checks if the type `T`
+is an array (`T extends Array<infer U>`), and if so, it returns the element type of the array
+(`U`). If `T` is not an array, it returns `T` itself. This allows for more flexible typing when
+working with arrays and their element types. 
+ */
+
+type FlattenType<T> = T extends Array<infer U> ? U : T;
+type FlattenTypeNumbers = FlattenType<object[]>;
+
+// ! 6. Partially Applied Types with Type Currying
+/**
+ * TypeScript's support for higher-order types allows you to create partially applied types. This technique, known as type currying, enables powerful composition patterns.
+ * 
+ * The `Curried` type is a higher-order type that represents a curried function. It takes two type
+parameters `T` and `U`, where `T` represents the return type of the curried function and `U`
+represents the argument type. The `Curried` type is a function type that takes an argument of
+type `U` and returns a value of type `T & U`, which is the intersection of `T` and `U`. This
+allows for partial application of the function, where you can provide some arguments and get a
+new function that expects the remaining arguments. 
+*/
+
+type Curried<T, U> = (arg: U) => T & U;
+
+function mergeWithCurriying<T, U>(functionIn: Curried<T, U>): T & U {
+  return functionIn({} as U);
+}
+
+type UserDetails = {
+  name: string;
+  age: number;
+};
+type UserSettings = {
+  language: string;
+  theme: string;
+};
+
+const result: UserDetails & UserSettings = mergeWithCurriying<
+  UserDetails,
+  UserSettings
+>(() => ({
+  name: "John",
+  age: 30,
+  language: "en",
+  theme: "light",
+}));
+console.debug({ result });

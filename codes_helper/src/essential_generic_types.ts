@@ -157,6 +157,7 @@ const userOne: UserRecordMap = {
 console.debug({ userOne });
 
 /**
- * !9. ReturnType<T>
+ * !xx
  */
-// The ReturnType<T> type is a generic type that takes a function type T and returns the return type of that function type.
+// 
+
