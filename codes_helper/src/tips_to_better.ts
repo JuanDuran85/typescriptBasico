@@ -241,8 +241,48 @@ type TupleToUnionType<T extends any[]> = T[number];
 type MyTuple = [string, number, boolean];
 type MyUnion = TupleToUnionType<MyTuple>;
 
-// ! 10. 
+// ! 10. Readonly for Immutable Types
 
 /**
- * 
+ * TypeScript provides a built-in Readonly utility type that makes all properties of an object read-only. This is helpful when you want to enforce immutability in your codebase.
  */
+
+type UserInmutable = {
+  name: string;
+  age: number;
+  email: string;
+  country: string;
+};
+
+type ReadOnlyUser = Readonly<UserInmutable>;
+const user: ReadOnlyUser = {
+  name: "John",
+  age: 30,
+  email: "johndoe@me.com",
+  country: "USA",
+}
+console.debug({ user });
+//Cannot assign to 'email' because it is a read-only property
+//user.email = "XHJF8@example.com";
+
+// ! 11. Unique Symbols for Safer Constants
+
+/**
+ * TypeScript’s unique symbol type can create unique, non-string values that are perfect for safer constant definitions and avoiding name collisions.
+ */
+
+const MyFirstConstantSymbol = Symbol(
+  "MyFirstConstantExample"
+);
+console.debug(MyFirstConstantSymbol);
+type MyTypeUniqueSymbol = {
+  [MyFirstConstantSymbol]: string;
+}
+
+const objType: MyTypeUniqueSymbol = {
+  [MyFirstConstantSymbol]: "MyFirstConstantExampleNewValue",
+}
+console.debug({ objType });
+console.debug(objType[MyFirstConstantSymbol]);
+
+
