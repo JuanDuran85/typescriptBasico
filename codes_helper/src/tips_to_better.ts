@@ -203,3 +203,46 @@ const result: UserDetails & UserSettings = mergeWithCurriying<
   theme: "light",
 }));
 console.debug({ result });
+
+// ! 7.  Type Guards for Compile-Time Type Checking
+
+/**
+ * Type guards are useful when you need to perform compile-time type checking. They allow TypeScript to narrow down the type of a value within a specific block of code.
+ */
+
+function isStringCheck(valueIn: any): valueIn is string {
+  return typeof valueIn === "string";
+}
+
+function concatValues(a: unknown, b: unknown): string | undefined {
+  if (isStringCheck(a) && isStringCheck(b)) {
+    return a.concat(b);
+  }
+}
+
+const resultStringConcat = concatValues("Hello", "World");
+console.debug(resultStringConcat);
+
+// ! 8. Advanced Type Inference with ReturnType
+/**
+ * The ReturnType utility type can infer the return type of a function, making it easier to work with higher-order functions and their types
+ */
+
+type MyFunctionOne = (x: number, y: number) => { result: number };
+type MyFunctionOneReturnType = ReturnType<MyFunctionOne>;
+
+// ! 9. Type-Level Programming with Recursive Types
+
+/**
+ * TypeScript supports recursive types, allowing you to create complex type-level computations and transformations. In this case, TupleToUnionType converts a tuple type to a union type, which can be useful when working with complex data structures.
+ */
+
+type TupleToUnionType<T extends any[]> = T[number];
+type MyTuple = [string, number, boolean];
+type MyUnion = TupleToUnionType<MyTuple>;
+
+// ! 10. 
+
+/**
+ * 
+ */
