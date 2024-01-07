@@ -13,6 +13,8 @@ const conducirBatimovil = ( auto: Coche ):void => {
   auto.acelear();
 }
 
+console.debug({ conducirBatimovil });
+
 const batimovil: Coche = {
   encender:false,
   velocidadMaxima:0,
@@ -51,6 +53,7 @@ const ciudadGotica: Gotica = ( ciudadanos:string[] ):number => {
   return ciudadanos.length;
 }
 
+console.debug({ ciudadGotica });
 // Cree una interfaz que obligue crear una clase
 // con las siguientes propiedades y metodos
 
