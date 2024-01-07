@@ -260,7 +260,7 @@ const user: ReadOnlyUser = {
   age: 30,
   email: "johndoe@me.com",
   country: "USA",
-}
+};
 console.debug({ user });
 //Cannot assign to 'email' because it is a read-only property
 //user.email = "XHJF8@example.com";
@@ -271,18 +271,99 @@ console.debug({ user });
  * TypeScript’s unique symbol type can create unique, non-string values that are perfect for safer constant definitions and avoiding name collisions.
  */
 
-const MyFirstConstantSymbol = Symbol(
-  "MyFirstConstantExample"
-);
+const MyFirstConstantSymbol = Symbol("MyFirstConstantExample");
 console.debug(MyFirstConstantSymbol);
 type MyTypeUniqueSymbol = {
   [MyFirstConstantSymbol]: string;
-}
+};
 
 const objType: MyTypeUniqueSymbol = {
   [MyFirstConstantSymbol]: "MyFirstConstantExampleNewValue",
-}
+};
 console.debug({ objType });
 console.debug(objType[MyFirstConstantSymbol]);
 
+// ! 11. Use namespaces and modules to organize code structure
 
+/**
+ * In TypeScript, namespaces and modules can be used to organize the code structure and avoid naming conflicts and duplicate definitions. When using namespaces and modules, you need to pay attention to the correctness and readability of naming and definition to avoid naming conflicts or irregular naming.
+ */
+
+namespace MyNameSpaceData {
+  export interface DataUserInterface {
+    getName(): string;
+    getAge(): number;
+    getEmail(): string;
+    getCountry(): string;
+    setName(name: string): void;
+    setAge(age: number): void;
+    setEmail(email: string): void;
+    setCountry(country: string): void;
+    build(): void;
+  }
+
+  export class ClassUser implements DataUserInterface {
+    constructor(
+      private name: string,
+      private age: number,
+      private email: string,
+      private country: string
+    ) {
+      this.name = name;
+      this.age = age;
+      this.email = email;
+      this.country = country;
+    }
+
+    getName(): string {
+      return this.name;
+    }
+
+    getAge(): number {
+      return this.age;
+    }
+
+    getEmail(): string {
+      return this.email;
+    }
+
+    getCountry(): string {
+      return this.country;
+    }
+
+    setName(name: string): void {
+      this.name = name;
+    }
+
+    setAge(age: number): void {
+      this.age = age;
+    }
+
+    setEmail(email: string): void {
+      this.email = email;
+    }
+
+    setCountry(country: string): void {
+      this.country = country;
+    }
+
+    build(): void {
+      console.debug({
+        name: this.name,
+        age: this.age,
+        email: this.email,
+        country: this.country,
+      });
+    }
+  }
+}
+
+const newUserToCreate: MyNameSpaceData.ClassUser =
+  new MyNameSpaceData.ClassUser("John", 30, "johndoe@me.com", "USA");
+
+console.debug(newUserToCreate);
+newUserToCreate.build();
+console.debug(newUserToCreate.getAge());
+console.debug(newUserToCreate.getCountry());
+newUserToCreate.setEmail("XHJF8@example.com");
+console.debug(newUserToCreate.getEmail());
