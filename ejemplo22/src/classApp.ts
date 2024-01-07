@@ -4,24 +4,24 @@ class Departament {
   protected budget: number[] = [];
 
   // You can use a short definition on the constructor
-  constructor(public name: string, private readonly idUser: string) {}
+  public constructor(public name: string, private readonly idUser: string) {}
 
-  describe(this: Departament) {
+  public describe(this: Departament) {
     console.debug(`Department: ${this.name}`);
     console.debug(`Id User: ${this.idUser}`);
   }
 
-  addEmployees(employee: string) {
+  public addEmployees(employee: string) {
     this.employees.push(employee);
   }
 
-  showEmployeeInformation() {
+  public showEmployeeInformation() {
     console.debug(`Employees: ${this.employees}`);
   }
 }
 
 class ItDepartament extends Departament {
-  constructor(id: string, public admins: string[]) {
+  public constructor(id: string, public admins: string[]) {
     super(id, "IT");
   }
 }
@@ -29,31 +29,31 @@ class ItDepartament extends Departament {
 class AccountingDepartament extends Departament {
   private lastReport: string | undefined;
 
-  constructor(id: string, private reports: string[]) {
+  public constructor(id: string, private reports: string[]) {
     super(id, "Accounting");
     this.lastReport = reports[this.reports.length - 1];
   }
 
-  get mostRecentReports() {
+  public get mostRecentReports() {
     if (this.lastReport) return this.lastReport;
     throw new Error("No report available");
   }
 
-  set mostRecentReports(newValue: string) {
+  public set mostRecentReports(newValue: string) {
     if (!newValue) throw new Error("Pless pass in a valid value");
     this.addReports(newValue);
   }
 
-  addReports(reportText: string) {
+  public addReports(reportText: string) {
     this.reports.push(reportText);
     this.lastReport = reportText;
   }
 
-  getReports() {
+  public getReports() {
     console.debug(this.reports);
   }
 
-  addBudget(newBudget: number) {
+  public addBudget(newBudget: number) {
     if (newBudget < 1000) {
       console.error("Error: new budget");
     }
@@ -72,6 +72,8 @@ const iTDepartCopy = {
   name: "DUMMY",
   describe: iTDepart.describe,
 };
+
+console.debug({ iTDepartCopy });
 
 const accounting = new AccountingDepartament("43Fdd3sD", []);
 
