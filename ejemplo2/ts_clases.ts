@@ -1,24 +1,24 @@
 class Video {
-    titulo: string;
+  titulo: string;
 
-    constructor(titulo : string){
-        this.titulo = titulo;
-    }
+  constructor(titulo: string) {
+    this.titulo = titulo;
+  }
 
-    getTitulo() : string {
-        return this.titulo;
-    }
+  getTitulo(): string {
+    return this.titulo;
+  }
 
-    setTitulo(tituloNuevo : string) {
-        this.titulo = tituloNuevo;
-    }
+  setTitulo(tituloNuevo: string) {
+    this.titulo = tituloNuevo;
+  }
 
-    printTitulo(){
-        console.debug(this.titulo);
-    }
+  printTitulo() {
+    console.debug(this.titulo);
+  }
 }
 
-const miVideo : Video = new Video("TS, clases y objetos");
+const miVideo: Video = new Video("TS, clases y objetos");
 miVideo.printTitulo();
 console.debug(miVideo.getTitulo());
 miVideo.setTitulo("Nuevo titulo con TS");
