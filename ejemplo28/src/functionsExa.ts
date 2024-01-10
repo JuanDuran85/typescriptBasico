@@ -1,6 +1,6 @@
 import { randomBytes } from "crypto";
 
-type Employee = {
+export type Employee = {
   name: string;
   startDate: Date;
   active: boolean;
@@ -9,11 +9,11 @@ type Employee = {
   id: string;
 };
 
-function generateRandomId() {
+export function generateRandomId() {
   return randomBytes(8).toString("hex");
 }
 
-function generateEmployee(
+export function generateEmployee(
   employeeName: string,
   employeeSalary: number
 ): Employee {
@@ -27,14 +27,8 @@ function generateEmployee(
   };
 }
 
-const John = generateEmployee("John", 1000);
-const Jane = generateEmployee("Jane", 2000);
-const allNewEmployee = [John, Jane];
-console.debug({
-  allNewEmployee,
-});
 
-const sendWelcomeMessage = (employeeIn: Employee) => {
+export const sendWelcomeMessage = (employeeIn: Employee) => {
   const { active, id, name, salary, startDate, email } = employeeIn;
   if (active) {
     console.debug(`To: ${name} - ID: ${id} - Email: ${email}`);
@@ -46,6 +40,3 @@ const sendWelcomeMessage = (employeeIn: Employee) => {
   }
 };
 
-allNewEmployee.forEach((value: Employee) => {
-  sendWelcomeMessage(value);
-});
