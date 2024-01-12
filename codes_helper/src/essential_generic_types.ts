@@ -157,7 +157,41 @@ const userOne: UserRecordMap = {
 console.debug({ userOne });
 
 /**
- * !xx
+ * !9. Const Assertions
+ */
+// they allow us to signal TypeScript that no literal values should be widened. 
+
+//For example:
+const ids = [1, 2, 3] as const; // gives us the type readonly [1, 2, 3] , which is a tuple.
+console.debug(ids);
+
+// Another example:
+const screens = {
+  Home: 'HOME_SCREEN',
+  Profile: 'PROFILE_SCREEN',
+} as const; // gives us the type readonly { readonly Home: "HOME_SCREEN"; readonly Profile: "PROFILE_SCREEN"; } , which is a literal object.
+console.debug(screens);
+
+type Position = 'Programmer' | 'Manager' | 'Engineer';
+type Employee = {
+  name: string;
+  position: Position;
+  salary: number;
+}
+function paySalary(employ: Employee) {
+  console.debug( `The pay for: ${employ.name} is ${employ.position}`);
+}
+const employeeOne = {
+  name: 'John Doe',
+  position: 'Programmer',
+  salary: 4000
+} as const; // the position of 'Programmer' will be for sure a programmer and never changed
+
+paySalary(employeeOne);
+
+/**
+ * !10. 
  */
 // 
+
 
