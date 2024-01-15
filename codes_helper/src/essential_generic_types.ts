@@ -156,6 +156,29 @@ const userOne: UserRecordMap = {
 }
 console.debug({ userOne });
 
+// We can get type safety for combining types:
+
+type Positions = 'Programmer' | 'Manager' | 'Engineer' | 'Designer';
+
+type PositionsSalaries = Record<Positions, {salary: number}>;
+
+const salaries: PositionsSalaries = {
+  Programmer: {
+    salary: 4000
+  },
+  Manager: {
+    salary: 5000
+  },
+  Engineer: {
+    salary: 6000
+  },
+  Designer: {
+    salary: 7000
+  }
+}
+
+console.debug({salaries});
+
 /**
  * !9. Const Assertions
  */
@@ -190,8 +213,25 @@ const employeeOne = {
 paySalary(employeeOne);
 
 /**
- * !10. 
+ * !10. Index signatures and records
  */
-// 
+// You can use to make a generic way which we can extend our object.
 
+type EmployeeDictionary = {
+  [key: string]: Employee
+}
 
+const employees: EmployeeDictionary = {
+  '1': {
+    name: 'John',
+    position: 'Programmer',
+    salary: 4000
+  },
+  '2': {
+    name: 'Jane',
+    position: 'Manager',
+    salary: 5000
+  }
+}
+
+console.debug(employeeOne);
