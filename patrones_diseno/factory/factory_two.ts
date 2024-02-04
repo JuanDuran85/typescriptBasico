@@ -11,7 +11,7 @@ interface StaffUsers {
 }
 
 type Keys = keyof typeof UserFactory.getTypeOfUser;
-type UserTypes = typeof UserFactory.getTypeOfUser[Keys];
+type UserTypes = (typeof UserFactory.getTypeOfUser)[Keys];
 type ExtrarInformation<T> = T extends new () => infer R ? R : never;
 
 class ManagerUser implements StaffUsers {
@@ -34,24 +34,26 @@ class NullStaffUser implements StaffUsers {
 
 //  UserFactory implemented
 class UserFactory {
-
-  public static getTypeOfUser = {
-    'Manager': ManagerUser,
-    'Developer': DeveloperUser,
+  public static readonly getTypeOfUser = {
+    Manager: ManagerUser,
+    Developer: DeveloperUser,
   };
 
   public static getStaffInstance(k: Keys): ExtrarInformation<UserTypes> {
-    return new this.getTypeOfUser[k]() || new NullStaffUser();
+    return (
+      (new this.getTypeOfUser[k]() as ExtrarInformation<UserTypes>) ||
+      new NullStaffUser()
+    );
   }
 }
 
 //  UserService as the client that consumes the factory
 
-class UserService {
-  getSalaryByUser(userType: Keys) {
+abstract class UserService {
+  public static getSalaryByUser(userType: Keys) {
     return UserFactory.getStaffInstance(userType).getSalary();
   }
 }
 
-console.debug("manager", new UserService().getSalaryByUser("Manager"));
-console.debug("Developer", new UserService().getSalaryByUser("Developer"));
+console.debug("manager", UserService.getSalaryByUser("Manager"));
+console.debug("Developer", UserService.getSalaryByUser("Developer"));
