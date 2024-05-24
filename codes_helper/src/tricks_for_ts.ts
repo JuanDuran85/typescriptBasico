@@ -81,3 +81,46 @@ const fishTwo: AnimalsWithFins = {
   fins: 6,
 };
 console.debug(fishTwo);
+
+//* 6. Exclude certain members of an enumeration type
+
+enum StatusEnum {
+  New,
+  InProgress,
+  Done,
+  Cancelled,
+}
+
+type ActiveStatusFromEnum = Exclude<
+  StatusEnum,
+  StatusEnum.Done | StatusEnum.Cancelled
+>;
+// type ActiveStatusFromEnum = StatusEnum.New | StatusEnum.InProgress
+
+//* 7. Exclude string literal types with the specified prefix
+
+type LogEventType =
+  | "userLogin"
+  | "userLogout"
+  | "systemException"
+  | "systemCrash"
+  | "performanceLoadTime"
+  | "performanceApiResponmse";
+
+  type SystemAndPerformanceEvents = Exclude<LogEventType, `user${string}`>;
+  // the type SystemAndPerformanceEvents should be: "systemException" | "systemCrash" | "performanceLoadTime" | "performanceApiResponmse"
+
+  //* 8. Exclude different forms of string literal types
+
+  type LogEventTypeTwo =
+    | "userLogin"
+    | "userLogout"
+    | "UserLogin"
+    | "UserLogout"
+    | "systemException"
+    | "systemCrash"
+    | "performanceLoadTime"
+    | "performanceApiResponmse";
+
+type SystemAndPerformanceEventsTwo = Exclude<LogEventType, `${"user" | "User"}${string}`>;
+// the type SystemAndPerformanceEvents should be: "systemException" | "systemCrash" | "performanceLoadTime" | "performanceApiResponmse"
