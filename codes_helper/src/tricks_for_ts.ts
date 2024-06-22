@@ -124,3 +124,24 @@ type LogEventType =
 
 type SystemAndPerformanceEventsTwo = Exclude<LogEventType, `${"user" | "User"}${string}`>;
 // the type SystemAndPerformanceEvents should be: "systemException" | "systemCrash" | "performanceLoadTime" | "performanceApiResponmse"
+
+
+//* 9. Extracting Array Member Types
+// Extract every array member as a union type
+
+const namesToExtract = [
+  'John',
+  'Jane',
+  'Jack',
+] as const;
+//  before
+type NamesTypeBefore = 'John' | 'Jane' | 'Jack';
+// after - better way
+type NamesTypeAfter = (typeof namesToExtract)[number];
+/* 
+First we get the type of the names array through (typeof names)
+Then we index into the array using [number], which gives us all the values in the array as a type. 
+*/
+
+
+//* 10. 

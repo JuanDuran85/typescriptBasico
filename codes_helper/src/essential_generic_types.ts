@@ -235,3 +235,11 @@ const employees: EmployeeDictionary = {
 }
 
 console.debug(employeeOne);
+
+/**
+ * !11. Conditional Types
+ */
+// type supports conditional types, which can be used for more complex type definitions.
+
+type IsString<T> = T extends string ? true : false;
+
