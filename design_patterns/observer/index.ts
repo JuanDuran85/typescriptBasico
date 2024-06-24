@@ -16,41 +16,41 @@ interface SubjectInterface<T> {
 }
 
 class Subject<T> implements SubjectInterface<T> {
-  observers: ObserverInterface<T>[];
+  public observers: ObserverInterface<T>[];
 
-  constructor() {
+  public constructor() {
     this.observers = [];
   }
 
-  subscribe(observer: ObserverInterface<T>): void {
+  public subscribe(observer: ObserverInterface<T>): void {
     this.observers.push(observer);
   }
 
-  unsubscribe(observer: ObserverInterface<T>): void {
+  public unsubscribe(observer: ObserverInterface<T>): void {
     this.observers = this.observers.filter((result) => result !== observer);
   }
 
-  notify(value: T): void {
+  public notify(value: T): void {
     this.observers.forEach((result) => result.refresh(value));
   }
 }
 
-class Observer<T> implements ObserverInterface<T>{
-    private fn: (value: T) => void;
-    constructor(fn: (value: T) => void) {
-        this.fn = fn;
-    }
-    refresh(value: T): void {
-        this.fn(value);
-    }
+class Observer<T> implements ObserverInterface<T> {
+  private fn: (value: T) => void;
+  public constructor(fn: (value: T) => void) {
+    this.fn = fn;
+  }
+  public refresh(value: T): void {
+    this.fn(value);
+  }
 }
 
-const subjectNumber = new Subject<number>();
-const obs1 = new Observer<number>((val) => {
-    console.debug(`Value Obs1: ${val}`);
+const subjectNumber: Subject<number> = new Subject<number>();
+const obs1: Observer<number> = new Observer<number>((val) => {
+  console.debug(`Value Obs1: ${val}`);
 });
-const obs2 = new Observer<number>((val) => {
-    console.debug(`Value Obs2: ${val}`);
+const obs2: Observer<number> = new Observer<number>((val) => {
+  console.debug(`Value Obs2: ${val}`);
 });
 
 subjectNumber.subscribe(obs1);
@@ -58,7 +58,9 @@ subjectNumber.subscribe(obs2);
 subjectNumber.notify(53.61);
 subjectNumber.notify(111.3333);
 
-const subjectString = new Subject<string>();
-const obsStringOne = new Observer<string>((val: string) => console.debug(`Value string observer 1: ${val.toUpperCase()}`));
+const subjectString: Subject<string> = new Subject<string>();
+const obsStringOne: Observer<string> = new Observer<string>((val: string) =>
+  console.debug(`Value string observer 1: ${val.toUpperCase()}`)
+);
 subjectString.subscribe(obsStringOne);
 subjectString.notify("Observador string one");
