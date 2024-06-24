@@ -100,3 +100,87 @@ class RectangleLsp {
 }
 
 // ! 4. Interface Segregation Principle (ISP)
+
+/* 
+Many client-specific interfaces are better than one general-purpose interface. This principle states that clients should not be forced to depend upon methods they do not use. Simply said, more interfaces are better than having too few
+*/
+
+// Don't do this
+/* 
+interface Character {
+  shoot(): void;
+  swim(): void;
+  talk(): void;
+  dance(): void;
+}
+*/
+
+interface Talker {
+  talk(): void;
+}
+
+interface Shooter {
+  shoot(): void;
+}
+
+interface Swimmer {
+  swim(): void;
+}
+
+interface Dancer {
+  dance(): void;
+}
+
+class Troll implements Shooter, Dancer {
+  public shoot(): void {
+    console.debug("Troll is shooting");
+  }
+
+  public dance(): void {
+    console.debug("Troll is dancing");
+  }
+}
+
+// ! 5. Dependency Inversion Principle (DIP)
+
+/*
+Depend upon abstractions, [not] concretions. 
+*/
+
+interface Developer {
+  develop(): void;
+}
+
+class FrontendDeveloper implements Developer {
+  public develop(): void {
+    this.writerHtmlCode();
+  }
+
+  private writerHtmlCode(): void {
+    console.debug("writer html code");
+  }
+}
+
+class backendDeveloper implements Developer {
+  public develop(): void {
+    this.writeTypeScriptCode();
+  }
+
+  private writeTypeScriptCode(): void {
+    console.debug("writer typescript code");
+  }
+}
+
+class Softwareproject {
+  public developers: Developer[] = [];
+
+  public crearteProject(): void {
+    this.developers.forEach((developer) => developer.develop());
+  }
+}
+
+const frontDev = new FrontendDeveloper();
+const backDev = new backendDeveloper();
+const project = new Softwareproject();
+project.developers.push(frontDev, backDev);
+project.crearteProject();
