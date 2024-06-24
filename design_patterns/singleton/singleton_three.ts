@@ -12,7 +12,7 @@ class SingletonThree {
   }
 }
 
-const singletonClass = SingletonThree.getInstance();
-const singletonClass2 = SingletonThree.getInstance();
+const singletonClass: SingletonThree = SingletonThree.getInstance();
+const singletonClass2: SingletonThree = SingletonThree.getInstance();
 console.debug(singletonClass);
 console.debug(singletonClass2);

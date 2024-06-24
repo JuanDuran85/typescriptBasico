@@ -23,7 +23,7 @@ class Singleton {
     }
 }
 
-let instanceOne = Singleton.getInstance();
-let instanceTwo = Singleton.getInstance();
+const instanceOne: Singleton = Singleton.getInstance();
+const instanceTwo: Singleton = Singleton.getInstance();
 
 console.debug(instanceOne === instanceTwo)
