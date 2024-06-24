@@ -243,3 +243,36 @@ console.debug(employeeOne);
 
 type IsString<T> = T extends string ? true : false;
 
+/**
+ * !12. Required<T>
+ */
+// Constructs a type consisting of all properties of Type set to required. The opposite of Partial.
+
+interface UserRequired {
+  id?: number;
+  firstname: string;
+  lastname: string;
+  age?: number;
+}
+
+type UserRequiredRequired = Required<UserRequired>; // you can look at the type definition all the properties are required
+
+const userOneRequired: UserRequired = {
+  lastname: 'Doe',
+  firstname: 'John',
+}
+console.debug(userOneRequired);
+
+const updateUserOne = (user: Required<UserRequired>) => {
+  userOneRequired.age = user.age;
+  userOneRequired.firstname = user.firstname;
+  userOneRequired.lastname = user.lastname;
+  userOneRequired.id = user.id;
+}
+updateUserOne({
+  firstname: 'John',
+  lastname: 'Doe',
+  age: 30,
+  id: 1
+});
+console.debug(userOneRequired);
