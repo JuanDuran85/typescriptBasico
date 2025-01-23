@@ -41,6 +41,20 @@ Ejemplos de TypeScript Básico.
         tsc fileName.ts -w
    ```
 
+8. Compilar todo el proyecto
+   ```bash
+        tsc --build
+   ```
+
+9. Limpiar todo el proyecto
+   ```bash
+        tsc --clean
+   ```
+10. Hacer Build local para ver posibles errores de compilación
+   ```bash
+        tsc -p .
+   ```
+
 ## Otras instalaciones:
 
 1. RxJs
