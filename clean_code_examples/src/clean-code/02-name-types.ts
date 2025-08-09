@@ -9,10 +9,10 @@
     { id: 3, email: "melissa@google.com" },
   ];
 
-  const usersEmails = usersData.map((user) => user.email);
+  const userEmails = usersData.map((user) => user.email);
 
-  const isJump: boolean = false;
-  const isRun: boolean = true;
+  const canJump: boolean = false;
+  const canRun: boolean = true;
   const hasItems: boolean = true;
   const isLoading: boolean = false;
 
@@ -23,11 +23,11 @@
     throw new Error("Function not implemented.");
   }
 
-  function getBooksFromUrl(u: string) {
+  function getBooksFromUrl(url: string) {
     throw new Error("Function not implemented.");
   }
 
-  function squareArea(s: number) {
+  function getSquareArea(side: number) {
     throw new Error("Function not implemented.");
   }
 
