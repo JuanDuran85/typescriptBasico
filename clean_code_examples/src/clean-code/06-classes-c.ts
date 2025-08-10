@@ -15,13 +15,17 @@
   interface UserProperties {
     email: string;
     role: string;
-    personProperties: PersonProperties;
   }
 
-  interface UserSettingProperties {
+  interface SettingsProperties {
     workingDirectory: string;
     lastFolderOpen: string;
+  }
+
+  interface UserSettingsProperties {
+    personProperties: PersonProperties;
     userProperties: UserProperties;
+    settingsProperties: SettingsProperties;
   }
 
   class Person {
@@ -43,18 +47,15 @@
   });
   console.log({ newPerson });
 
-  class User extends Person {
-    public lastAccess: Date;
+  class User {
     public email: string;
+    public lastAccess: Date;
     public role: string;
-    public personProperties: PersonProperties;
 
-    constructor({ email, role, personProperties }: UserProperties) {
-      super(personProperties);
+    constructor({ email, role }: UserProperties) {
       this.email = email;
-      this.role = role;
-      this.personProperties = personProperties;
       this.lastAccess = new Date();
+      this.role = role;
     }
 
     public checkCredentials() {
@@ -62,19 +63,36 @@
     }
   }
 
-  class UserSettings extends User {
+  const newUser: User = new User({
+    email: "john@email",
+    role: "Admin",
+  });
+
+  console.log({ newUser });
+
+  class SettingsProperties {
     public workingDirectory: string;
     public lastFolderOpen: string;
-    public userProperties: UserProperties;
-    constructor({
-      workingDirectory,
-      lastFolderOpen,
-      userProperties,
-    }: UserSettingProperties) {
-      super(userProperties);
+    constructor({ workingDirectory, lastFolderOpen }: SettingsProperties) {
       this.workingDirectory = workingDirectory;
       this.lastFolderOpen = lastFolderOpen;
-      this.userProperties = userProperties;
+    }
+  }
+
+  // composition class
+  class UserSettings {
+    public person: Person;
+    public user: User;
+    public setting: SettingsProperties;
+
+    constructor({
+      personProperties,
+      settingsProperties,
+      userProperties,
+    }: UserSettingsProperties) {
+      this.person = new Person(personProperties);
+      this.user = new User(userProperties);
+      this.setting = settingsProperties;
     }
   }
 
@@ -87,17 +105,20 @@
   const userProperties: UserProperties = {
     email: "john@email",
     role: "Admin",
-    personProperties,
+  };
+
+  const settingsProperties: SettingsProperties = {
+    workingDirectory: "/usr/home",
+    lastFolderOpen: "/dev",
   };
 
   const userSettings: UserSettings = new UserSettings({
-    workingDirectory: "/usr/home",
-    lastFolderOpen: "/dev",
+    personProperties,
+    settingsProperties,
     userProperties,
   });
 
   console.log({ userSettings });
-  console.log(`Credentials: ${userSettings.checkCredentials()}`);
 
   // -------------------------------------------------------------------------
   // -------------------------------------------------------------------------
