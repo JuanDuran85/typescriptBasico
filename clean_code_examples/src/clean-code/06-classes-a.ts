@@ -12,7 +12,7 @@
     ) {}
   }
 
-  const newPerson = new Person("John", "M", new Date("1985-10-24"));
+  const newPerson: Person = new Person("John", "M", new Date("1985-10-24"));
   console.log({ newPerson });
 
   class User extends Person {
@@ -47,6 +47,18 @@
       super(email, role, name, gender, birthdate);
     }
   }
+
+  const userSettings: UserSettings = new UserSettings(
+    "/usr/home",
+    "/dev",
+    "john@email",
+    "Admin",
+    "John",
+    "M",
+    new Date("1995-01-23")
+  );
+  console.log({ userSettings });
+  console.log(`Credentials: ${userSettings.checkCredentials()}`);
 
   // -------------------------------------------------------------------------
   // -------------------------------------------------------------------------
