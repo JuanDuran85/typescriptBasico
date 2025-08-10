@@ -14,11 +14,9 @@
     }
   }
 
-  // Usualmente, esto es una clase para controlar la vista que es desplegada al usuario
-  // Recuerden que podemos tener muchas vistas que realicen este mismo trabajo.
   class ProductBusinessLogicComponent {
-    private productService: ProductService;
-    private mailSender: MailSender;
+    private readonly productService: ProductService;
+    private readonly mailSender: MailSender;
 
     constructor(productService: ProductService, mailSender: MailSender) {
       this.productService = productService;
