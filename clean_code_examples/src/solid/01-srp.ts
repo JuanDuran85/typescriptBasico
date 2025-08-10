@@ -17,25 +17,31 @@
   // Usualmente, esto es una clase para controlar la vista que es desplegada al usuario
   // Recuerden que podemos tener muchas vistas que realicen este mismo trabajo.
   class ProductBusinessLogicComponent {
+    private productService: ProductService;
+    private mailSender: MailSender;
+
+    constructor(productService: ProductService, mailSender: MailSender) {
+      this.productService = productService;
+      this.mailSender = mailSender;
+    }
+
     public loadProduct(id: number) {
-      // Realiza un proceso para obtener el producto y retornarlo
-      console.log("Producto: ", { id, name: "OLED Tv" });
+      this.productService.getProductById(id);
     }
 
     public saveProduct(product: Product) {
-      // Realiza una petición para salvar en base de datos
-      console.log("Guardando en base de datos", product);
+      this.productService.saveProduct(product);
     }
 
     public notifyClients() {
-      console.log("Enviando correo a los clientes");
+      this.mailSender.sendEmail(["2N0kZ@example.com"], "to-client");
     }
   }
 
   class MailSender {
-    private masterEmail: string = "2N0kZ@example.com";
+    private readonly masterEmail: string = "2N0kZ@example.com";
 
-    public sendEmail(emailList: string[], template: 'to-client' | 'to-admins') {
+    public sendEmail(emailList: string[], template: "to-client" | "to-admins") {
       console.log("Sending email to: ", {
         to: emailList,
         template,
@@ -51,9 +57,12 @@
     }
   }
 
+  const productServices: ProductService = new ProductService();
+  const mailSender: MailSender = new MailSender();
+
   const productBloc: ProductBusinessLogicComponent =
-    new ProductBusinessLogicComponent();
-const cartBloc: CartBusinessLogicComponent = new CartBusinessLogicComponent();
+    new ProductBusinessLogicComponent(productServices, mailSender);
+  const cartBloc: CartBusinessLogicComponent = new CartBusinessLogicComponent();
 
   productBloc.loadProduct(10);
   productBloc.saveProduct({ id: 10, name: "OLED TV" });
