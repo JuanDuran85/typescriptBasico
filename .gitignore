@@ -3,6 +3,7 @@
 node_module
 /ejemplo21/node_modules
 .vscode/
+.qodo
 
 # Logs
 logs
