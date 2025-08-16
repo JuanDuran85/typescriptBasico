@@ -37,6 +37,20 @@ class BeefHamburger implements Hamburger {
     }
 }
 
+class BeenHamburger implements Hamburger {
+    prepare(): void {
+        console.log("%cPreparing a Been Hamburger", COLORS.red);
+    }
+    cook(): void {
+        console.log("Cooking a Been Hamburger");
+    }
+    cut(): void {
+        console.log("Cutting a Been Hamburger");
+    }
+    box(): void {
+        console.log("Boxing a Been Hamburger");
+    }
+}
 
 abstract class Restaurant {
     protected abstract createHamburger(): Hamburger;
@@ -62,10 +76,18 @@ class BeefRestaurant extends Restaurant {
     }
 }
 
+class BeenRestaurant extends Restaurant {
+    override createHamburger(): Hamburger {
+        return new BeenHamburger();
+    }
+}
+
 function main() {
     let restaurant: Restaurant;
 
-    const burgerType: string | null = prompt("What type of burger do you want? (chicken/beef)");
+    const burgerType: string | null = prompt(
+        "What type of burger do you want? (chicken/beef/been)"
+    );
 
     switch (burgerType) {
         case "chicken":
@@ -73,6 +95,9 @@ function main() {
             break;
         case "beef":
             restaurant = new BeefRestaurant();
+            break;
+        case "been":
+            restaurant = new BeenRestaurant();
             break;
         default:
             throw new Error("Invalid burger type");
