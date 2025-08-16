@@ -1,14 +1,109 @@
-/**
- * ! Factory Method:
- * El patrón Factory Method permite crear objetos sin especificar
- * la clase exacta del objeto que se creará.
- *
- * En lugar de eso, delegamos la creación de objetos a subclases o métodos
- * que encapsulan esta lógica.
- *
- * * Es útil cuando una clase no puede anticipar la clase
- * * de objetos que debe crear.
- *
- * https://refactoring.guru/es/design-patterns/factory-method
- *
- */
+import { COLORS } from "./helpers/colors.ts";
+
+interface Hamburger {
+    prepare(): void;
+    cook(): void;
+    cut(): void;
+    box(): void;
+}
+
+class ChickenHamburger implements Hamburger {
+    prepare(): void {
+        console.log("%cPreparing a Chicken Hamburger", COLORS.green);
+    }
+    cook(): void {
+        console.log("Cooking a Chicken Hamburger");
+    }
+    cut(): void {
+        console.log("Cutting a Chicken Hamburger");
+    }
+    box(): void {
+        console.log("Boxing a Chicken Hamburger");
+    }
+}
+
+class BeefHamburger implements Hamburger {
+    prepare(): void {
+        console.log("%cPreparing a Beef Hamburger", COLORS.purple);
+    }
+    cook(): void {
+        console.log("Cooking a Beef Hamburger");
+    }
+    cut(): void {
+        console.log("Cutting a Beef Hamburger");
+    }
+    box(): void {
+        console.log("Boxing a Beef Hamburger");
+    }
+}
+
+class BeenHamburger implements Hamburger {
+    prepare(): void {
+        console.log("%cPreparing a Been Hamburger", COLORS.red);
+    }
+    cook(): void {
+        console.log("Cooking a Been Hamburger");
+    }
+    cut(): void {
+        console.log("Cutting a Been Hamburger");
+    }
+    box(): void {
+        console.log("Boxing a Been Hamburger");
+    }
+}
+
+abstract class Restaurant {
+    protected abstract createHamburger(): Hamburger;
+
+    orderHamburger(): void {
+        const hamburger: Hamburger = this.createHamburger();
+        hamburger.prepare();
+        hamburger.cook();
+        hamburger.cut();
+        hamburger.box();
+    }
+}
+
+class ChickenRestaurant extends Restaurant {
+    override createHamburger(): Hamburger {
+        return new ChickenHamburger();
+    }
+}
+
+class BeefRestaurant extends Restaurant {
+    override createHamburger(): Hamburger {
+        return new BeefHamburger();
+    }
+}
+
+class BeenRestaurant extends Restaurant {
+    override createHamburger(): Hamburger {
+        return new BeenHamburger();
+    }
+}
+
+function main() {
+    let restaurant: Restaurant;
+
+    const burgerType: string | null = prompt(
+        "What type of burger do you want? (chicken/beef/been)"
+    );
+
+    switch (burgerType) {
+        case "chicken":
+            restaurant = new ChickenRestaurant();
+            break;
+        case "beef":
+            restaurant = new BeefRestaurant();
+            break;
+        case "been":
+            restaurant = new BeenRestaurant();
+            break;
+        default:
+            throw new Error("Invalid burger type");
+    }
+
+    restaurant.orderHamburger();
+}
+
+main();
