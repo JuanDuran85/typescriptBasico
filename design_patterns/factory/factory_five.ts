@@ -35,27 +35,28 @@ class LegalPerson implements PersonInterface {
 
 //------------ clasess Factory---------------//
 
-interface PersonalClasess {
+interface PersonalClasses {
   NP: (name: string) => NaturalPerson;
   LP: (name: string) => LegalPerson;
 }
 class PersonalFactory {
-  public static personClassName: PersonalClasess = {
+  public static readonly personClassName: PersonalClasses = {
     NP: (name: string) => new NaturalPerson(name),
     LP: (name: string) => new LegalPerson(name),
   };
 
   public static createPersonMethod(type: string, name: string): NaturalPerson | LegalPerson {
-    return typeof this.personClassName[type](name) === "object"
-      ? this.personClassName[type](name)
-      : "Error...";
+    if (!this.personClassName[type as keyof PersonalClasses]) {
+      throw new Error("Error...");
+    }
+    return this.personClassName[type as keyof PersonalClasses](name);
   }
 }
 
 class Main {
   public mainMethod() {
-    const npResult = PersonalFactory.createPersonMethod("NP", "Juan") as NaturalPerson;
-    const ldResult = PersonalFactory.createPersonMethod("LP","Maria") as LegalPerson;
+    const npResult: NaturalPerson = PersonalFactory.createPersonMethod("NP", "Juan") as NaturalPerson;
+    const ldResult: NaturalPerson = PersonalFactory.createPersonMethod("LP","Maria") as LegalPerson;
     return {
       npResult,
       ldResult,
