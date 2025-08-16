@@ -50,10 +50,10 @@ class ConcreteSuperCX0Factory extends SuperXFactory {
     }
 }
 
-//3. After creating the ConcreteSuperCX0Factory factory classe, we can start producing vehicles:
-const concreteFactoryCar = new ConcreteSuperCX0Factory();
-const superCX01 = concreteFactoryCar.produceSuperCX01();
-const superCX02 = concreteFactoryCar.produceSuperCX02();
+//3. After creating the ConcreteSuperCX0Factory factory classes, we can start producing vehicles:
+const concreteFactoryCar: ConcreteSuperCX0Factory = new ConcreteSuperCX0Factory();
+const superCX01: VehicleThreeSuperX01 = concreteFactoryCar.produceSuperCX01();
+const superCX02: VehicleThreeSuperX02 = concreteFactoryCar.produceSuperCX02();
 
 superCX01.run();
 superCX02.run();

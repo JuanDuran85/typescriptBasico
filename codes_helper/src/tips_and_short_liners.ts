@@ -52,7 +52,7 @@ const productOne: Product = {
   name: "Book",
 };
 
-const nameProduct = getProductProperty(productOne, "name");
+const nameProduct: string | number = getProductProperty(productOne, "name");
 console.debug(nameProduct);
 //const notProperty = getProductProperty(productOne, "year"); Argument of type '"year"' is not assignable to parameter of type 'keyof Product'.
 
