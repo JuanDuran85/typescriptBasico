@@ -6,21 +6,21 @@ interface Report {
 
 class SalesReport implements Report {
   public generate(): void {
-    console.log("Creating ----> Sales Report");
+    console.log("Creating ----> %cSales Report", COLORS.red);
   }
 
 }
 
 class InventoryReport implements Report {
   public generate(): void {
-    console.log("Creating ----> Inventory Report");
+    console.log("Creating ----> %cInventory Report", COLORS.green);
   }
 
 }
 
 class FinancialReport implements Report {
   public generate(): void {
-    console.log("Creating ----> Financial Report");
+    console.log("Creating ----> %cFinancial Report", COLORS.blue);
   }
 
 }
@@ -54,8 +54,6 @@ class FinancialReportFactory extends ReportFactory {
 }
 
 function main() {
-  let reportFactory: ReportFactory;
-
   const reportTypeOptions = {
     sales: new SalesReportFactory(),
     inventory: new InventoryReportFactory(),
@@ -63,11 +61,10 @@ function main() {
   };
 
   const reportType = prompt(
-    "¿What type of report do you want? %c(sales/inventory/financial)%c)",
-    COLORS.red
+    "¿What type of report do you want?(sales/inventory/financial))"
   );
 
-  reportFactory = reportTypeOptions[reportType as keyof typeof reportTypeOptions];
+  const reportFactory = reportTypeOptions[reportType as keyof typeof reportTypeOptions];
 
   if (!reportFactory) {
     throw new Error("Invalid report type");
