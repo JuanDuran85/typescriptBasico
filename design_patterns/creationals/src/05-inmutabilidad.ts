@@ -28,6 +28,7 @@ class CodeEditorState {
             Cursor Position: ${this.cursorPosition}
             Unsaved Changes: ${this.unsavedChanges}
         `);
+        console.log("%c------------------------------------------", COLORS.red);
     }
 }
 
@@ -44,7 +45,16 @@ class CodeEditorHistory {
         this.currentIndex++;
     }
 
-    public redo(): CodeEditorState | null | undefined {
+    public undo(): CodeEditorState | null {
+        if (this.currentIndex > 0) {
+            this.currentIndex--;
+            return this.history[this.currentIndex];
+        }
+
+        return null;
+    }
+
+    public redo(): CodeEditorState | null {
         if (this.currentIndex < this.history.length - 1) {
             this.currentIndex++;
             return this.history[this.currentIndex];
@@ -52,5 +62,49 @@ class CodeEditorHistory {
 
         return null;
     }
-
 }
+
+function main() {
+    const history: CodeEditorHistory = new CodeEditorHistory();
+
+    console.log("-------------------------------------------------");
+    console.log("%cAfter first state", COLORS.purple);
+    let editorState: CodeEditorState = new CodeEditorState("console.log('new state to use...')", 2, false);
+    history.save(editorState);
+    editorState.displayState();
+    console.log("-------------------------------------------------");
+    
+    console.log("\n-------------------------------------------------");
+    console.log("%cAfter second state", COLORS.green);
+    editorState = editorState.copyWith({
+        content: "console.log('new state to use...'); \nconsole.log('Another new state')",
+        cursorPosition: 3,
+        unsavedChanges: true,
+    });
+    history.save(editorState);
+    editorState.displayState();
+    console.log("-------------------------------------------------");
+    
+    console.log("\n-------------------------------------------------");
+    console.log("%cAfter Third State Change", COLORS.green);
+    editorState = editorState.copyWith({
+        cursorPosition: 5,
+    });
+    history.save(editorState);
+    editorState.displayState();
+    console.log("-------------------------------------------------");
+    
+    console.log("\n-------------------------------------------------");
+    console.log("%cUsing Undo", COLORS.yellow);
+    editorState = history.undo()!;
+    editorState.displayState();
+    console.log("-------------------------------------------------");
+    
+    console.log("\n-------------------------------------------------");
+    console.log("%cUsing Redo", COLORS.pink);
+    editorState = history.redo()!;
+    editorState.displayState();
+    console.log("-------------------------------------------------");
+}
+
+main();
