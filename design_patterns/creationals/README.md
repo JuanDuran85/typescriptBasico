@@ -33,3 +33,9 @@ These patterns provide various object creation mechanisms, which increase flexib
 - The prototype pattern suggests that you create new objects by copying existing ones, which can be more efficient than creating new objects from scratch.
 
 - The prototype pattern is often used when the cost of creating a new object is more expensive than copying an existing one, or when the system needs to be able to create objects dynamically at runtime.
+
+## 5. Immutability with Copy
+
+- Although immutability is a good practice, it is not always possible. In these cases, a copy of the object can be created and modified. This is useful for maintaining a history of state in interactive applications.
+
+- The immutability with copy pattern suggests that you create a new object that is a copy of the original object, and then modify the new object instead of the original one.
