@@ -1,64 +1,54 @@
-/**
- * ! Inmutabilidad con copia
- * Aunque la inmutabilidad es una buena práctica, no siempre es posible.
- * En estos casos, se puede hacer una copia del objeto y modificar la copia.
- *
- *  * Es útil para mantener un historial de estados en aplicaciones interactivas.
- *
- */
+import { COLORS } from "./helpers/colors.ts";
 
-/**
- 1.	Completen el método copyWith en la clase Player para que permita 
- crear una copia con cambios en name, score o level.
- 
- 2.	Usen el código cliente para probar el funcionamiento de copyWith, 
- haciendo cambios en el puntaje, nivel y nombre del jugador.
- */
+interface PlayerProperties {
+  name: string;
+  score: number;
+  level: number;
+}
 
-import { COLORS } from "../helpers/colors.ts";
 
-// 1. Clase Player inmutable
 class Player {
-  readonly name: string;
-  readonly score: number;
-  readonly level: number;
+  public readonly name: string;
+  public readonly score: number;
+  public readonly level: number;
 
-  constructor(name: string, score: number, level: number) {
-    throw new Error("Method not implemented.");
+  public constructor({ name, score, level }: PlayerProperties) {
+    this.name = name;
+    this.score = score;
+    this.level = level;
   }
 
-  // Método copyWith para crear una copia modificada del jugador
-  copyWith({ name, score, level }: Partial<Player>): Player {
-    throw new Error("Method not implemented.");
+  public copyWith({ name, score, level }: Partial<Player>): Player {
+    return new Player({
+      name: name ?? this.name,
+      score: score ?? this.score,
+      level: level ?? this.level
+    }
+    );
   }
 
-  displayState(): void {
-    console.log(`\n%cJugador: ${this.name}`, COLORS.green);
-    console.log(`%cPuntaje: ${this.score}`, COLORS.yellow);
-    console.log(`%cNivel: ${this.level}`, COLORS.blue);
+  public displayState(): void {
+    console.log(`\n%cPlayer: ${this.name}`, COLORS.green);
+    console.log(`%cScore: ${this.score}`, COLORS.yellow);
+    console.log(`%cLevel: ${this.level}`, COLORS.blue);
   }
 }
 
-// 2. Código Cliente para probar
 function main() {
-  // Crear jugador inicial
-  let player = new Player("Carlos", 0, 1);
-  console.log("Estado inicial:");
+  let player: Player = new Player({name: "John", score: 0, level: 1});
+  console.log("Initial state:");
   player.displayState();
 
-  // Incrementar el puntaje
   player = player.copyWith({ score: 10 });
-  console.log("\nDespués de incrementar el puntaje:");
+  console.log("\nAfter increasing the score:");
   player.displayState();
 
-  // Subir de nivel
   player = player.copyWith({ level: 2 });
-  console.log("\nDespués de subir de nivel:");
+  console.log("\nAfter increasing the level:");
   player.displayState();
 
-  // Cambiar el nombre del jugador
   player = player.copyWith({ name: "Carlos Pro" });
-  console.log("\nDespués de cambiar el nombre:");
+  console.log("\nAfter changing the name:");
   player.displayState();
 }
 
