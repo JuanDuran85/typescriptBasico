@@ -39,3 +39,9 @@ These patterns provide various object creation mechanisms, which increase flexib
 - Although immutability is a good practice, it is not always possible. In these cases, a copy of the object can be created and modified. This is useful for maintaining a history of state in interactive applications.
 
 - The immutability with copy pattern suggests that you create a new object that is a copy of the original object, and then modify the new object instead of the original one.
+
+## 6. Singleton:
+
+- The singleton pattern is a creational design pattern that lets you ensure that a class has only one instance, while providing a global point of access to it.
+
+- The singleton pattern is often used when exactly one object is needed to coordinate actions across the system.
