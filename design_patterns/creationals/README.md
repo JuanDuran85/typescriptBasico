@@ -45,3 +45,11 @@ These patterns provide various object creation mechanisms, which increase flexib
 - The singleton pattern is a creational design pattern that lets you ensure that a class has only one instance, while providing a global point of access to it.
 
 - The singleton pattern is often used when exactly one object is needed to coordinate actions across the system.
+
+## 7. Factory Function
+
+- The factory function is a creational design pattern that uses a function to create objects instead of using a constructor.
+
+- The factory function allows you to create objects with a specific structure or behavior without exposing the details of the object's implementation.
+
+- The factory function is often used when the object creation process is complex or involves multiple steps.
