@@ -1,11 +1,37 @@
-/**
- * ! Patrón Bridge
- * Este patrón nos permite desacoplar una abstracción de su implementación,
- * de tal forma que ambas puedan variar independientemente.
- *
- * * Es útil cuando se tienen múltiples implementaciones de una abstracción
- * * Se puede utilizar para separar la lógica de negocio de la lógica de presentación
- * * Se puede utilizar para separar la lógica de la interfaz de usuario también.
- *
- * https://refactoring.guru/es/design-patterns/bridge
- */
+import { COLORS } from "./helpers/colors.ts";
+interface Ability {
+  use(): void;
+}
+
+class SwordAttack implements Ability {
+  public use(): void {
+    console.debug("%cAttacking with a sword", COLORS.red);
+  }
+}
+
+class MagicSpell implements Ability {
+  public use(): void {
+    console.debug("%cCasting a magic spell", COLORS.blue);
+  }
+}
+
+abstract class Character {
+  protected ability: Ability;
+
+  public constructor(abilityIn: Ability) {
+    this.ability = abilityIn;
+  }
+
+  public setAbility(abilityIn: Ability): void {
+    this.ability = abilityIn;
+  }
+
+  abstract performAbility(): void;
+}
+
+class PrincipalWarriorActor extends Character {
+  override performAbility(): void {
+    console.debug("Warrior performing ability...");
+    this.ability.use();
+  }
+}
