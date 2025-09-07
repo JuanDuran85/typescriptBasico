@@ -1,11 +1,62 @@
-/**
- * ! Patrón Bridge
- * Este patrón nos permite desacoplar una abstracción de su implementación,
- * de tal forma que ambas puedan variar independientemente.
- *
- * * Es útil cuando se tienen múltiples implementaciones de una abstracción
- * * Se puede utilizar para separar la lógica de negocio de la lógica de presentación
- * * Se puede utilizar para separar la lógica de la interfaz de usuario también.
- *
- * https://refactoring.guru/es/design-patterns/bridge
- */
+import { COLORS } from "./helpers/colors.ts";
+
+interface NotificationChannel {
+  send(message: string): void;
+}
+
+class EmailChannel implements NotificationChannel {
+  public send(message: string): void {
+    console.debug(`Sending email: ${message}`);
+  }
+}
+
+class SMSChannel implements NotificationChannel {
+  public send(message: string): void {
+    console.debug(`Sending SMS: ${message}`);
+  }
+}
+
+class PushNotificationChannel implements NotificationChannel {
+  public send(message: string): void {
+    console.debug(`Sending Push: ${message}`);
+  }
+}
+
+abstract class Notification {
+  protected channels: NotificationChannel[];
+
+  public constructor(channelsIn: NotificationChannel[]) {
+    this.channels = channelsIn;
+  }
+
+  abstract notify(message: string): void;
+  abstract addChannel(channel: NotificationChannel): void;
+}
+
+class AlertNotification extends Notification {
+  public override notify(message: string): void {
+    console.debug("\n%cAlert Notification:", COLORS.red);
+    this.channels.forEach((channel: NotificationChannel) =>
+      channel.send(message)
+    );
+  }
+  public override addChannel(channel: NotificationChannel): void {
+    this.channels.push(channel);
+    console.debug(`Added channel: ${channel.constructor.name}`);
+  }
+}
+
+function main() {
+  const channels = [
+    new EmailChannel(),
+  ];
+
+  const alert: AlertNotification = new AlertNotification(channels);
+
+  alert.notify("Security alert: Unauthorized access detected.");
+
+  alert.addChannel(new PushNotificationChannel());
+  alert.notify("Security alert: Unauthorized access detected.");
+}
+
+main();
