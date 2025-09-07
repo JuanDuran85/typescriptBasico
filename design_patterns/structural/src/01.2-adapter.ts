@@ -3,16 +3,20 @@ import { COLORS } from "./helpers/colors.ts";
 interface PaymentProcessor {
   processPayment(amount: number): void;
 }
+
 class PayPalService {
   public sendPayment(amount: number): void {
-    console.debug(`Paypal process payment. Amount: ${amount} USD`, COLORS.blue);
+    console.debug(
+      `%cPaypal process payment. Amount: ${amount} USD`,
+      COLORS.blue
+    );
   }
 }
 
 class StripeService {
   public makeCharge(amount: number): void {
     console.debug(
-      `Stripe processing payment. Amount: ${amount} USD`,
+      `%cStripe processing payment. Amount: ${amount} USD`,
       COLORS.purple
     );
   }
@@ -21,7 +25,7 @@ class StripeService {
 class MercadoPagoService {
   public pay(amount: number): void {
     console.debug(
-      `MercadoPago processing payment. Amount: ${amount}`,
+      `%cMercadoPago processing payment. Amount: ${amount}`,
       COLORS.yellow
     );
   }
@@ -35,7 +39,11 @@ class PayPalAdapter implements PaymentProcessor {
 }
 
 class StripeAdapter implements PaymentProcessor {
-  private readonly service: StripeService = new StripeService();
+  private readonly service: StripeService;
+
+  public constructor(stripeService: StripeService) {
+    this.service = stripeService;
+  }
   public processPayment(amount: number): void {
     this.service.makeCharge(amount);
   }
@@ -52,7 +60,9 @@ function main(): void {
   const paymentAmount: number = 100;
 
   const paypalProcessor: PaymentProcessor = new PayPalAdapter();
-  const stripeProcessor: PaymentProcessor = new StripeAdapter();
+  const stripeProcessor: PaymentProcessor = new StripeAdapter(
+    new StripeService()
+  );
   const mercadoPagoProcessor: PaymentProcessor = new MercadoPagoAdapter();
 
   console.debug("Using PayPal:");
