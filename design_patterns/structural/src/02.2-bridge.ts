@@ -34,23 +34,23 @@ abstract class Notification {
 }
 
 class AlertNotification extends Notification {
-  public notify(message: string): void {
+  public override notify(message: string): void {
     console.debug("\n%cAlert Notification:", COLORS.red);
     this.channel.send(message);
   }
 
-  public setChannel(channel: NotificationChannel): void {
+  public override setChannel(channel: NotificationChannel): void {
     this.channel = channel;
   }
 }
 
 class ReminderNotification extends Notification {
-  public notify(message: string): void {
+  public override notify(message: string): void {
     console.debug("\n%cReminder Notification:", COLORS.blue);
     this.channel.send(message);
   }
 
-  public setChannel(channel: NotificationChannel): void {
+  public override setChannel(channel: NotificationChannel): void {
     this.channel = channel;
   }
 }
