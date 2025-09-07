@@ -1,5 +1,4 @@
 import { Logger } from "jsr:@deno-library/logger";
-import { COLORS } from "../helpers/colors.ts";
 
 interface ILoggerAdapter {
   fileName: string;
