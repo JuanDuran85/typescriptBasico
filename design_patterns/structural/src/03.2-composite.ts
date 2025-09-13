@@ -69,9 +69,6 @@ function main() {
 
   const mainMenu: MenuCategory = new MenuCategory("Main Menu");
   mainMenu.add([appetizers, beverages, desserts, mainCourse]);
-  mainMenu.add(mainCourse);
-  mainMenu.add(beverages);
-  mainMenu.add(desserts);
 
   console.debug("Main Menu Details:");
   mainMenu.showDetails();
