@@ -26,3 +26,9 @@ Structural design patterns are concerned with how classes and objects are compos
 
 - Composite lets clients treat individual objects and compositions of objects uniformly.
 
+## 5. Decorator:
+
+- Decorator is a structural design pattern that allows behavior to be added to individual objects, either statically or dynamically, without affecting the behavior of other objects from the same class.
+  
+- The decorator pattern is typically used to extend the functionalities of classes in a flexible and reusable way.
+
