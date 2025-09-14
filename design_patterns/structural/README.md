@@ -32,3 +32,8 @@ Structural design patterns are concerned with how classes and objects are compos
   
 - The decorator pattern is typically used to extend the functionalities of classes in a flexible and reusable way.
 
+## 6. Facade:
+
+- Facade is a structural design pattern that provides a simplified interface to a library, a framework, or any other complex set of classes.
+
+- Facade defines a higher-level interface that makes the subsystem easier to use.
