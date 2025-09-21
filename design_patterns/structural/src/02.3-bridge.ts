@@ -57,6 +57,9 @@ function main() {
 
   alert.addChannel(new PushNotificationChannel());
   alert.notify("Security alert: Unauthorized access detected.");
+
+  alert.addChannel(new SMSChannel());
+  alert.notify("Security alert: Unauthorized access detected.");
 }
 
 main();
