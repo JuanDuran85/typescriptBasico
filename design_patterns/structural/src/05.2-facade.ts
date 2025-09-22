@@ -1,57 +1,39 @@
-/**
- * ! Patrón Facade
- * Este patrón proporciona una interfaz unificada para un conjunto de interfaces
- * en un subsistema.
- *
- * Facade define una interfaz de nivel más alto que hace que el subsistema
- * sea más fácil de usar.
- *
- * * Es útil cuando un subsistema es complejo o difícil de entender para
- * * proporcionar una interfaz simplificada para el cliente.
- *
- * https://refactoring.guru/es/design-patterns/facade
- */
-
-// !Tarea: Tarea: Sistema de Encendido de una Computadora con el Patrón Facade
-
-import { COLORS } from '../helpers/colors.ts';
-
-// 1. Clases del Subsistema
+import { COLORS } from './helpers/colors.ts';
 
 class CPU {
   stopOperations(): void {
-    console.log('CPU: Deteniendo operaciones.');
+    console.debug('CPU: Stopping operations.');
   }
 
   jump(position: number): void {
-    console.log(`CPU: Saltando a la posición de memoria ${position}.`);
+    console.debug(`CPU: Jumping to memory position ${position}.`);
   }
 
   execute(): void {
-    console.log('CPU: Ejecutando instrucciones.');
+    console.debug('CPU: Executing instructions.');
   }
 }
 
 class HardDrive {
   read(position: number, size: number): string {
-    console.log(
-      `HardDrive: Leyendo ${size} bytes desde la posición ${position}.`
+    console.debug(
+      `HardDrive: Reading ${size} bytes from position ${position}.`
     );
     return '001010001010100';
   }
 
   close() {
-    console.log('HardDrive: Deteniendo disco duro.');
+    console.debug('HardDrive: Stopping hard drive.');
   }
 }
 
 class Memory {
   load(position: number, data: string): void {
-    console.log(`Memory: Cargando datos en la posición ${position} ${data}.`);
+    console.debug(`Memory: Loading data at position ${position} ${data}.`);
   }
 
   free(): void {
-    console.log('Memory: Liberando memoria.');
+    console.debug('Memory: Freeing memory.');
   }
 }
 
@@ -64,26 +46,26 @@ class ComputerFacade {
   constructor() {}
 
   startComputer(): void {
-    console.log('\n%cIniciando la computadora...', COLORS.cyan);
+    console.debug('%cStarting the computer...', COLORS.cyan);
 
     // TODO: ejecutar las operaciones necesarias para encender la computadora
     // 1. Cargar el sistema operativo en la memoria - memory.load(0, hardDrive.read(0, 1024))
     // 2. Saltar a la posición de memoria 0 - cpu.jump(0)
     // 3. Ejecutar las instrucciones del CPU - cpu.execute()
 
-    console.log('Computadora lista para usar.\n');
+    console.debug('Computer ready to use. \n');
   }
 
   shutDownComputer(): void {
-    console.log('\n%cApagando la computadora...', COLORS.red);
-    console.log('Cerrando procesos y guardando datos...');
+    console.debug('%cShutting down the computer...', COLORS.red);
+    console.debug('Closing processes and saving data...');
 
     // TODO: ejecutar las operaciones necesarias para apagar la computadora
     // 1. Detener las operaciones del CPU - cpu.stopOperations()
     // 2. Liberar la memoria - memory.free()
     // 3. Cerrar el disco duro - hardDrive.close()
 
-    console.log('Computadora apagada.\n');
+    console.debug('Computer shut down.\n');
   }
 }
 
