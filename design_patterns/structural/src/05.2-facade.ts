@@ -1,8 +1,8 @@
-import { COLORS } from './helpers/colors.ts';
+import { COLORS } from "./helpers/colors.ts";
 
 class CPU {
   public stopOperations(): void {
-    console.debug('CPU: Stopping operations.');
+    console.debug("CPU: Stopping operations.");
   }
 
   public jump(position: number): void {
@@ -10,7 +10,7 @@ class CPU {
   }
 
   public execute(): void {
-    console.debug('CPU: Executing instructions.');
+    console.debug("CPU: Executing instructions.");
   }
 }
 
@@ -19,11 +19,11 @@ class HardDrive {
     console.debug(
       `HardDrive: Reading ${size} bytes from position ${position}.`
     );
-    return '001010001010100';
+    return "001010001010100";
   }
 
   public close(): void {
-    console.debug('HardDrive: Stopping hard drive.');
+    console.debug("HardDrive: Stopping hard drive.");
   }
 }
 
@@ -33,39 +33,48 @@ class Memory {
   }
 
   public free(): void {
-    console.debug('Memory: Freeing memory.');
+    console.debug("Memory: Freeing memory.");
   }
 }
 
-// 2. Clase Facade - ComputerFacade
+type ComputerFacadeType = {
+  cpu: CPU;
+  memory: Memory;
+  hardDrive: HardDrive;
+};
 
 class ComputerFacade {
-  // TODO: Agregar los atributos necesarios CPU, Memory y HardDrive
+  private cpu: CPU;
+  private memory: Memory;
+  private hardDrive: HardDrive;
 
-  // TODO: Agregar el constructor para instanciar los atributos CPU, Memory y HardDrive
-  constructor() {}
+  constructor({ cpu, hardDrive, memory }: ComputerFacadeType) {
+    this.cpu = cpu;
+    this.memory = memory;
+    this.hardDrive = hardDrive;
+  }
 
   public startComputer(): void {
-    console.debug('%cStarting the computer...', COLORS.cyan);
+    console.debug("%cStarting the computer...", COLORS.cyan);
 
     // TODO: ejecutar las operaciones necesarias para encender la computadora
     // 1. Cargar el sistema operativo en la memoria - memory.load(0, hardDrive.read(0, 1024))
     // 2. Saltar a la posición de memoria 0 - cpu.jump(0)
     // 3. Ejecutar las instrucciones del CPU - cpu.execute()
 
-    console.debug('Computer ready to use. \n');
+    console.debug("Computer ready to use. \n");
   }
 
   public shutDownComputer(): void {
-    console.debug('%cShutting down the computer...', COLORS.red);
-    console.debug('Closing processes and saving data...');
+    console.debug("%cShutting down the computer...", COLORS.red);
+    console.debug("Closing processes and saving data...");
 
     // TODO: ejecutar las operaciones necesarias para apagar la computadora
     // 1. Detener las operaciones del CPU - cpu.stopOperations()
     // 2. Liberar la memoria - memory.free()
     // 3. Cerrar el disco duro - hardDrive.close()
 
-    console.debug('Computer shut down.\n');
+    console.debug("Computer shut down.\n");
   }
 }
 
