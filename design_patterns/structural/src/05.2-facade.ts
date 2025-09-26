@@ -44,15 +44,9 @@ type ComputerFacadeType = {
 };
 
 class ComputerFacade {
-  private cpu: CPU;
-  private memory: Memory;
-  private hardDrive: HardDrive;
-
-  constructor({ cpu, hardDrive, memory }: ComputerFacadeType) {
-    this.cpu = cpu;
-    this.memory = memory;
-    this.hardDrive = hardDrive;
-  }
+  private cpu: CPU = new CPU();
+  private memory: Memory = new Memory();
+  private hardDrive: HardDrive = new HardDrive();
 
   public startComputer(): void {
     console.debug("%cStarting the computer...", COLORS.cyan);
@@ -76,14 +70,7 @@ class ComputerFacade {
 }
 
 function main() {
-  const cpu: CPU = new CPU();
-  const memory: Memory = new Memory();
-  const hardDrive: HardDrive = new HardDrive();
-  const computer: ComputerFacade = new ComputerFacade({
-    cpu,
-    hardDrive,
-    memory,
-  });
+  const computer: ComputerFacade = new ComputerFacade();
   computer.startComputer();
   computer.shutDownComputer();
 }
