@@ -56,11 +56,9 @@ class ComputerFacade {
 
   public startComputer(): void {
     console.debug("%cStarting the computer...", COLORS.cyan);
-
-    // TODO: ejecutar las operaciones necesarias para encender la computadora
-    // 1. Cargar el sistema operativo en la memoria - memory.load(0, hardDrive.read(0, 1024))
-    // 2. Saltar a la posición de memoria 0 - cpu.jump(0)
-    // 3. Ejecutar las instrucciones del CPU - cpu.execute()
+    this.memory.load(0, this.hardDrive.read(0, 1024));
+    this.cpu.jump(0);
+    this.cpu.execute();
 
     console.debug("Computer ready to use. \n");
   }
@@ -69,24 +67,24 @@ class ComputerFacade {
     console.debug("%cShutting down the computer...", COLORS.red);
     console.debug("Closing processes and saving data...");
 
-    // TODO: ejecutar las operaciones necesarias para apagar la computadora
-    // 1. Detener las operaciones del CPU - cpu.stopOperations()
-    // 2. Liberar la memoria - memory.free()
-    // 3. Cerrar el disco duro - hardDrive.close()
+    this.cpu.stopOperations();
+    this.memory.free();
+    this.hardDrive.close();
 
     console.debug("Computer shut down.\n");
   }
 }
 
-// 3. Código Cliente para Usar la Facade
-// TODO: Aquí no hay nada que hacer, debe de encender la computadora y apagarla sin problemas
 function main() {
-  const computer = new ComputerFacade();
-
-  // Encender la computadora usando la fachada
+  const cpu: CPU = new CPU();
+  const memory: Memory = new Memory();
+  const hardDrive: HardDrive = new HardDrive();
+  const computer: ComputerFacade = new ComputerFacade({
+    cpu,
+    hardDrive,
+    memory,
+  });
   computer.startComputer();
-
-  // Apagar la computadora usando la fachada
   computer.shutDownComputer();
 }
 
