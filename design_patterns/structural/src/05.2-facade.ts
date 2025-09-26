@@ -1,38 +1,38 @@
 import { COLORS } from './helpers/colors.ts';
 
 class CPU {
-  stopOperations(): void {
+  public stopOperations(): void {
     console.debug('CPU: Stopping operations.');
   }
 
-  jump(position: number): void {
+  public jump(position: number): void {
     console.debug(`CPU: Jumping to memory position ${position}.`);
   }
 
-  execute(): void {
+  public execute(): void {
     console.debug('CPU: Executing instructions.');
   }
 }
 
 class HardDrive {
-  read(position: number, size: number): string {
+  public read(position: number, size: number): string {
     console.debug(
       `HardDrive: Reading ${size} bytes from position ${position}.`
     );
     return '001010001010100';
   }
 
-  close() {
+  public close(): void {
     console.debug('HardDrive: Stopping hard drive.');
   }
 }
 
 class Memory {
-  load(position: number, data: string): void {
+  public load(position: number, data: string): void {
     console.debug(`Memory: Loading data at position ${position} ${data}.`);
   }
 
-  free(): void {
+  public free(): void {
     console.debug('Memory: Freeing memory.');
   }
 }
@@ -45,7 +45,7 @@ class ComputerFacade {
   // TODO: Agregar el constructor para instanciar los atributos CPU, Memory y HardDrive
   constructor() {}
 
-  startComputer(): void {
+  public startComputer(): void {
     console.debug('%cStarting the computer...', COLORS.cyan);
 
     // TODO: ejecutar las operaciones necesarias para encender la computadora
@@ -56,7 +56,7 @@ class ComputerFacade {
     console.debug('Computer ready to use. \n');
   }
 
-  shutDownComputer(): void {
+  public shutDownComputer(): void {
     console.debug('%cShutting down the computer...', COLORS.red);
     console.debug('Closing processes and saving data...');
 
