@@ -37,3 +37,11 @@ Structural design patterns are concerned with how classes and objects are compos
 - Facade is a structural design pattern that provides a simplified interface to a library, a framework, or any other complex set of classes.
 
 - Facade defines a higher-level interface that makes the subsystem easier to use.
+
+## 7. Flyweight:
+
+- Flyweight is a structural design pattern that allows objects to be shared.
+
+- Flyweight is used to minimize memory usage or computational expenses by sharing as much data as possible with similar objects.
+
+- Flyweight is a structural design pattern that lets you fit more objects into the available amount of RAM by sharing common parts of state between multiple objects instead of keeping all of the data in each object.
