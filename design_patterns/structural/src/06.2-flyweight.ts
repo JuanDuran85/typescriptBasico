@@ -33,15 +33,12 @@ class BulletTypeFactory {
     damage: number,
     color: string
   ): BulletType {
-    if (!this.bulletTypes[`${name}-${damage}-${color}`]) {
+    const keyBulletType: string = `${name}-${damage}-${color}`;
+    if (!this.bulletTypes[keyBulletType]) {
       console.debug(
         `Creating new BulletType: ${name}, Damage: ${damage}, Color: ${color}`
       );
-      this.bulletTypes[`${name}-${damage}-${color}`] = new BulletType(
-        name,
-        damage,
-        color
-      );
+      this.bulletTypes[keyBulletType] = new BulletType(name, damage, color);
     }
 
     return this.bulletTypes[`${name}-${damage}-${color}`];
