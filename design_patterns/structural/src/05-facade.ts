@@ -1,52 +1,52 @@
 class Projector {
-  public on() {
+  public on(): void {
     console.debug("Turn on projector");
   }
-  public off() {
+  public off(): void {
     console.debug("Turn off projector");
   }
 }
 
 class SoundSystem {
-  public on() {
+  public on(): void {
     console.debug("Turn on sound system");
   }
-  public off() {
+  public off(): void {
     console.debug("Turn off sound system");
   }
 }
 
 class VideoPlayer {
-  public on() {
+  public on(): void {
     console.debug("Turn on video player");
   }
 
-  public play(movie: string) {
+  public play(movie: string): void {
     console.debug(`Playing movie: ${movie}`);
   }
 
-  public stop() {
+  public stop(): void {
     console.debug("Stopping video player");
   }
 
-  public off() {
+  public off(): void {
     console.debug("Turn off video player");
   }
 }
 
 class PopcornMaker {
-  public on() {
+  public on(): void {
     console.debug("Turn on popcorn maker");
   }
-  public off() {
+  public off(): void {
     console.debug("Turn off popcorn maker");
   }
 
-  public poppingPopcorn() {
+  public poppingPopcorn(): void {
     console.debug("Popping popcorn");
   }
 
-  public stopPoppingPopcorn() {
+  public stopPoppingPopcorn(): void {
     console.debug("Stop popping popcorn");
   }
 }
@@ -76,7 +76,7 @@ class HomeTheaterFacade {
     this.videoPlayer = videoPlayer;
   }
 
-  public watchMovie(movieIn: string) {
+  public watchMovie(movieIn: string): void {
     console.debug(`Preparing to watch movie: ${movieIn}`);
     this.projector.on();
     this.soundSystem.on();
@@ -87,7 +87,7 @@ class HomeTheaterFacade {
     console.debug("Enjoy your movie...");
   }
 
-  public endWatchingMovie() {
+  public endWatchingMovie(): void {
     console.debug("End watching movie");
     this.projector.off();
     this.soundSystem.off();
