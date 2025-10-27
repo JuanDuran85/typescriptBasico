@@ -68,7 +68,7 @@ class Director extends BaseApprover {
       return;
     }
 
-    console.debug();
+    console.debug("%cDirector can not approved this request.", COLORS.red);
   }
 }
 
