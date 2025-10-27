@@ -1,4 +1,5 @@
 import { COLORS } from "./helpers/colors.ts";
+
 interface Approver {
   setNext(approver: Approver): Approver;
   approveRequest(amount: number): void;
@@ -12,7 +13,7 @@ abstract class BaseApprover implements Approver {
     return approver;
   }
 
-  abstract approveRequest(amount: number): void;
+  public abstract approveRequest(amount: number): void;
 
   protected next(amount: number): void {
     if (this.nextApprover) {
@@ -24,27 +25,51 @@ abstract class BaseApprover implements Approver {
   }
 }
 
-// 3. Clases Concretas de Aprobadores
-
 class Supervisor extends BaseApprover {
-  // TODO: Implementar el método approveRequest si el monto es menor o igual a 1000
-  // TODO: Si el monto es mayor a 1000, pasar la solicitud al siguiente aprobador
-  override approveRequest(amount: number): void {
-    throw new Error("Method not implemented.");
+  public override approveRequest(amount: number): void {
+    if (amount <= 1000) {
+      console.debug(
+        `%cSupervisor approved request of $${amount}.`,
+        COLORS.green
+      );
+      return;
+    }
+
+    console.debug(
+      `%cSupervisor can not approved this request of $${amount}.`,
+      COLORS.red
+    );
+    super.next(amount);
   }
 }
 
 class Manager extends BaseApprover {
-  //TODO: Implementar el método approveRequest si el monto es menor o igual a 5000
-  // TODO: Si el monto es mayor a 5000, pasar la solicitud al siguiente aprobador
+  public override approveRequest(amount: number): void {
+    if (amount <= 5000) {
+      console.debug(`%cManager approved request of $${amount}.`, COLORS.blue);
+      return;
+    }
 
-  override approveRequest(amount: number): void {
-    throw new Error("Method not implemented.");
+    console.debug(
+      `%cManager can not approved this request of $${amount}.`,
+      COLORS.red
+    );
+    super.next(amount);
   }
 }
 
 class Director extends BaseApprover {
-  // TODO: Implementar el método approveRequest si el monto
+  public override approveRequest(amount: number): void {
+    if (amount > 5000) {
+      console.debug(
+        `%cDirector approved request of $${amount}.`,
+        COLORS.yellow
+      );
+      return;
+    }
+
+    console.debug();
+  }
 }
 
 function main() {
