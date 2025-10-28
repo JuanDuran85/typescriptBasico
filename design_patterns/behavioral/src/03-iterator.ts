@@ -27,8 +27,8 @@ class PokemonCollection {
     return this.pokemonAll.length;
   }
 
-  public createIterator(): Iterator<Pokemon> {
-    throw new Error("Method not implemented.");
+  public createIterator(): PokemonIterator {
+    return new PokemonIterator(this);
   }
 }
 
@@ -54,3 +54,23 @@ class PokemonIterator implements Iterator<Pokemon> {
     return this.collection.getPokemonAt(this.position);
   }
 }
+
+function main() {
+  const pokedex: PokemonCollection = new PokemonCollection();
+
+  pokedex.addPokemon(new Pokemon("Pikachu", "Electric"));
+  pokedex.addPokemon(new Pokemon("Charmander", "Fire"));
+  pokedex.addPokemon(new Pokemon("Squirtle", "Water"));
+  pokedex.addPokemon(new Pokemon("Bulbasaur", "Grass/Poison"));
+
+  const iterator: PokemonIterator = pokedex.createIterator();
+
+  while (iterator.hasNext()) {
+    const pokemon = iterator.next();
+    if (pokemon) {
+      console.debug(`Pokemon: ${pokemon.name}, Type: ${pokemon.type}`);
+    }
+  }
+}
+
+main();
