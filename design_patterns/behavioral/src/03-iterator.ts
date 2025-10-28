@@ -68,7 +68,7 @@ function main() {
   while (iterator.hasNext()) {
     const pokemon = iterator.next();
     if (pokemon) {
-      console.debug(`Pokemon: ${pokemon.name}, Type: ${pokemon.type}`);
+      console.debug(`Pokemon: ${pokemon.name}. Type: ${pokemon.type}`);
     }
   }
 }
