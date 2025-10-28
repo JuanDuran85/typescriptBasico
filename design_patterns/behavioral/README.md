@@ -15,3 +15,9 @@ These patterns help in defining how objects interact in a system, promoting loos
 - Is a behavioral design pattern that turns a request into a stand-alone object that contains all information about the request. This transformation lets you pass requests as a method arguments, delay or queue a request’s execution, and support undoable operations.
 
 - The Command pattern encapsulates a request as an object, thereby allowing for parameterization of clients with queues, requests, and operations. It also supports undoable operations.
+
+## 3. Iterator
+
+- Iterator is a behavioral design pattern that lets you traverse elements of a collection without exposing its underlying representation (list, stack, tree, etc.).
+
+- The Iterator pattern provides a way to access the elements of an aggregate object sequentially without exposing its underlying representation.
