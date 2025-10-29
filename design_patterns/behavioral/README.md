@@ -21,3 +21,9 @@ These patterns help in defining how objects interact in a system, promoting loos
 - Iterator is a behavioral design pattern that lets you traverse elements of a collection without exposing its underlying representation (list, stack, tree, etc.).
 
 - The Iterator pattern provides a way to access the elements of an aggregate object sequentially without exposing its underlying representation.
+
+## 4. Mediator
+
+- Mediator is a behavioral design pattern that lets you reduce chaotic dependencies between objects. The pattern restricts direct communications between the objects and forces them to collaborate only via a mediator object.
+
+- The Mediator pattern defines an object that encapsulates how a set of objects interact. Mediators provide a way to decouple objects from each other, making them independent of each other.
