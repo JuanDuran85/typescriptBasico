@@ -27,3 +27,9 @@ These patterns help in defining how objects interact in a system, promoting loos
 - Mediator is a behavioral design pattern that lets you reduce chaotic dependencies between objects. The pattern restricts direct communications between the objects and forces them to collaborate only via a mediator object.
 
 - The Mediator pattern defines an object that encapsulates how a set of objects interact. Mediators provide a way to decouple objects from each other, making them independent of each other.
+
+## 5. Memento
+
+- Memento is a behavioral design pattern that lets you save and restore the previous state of an object without revealing the details of its implementation.
+
+- The Memento pattern provides a way to capture and externalize an object's internal state so that the object can be restored to this state later, without violating encapsulation.
