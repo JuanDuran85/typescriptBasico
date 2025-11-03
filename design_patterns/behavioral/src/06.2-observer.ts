@@ -4,44 +4,37 @@ interface Observer {
   update(weatherData: string): void;
 }
 
-// Clase Subject - WeatherStation
-// TODO: Terminal la implementación
 class WeatherStation {
-  // observers = [];
-  // weatherData = 'Soleado';
+  private observers: Observer[] = [];
+  private weatherData: string = "Sunny";
 
-  // Agregar un Observer
   public subscribe(observer: Observer): void {
-    // TODO: añadir observer
-
+    this.observers.push(observer);
+    observer.update(this.weatherData);
     console.debug(
       "%cNew application subscribed to the weather system.",
       COLORS.green
     );
   }
 
-  // Eliminar un Observer
   public unsubscribe(observer: Observer): void {
-    // TODO: eliminar observer
-
+    this.observers = this.observers.filter((sub: Observer) => sub !== observer);
     console.debug(`%cAn application has unsubscribed`, COLORS.red);
   }
 
-  // Actualizar el clima y notificar a todos los Observers
-  public setWeather(weatherData: string): void {
-    console.debug(`\nWeather updated: %c${weatherData}`, COLORS.blue);
-
-    // TODO: actualizar clima y notificar a todos los Observers con el método notifyObservers
+  public setWeather(weatherDataIn: string): void {
+    this.weatherData = weatherDataIn;
+    console.debug(`\nWeather updated: %c${weatherDataIn}`, COLORS.blue);
+    this.notifyObservers();
   }
 
-  // Notificar a todos los Observers
   private notifyObservers(): void {
-    // TODO: implementar método
-    throw new Error("Method not implemented.");
+    for (const observer of this.observers) {
+      observer.update(this.weatherData);
+    }
   }
 }
 
-// Clase Observer - WeatherApp
 class WeatherApp implements Observer {
   private name: string;
 
@@ -49,7 +42,6 @@ class WeatherApp implements Observer {
     this.name = name;
   }
 
-  // Recibir actualización del clima
   public update(weatherData: string): void {
     console.debug(
       `%c${this.name} %chas received weather notification: %c${weatherData}`,
@@ -60,7 +52,6 @@ class WeatherApp implements Observer {
   }
 }
 
-// Código Cliente para Probar
 function main(): void {
   const weatherStation: WeatherStation = new WeatherStation();
 
