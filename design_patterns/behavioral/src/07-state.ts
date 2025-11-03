@@ -1,4 +1,5 @@
 import { COLORS } from "./helpers/colors.ts";
+import { sleep } from "./helpers/sleep.ts";
 
 interface StateInterface {
   name: string;
@@ -10,7 +11,9 @@ interface StateInterface {
 class VendingMachine {
   private stateVendingMachine: StateInterface;
 
-  constructor() {}
+  constructor() {
+    this.stateVendingMachine = new WaitingForMoney(this);
+  }
 
   public insertMoney(): void {
     this.stateVendingMachine.insertMoney();
@@ -39,7 +42,7 @@ class VendingMachine {
 }
 
 class WaitingForMoney implements StateInterface {
-  private name: string = "WaitingForMoney";
+  public name: string = "WaitingForMoney";
   private vendingMachine: VendingMachine;
 
   constructor(vendingMachineIn: VendingMachine) {
@@ -48,6 +51,9 @@ class WaitingForMoney implements StateInterface {
 
   public insertMoney(): void {
     console.debug(`Money Inserted. %cPlease, select a product...`, COLORS.blue);
+    this.vendingMachine.setActualState(
+      new ProductSelected(this.vendingMachine)
+    );
   }
   public selectProduct(): void {
     console.debug(`First... %cYou need to insert your money`, COLORS.red);
@@ -58,7 +64,7 @@ class WaitingForMoney implements StateInterface {
 }
 
 class ProductSelected implements StateInterface {
-  private name: string = "ProductSelected";
+  public name: string = "ProductSelected";
   private vendingMachine: VendingMachine;
 
   constructor(vendingMachineIn: VendingMachine) {
@@ -66,10 +72,12 @@ class ProductSelected implements StateInterface {
   }
 
   public insertMoney(): void {
-    console.debug(`You need to select a product first`, COLORS.red);
+    console.debug(`%cYou need to select a product first`, COLORS.red);
   }
   public selectProduct(): void {
-    this.vendingMachine.setActualState();
+    this.vendingMachine.setActualState(
+      new DispensingProduct(this.vendingMachine)
+    );
   }
   public dispenseProduct(): void {
     console.debug(`First... %cYou need to select a product first`, COLORS.red);
@@ -77,7 +85,7 @@ class ProductSelected implements StateInterface {
 }
 
 class DispensingProduct implements StateInterface {
-  private name: string = "DispensingProduct";
+  public name: string = "DispensingProduct";
   private vendingMachine: VendingMachine;
 
   constructor(vendingMachineIn: VendingMachine) {
@@ -86,15 +94,62 @@ class DispensingProduct implements StateInterface {
 
   public insertMoney(): void {
     console.debug(
-      `You need to wait for the product to be dispensed`,
+      `%cYou need to wait for the product to be dispensed`,
       COLORS.red
     );
   }
   public selectProduct(): void {
-    console.debug(`The product was dispensed.`, COLORS.red);
+    console.debug(`%cThe product was dispensed.`, COLORS.red);
   }
   public dispenseProduct(): void {
     console.debug(`%cProduct dispensed`, COLORS.green);
-    this.vendingMachine.setActualState(new WaitingForMoney());
+    this.vendingMachine.setActualState(
+      new WaitingForMoney(this.vendingMachine)
+    );
   }
 }
+
+async function main() {
+  const vendingMachine: VendingMachine = new VendingMachine();
+
+  let selectedOption: string | null = "4";
+
+  do {
+    console.clear();
+    console.debug(
+      `Select an option: %c${vendingMachine.getActualState()}`,
+      COLORS.orange
+    );
+
+    selectedOption = prompt(`
+      1. Insert Money
+      2. Select Product
+      3. Dispense Product
+      4. Exit
+
+      option: `);
+
+    switch (selectedOption) {
+      case "1":
+        vendingMachine.insertMoney();
+        break;
+      case "2":
+        vendingMachine.selectProduct();
+        break;
+      case "3":
+        vendingMachine.dispenseProduct();
+        break;
+      case "4":
+        console.debug("Exiting program...");
+        break;
+
+      default:
+        console.debug("Invalid option.");
+        break;
+    }
+
+    await sleep(3000);
+  } while (selectedOption !== "4");
+}
+
+main();
