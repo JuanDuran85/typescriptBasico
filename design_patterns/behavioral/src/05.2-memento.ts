@@ -25,37 +25,30 @@ class DrawingBoard {
   }
 
   public save(): DrawingMemento {
-    // TODO: Implementar el método save para guardar el estado actual
-    throw new Error("Method not implemented.");
+    return new DrawingMemento(this.shapes);
   }
 
-  // Restaurar el estado de la pizarra desde un Memento
   public restore(memento: DrawingMemento): void {
     this.shapes = memento.getShapes();
     console.debug("%c\nBoard state restored.", COLORS.blue);
   }
 }
 
-// Clase Caretaker - History
 class History {
   private mementos: DrawingMemento[] = [];
 
-  // Guardar un Memento
-  // TODO: Implementar push para guardar en la historia
   public push(memento: DrawingMemento): void {
-    throw new Error("Method not implemented.");
+    this.mementos.push(memento);
   }
 
-  // Recuperar el último Memento
-  // TODO: Implementar pop para recuperar el último memento
   public pop(): DrawingMemento | undefined {
-    throw new Error("Method not implemented.");
+    return this.mementos.pop();
   }
 }
 
 function main(): void {
-  const drawingBoard = new DrawingBoard();
-  const history = new History();
+  const drawingBoard: DrawingBoard = new DrawingBoard();
+  const history: History = new History();
 
   drawingBoard.addShape("Circle");
   history.push(drawingBoard.save());
