@@ -39,3 +39,9 @@ These patterns help in defining how objects interact in a system, promoting loos
 - Observer is a behavioral design pattern that lets you define a subscription mechanism to notify multiple objects about any events that happen to the object they're observing.
 
 - The Observer pattern defines a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.
+
+## 7. State
+
+- State is a behavioral design pattern that lets an object alter its behavior when its internal state changes. It appears as if the object changed its class.
+
+- The State pattern allows an object to alter its behavior when its internal state changes. The object will appear to change its class.
