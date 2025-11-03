@@ -33,3 +33,9 @@ These patterns help in defining how objects interact in a system, promoting loos
 - Memento is a behavioral design pattern that lets you save and restore the previous state of an object without revealing the details of its implementation.
 
 - The Memento pattern provides a way to capture and externalize an object's internal state so that the object can be restored to this state later, without violating encapsulation.
+
+## 6. Observer
+
+- Observer is a behavioral design pattern that lets you define a subscription mechanism to notify multiple objects about any events that happen to the object they're observing.
+
+- The Observer pattern defines a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically.
