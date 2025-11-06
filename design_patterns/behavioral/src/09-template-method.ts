@@ -39,11 +39,11 @@ class Coffee extends HotBeverageTemplate {
 }
 
 function main() {
-  console.debug("Preparing Tea", COLORS.green);
+  console.debug("%cPreparing Tea", COLORS.green);
   const tea01: Tea = new Tea();
   tea01.makeBeverage();
 
-  console.debug("\nPreparing Coffee", COLORS.brown);
+  console.debug("\n%cPreparing Coffee", COLORS.brown);
   const coffee01: Coffee = new Coffee();
   coffee01.makeBeverage();
 }
