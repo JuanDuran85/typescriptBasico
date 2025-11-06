@@ -26,3 +26,12 @@ class Tea extends HotBeverageTemplate {
     console.debug(`Adding lemon and sugar`);
   }
 }
+
+class Coffee extends HotBeverageTemplate {
+  protected addMainIngredient(): void {
+    console.debug(`Adding coffee grounds`);
+  }
+  protected addCondiments(): void {
+    console.debug(`Adding milk and sugar`);
+  }
+}
