@@ -45,3 +45,9 @@ These patterns help in defining how objects interact in a system, promoting loos
 - State is a behavioral design pattern that lets an object alter its behavior when its internal state changes. It appears as if the object changed its class.
 
 - The State pattern allows an object to alter its behavior when its internal state changes. The object will appear to change its class.
+
+## 8. Strategy
+
+- Strategy is a behavioral design pattern that lets you define a family of algorithms, put each of them into a separate class, and make their objects interchangeable.
+
+- The Strategy pattern defines a family of algorithms, encapsulates each one, and makes them interchangeable. Strategy lets the algorithm vary independently from clients that use it.
