@@ -6,19 +6,19 @@ interface MovementStrategy {
 
 class SwimFast implements MovementStrategy {
   public move(): void {
-    console.debug("%cThe duck isSwimming fast!", COLORS.cyan);
+    console.debug("%cThe duck isSwimming fast!\n", COLORS.cyan);
   }
 }
 
 class FlyOverWater implements MovementStrategy {
   public move(): void {
-    console.debug("%cThe duck is flying over the water!", COLORS.blue);
+    console.debug("%cThe duck is flying over the water!\n", COLORS.blue);
   }
 }
 
 class WalkingClumsily implements MovementStrategy {
   public move(): void {
-    console.debug("%cThe duck is walking clumsily!", COLORS.brown);
+    console.debug("%cThe duck is walking clumsily!\n", COLORS.brown);
   }
 }
 
