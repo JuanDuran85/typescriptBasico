@@ -17,3 +17,12 @@ abstract class HotBeverageTemplate {
   protected abstract addMainIngredient(): void;
   protected abstract addCondiments(): void;
 }
+
+class Tea extends HotBeverageTemplate {
+  protected addMainIngredient(): void {
+    console.debug(`Adding tea leaves`);
+  }
+  protected addCondiments(): void {
+    console.debug(`Adding lemon and sugar`);
+  }
+}
