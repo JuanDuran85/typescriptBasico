@@ -1,20 +1,4 @@
 /**
- * ! Patrón Template Method
- *
- * El patrón Template Method es un patrón de diseño de comportamiento
- * que define el esqueleto de un algoritmo en una operación,
- * delegando algunos pasos a las subclases.
- *
- * Permite que las subclases redefinan ciertos pasos de un algoritmo
- * sin cambiar su estructura.
- *
- * * Es útil cuando se tiene un algoritmo que sigue una secuencia de pasos
- * * y se quiere permitir a las subclases que redefinan algunos de esos pasos.
- *
- * https://refactoring.guru/es/design-patterns/template-method
- */
-
-/**
  * !Objetivo: 
  * Implementar el patrón Template Method para simular un sistema de limpieza 
  * de diferentes tipos de habitaciones 
@@ -38,7 +22,7 @@
     5.	Salir de la habitación: Cerrar la puerta y marcar como terminada
  */
 
-import { COLORS } from '../helpers/colors.ts';
+import { COLORS } from './helpers/colors.ts';
 
 // Clase Base - RoomCleaning
 abstract class RoomCleaning {
