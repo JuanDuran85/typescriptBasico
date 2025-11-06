@@ -31,19 +31,19 @@ abstract class RoomCleaning {
 }
 
 class HotelRoomCleaning extends RoomCleaning {
-  protected specificCleaning(): void {
+  protected override specificCleaning(): void {
     console.debug("Making beds and restocking bathroom supplies.");
   }
 }
 
 class ConferenceRoomCleaning extends RoomCleaning {
-  protected specificCleaning(): void {
+  protected override specificCleaning(): void {
     console.debug("Cleaning tables and organizing chairs.");
   }
 }
 
 class OfficeCleaning extends RoomCleaning {
-  protected specificCleaning(): void {
+  protected override specificCleaning(): void {
     console.debug("Cleaning desks and organizing documents.");
   }
 }
