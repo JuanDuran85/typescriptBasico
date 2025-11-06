@@ -57,3 +57,8 @@ These patterns help in defining how objects interact in a system, promoting loos
 - Template Method is a behavioral design pattern that defines the skeleton of an algorithm in the superclass but lets subclasses override specific steps of the algorithm without changing its structure.
 
 
+## 10. Visitor
+
+- Visitor is a behavioral design pattern that lets you separate algorithms from the objects on which they operate.
+
+- The Visitor pattern lets you separate the behavior of an object from its appearance, allowing the behavior to be changed on the fly.
