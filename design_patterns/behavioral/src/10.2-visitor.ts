@@ -1,17 +1,4 @@
 /**
- * !Patrón Visitor
- *
- * El patrón Visitor es un patrón de diseño de comportamiento
- * que te permite separar algoritmos de los objetos sobre
- * los que operan.
- *
- * * Es útil cuando necesitas añadir nuevas operaciones a
- * * clases estables sin cambiar su código.
- *
- * https://refactoring.guru/es/design-patterns/visitor
- */
-
-/**
  * !Objetivo:
  * Implementar el patrón Visitor en un sistema de gestión de vehículos
  * que permite realizar operaciones específicas sobre diferentes
@@ -21,7 +8,7 @@
  * y verificar si los vehículos cumplen con las normas de emisión.
  */
 
-import { COLORS } from '../helpers/colors.ts';
+import { COLORS } from './helpers/colors.ts';
 
 // Interfaz Visitor
 interface Visitor {
