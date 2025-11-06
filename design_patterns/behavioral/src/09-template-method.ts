@@ -1,3 +1,5 @@
+import { COLORS } from "./helpers/colors.ts";
+
 abstract class HotBeverageTemplate {
   public makeBeverage(): void {
     this.boilWater();
@@ -35,3 +37,15 @@ class Coffee extends HotBeverageTemplate {
     console.debug(`Adding milk and sugar`);
   }
 }
+
+function main() {
+  console.debug("Preparing Tea", COLORS.green);
+  const tea01: Tea = new Tea();
+  tea01.makeBeverage();
+
+  console.debug("\nPreparing Coffee", COLORS.brown);
+  const coffee01: Coffee = new Coffee();
+  coffee01.makeBeverage();
+}
+
+main();
