@@ -68,17 +68,17 @@ class FerrisWheel implements AttractionElement {
 }
 
 class ChildVisitor implements Visitor {
-  private finalPrice: number;
+  private finalPrice: number = 0;
+  private price: number = 0;
   private discount: number;
 
-  constructor(finalPrice: number = 0, discount: number = 0.25) {
-    this.finalPrice = finalPrice;
+  constructor(price: number = 0, discount: number = 0.25) {
+    this.price = price;
     this.discount = discount;
   }
 
   public visitRollerCoaster(rollerCoasterElement: RollerCoaster): void {
-    const fullPrice: number =
-      this.finalPrice || rollerCoasterElement.getPrice();
+    const fullPrice: number = this.price || rollerCoasterElement.getPrice();
     this.finalPrice = fullPrice - fullPrice * this.discount;
 
     console.debug(
@@ -88,7 +88,7 @@ class ChildVisitor implements Visitor {
     );
   }
   public visitHauntedHouse(hauntedHouseElement: HauntedHouse): void {
-    const fullPrice: number = this.finalPrice || hauntedHouseElement.getPrice();
+    const fullPrice: number = this.price || hauntedHouseElement.getPrice();
     this.finalPrice = fullPrice - fullPrice * this.discount;
 
     console.debug(
@@ -98,7 +98,7 @@ class ChildVisitor implements Visitor {
     );
   }
   public visitFerrisWheel(ferrisWheelElement: FerrisWheel): void {
-    const fullPrice: number = this.finalPrice || ferrisWheelElement.getPrice();
+    const fullPrice: number = this.price || ferrisWheelElement.getPrice();
     this.finalPrice = fullPrice - fullPrice * this.discount;
     console.debug(
       `The child have ${
@@ -109,17 +109,17 @@ class ChildVisitor implements Visitor {
 }
 
 class AdultVisitor implements Visitor {
-  private finalPrice: number;
+  private finalPrice: number = 0;
+  private price: number = 0;
   private discount: number;
 
-  constructor(finalPrice: number = 0, discount: number = 0) {
-    this.finalPrice = finalPrice;
+  constructor(price: number = 0, discount: number = 0) {
+    this.price = price;
     this.discount = discount;
   }
 
   public visitRollerCoaster(rollerCoasterElement: RollerCoaster): void {
-    const fullPrice: number =
-      this.finalPrice || rollerCoasterElement.getPrice();
+    const fullPrice: number = this.price || rollerCoasterElement.getPrice();
     this.finalPrice = fullPrice - fullPrice * this.discount;
     console.debug(
       `The adult have ${
@@ -128,7 +128,7 @@ class AdultVisitor implements Visitor {
     );
   }
   public visitHauntedHouse(hauntedHouseElement: HauntedHouse): void {
-    const fullPrice: number = this.finalPrice || hauntedHouseElement.getPrice();
+    const fullPrice: number = this.price || hauntedHouseElement.getPrice();
     this.finalPrice = fullPrice - fullPrice * this.discount;
     console.debug(
       `The adult have ${
@@ -137,7 +137,7 @@ class AdultVisitor implements Visitor {
     );
   }
   public visitFerrisWheel(ferrisWheelElement: FerrisWheel): void {
-    const fullPrice: number = this.finalPrice || ferrisWheelElement.getPrice();
+    const fullPrice: number = this.price || ferrisWheelElement.getPrice();
     this.finalPrice = fullPrice - fullPrice * this.discount;
     console.debug(
       `The adult have ${
@@ -148,17 +148,17 @@ class AdultVisitor implements Visitor {
 }
 
 class SeniorAdultVisitor implements Visitor {
-  private finalPrice: number;
+  private finalPrice: number = 0;
+  private price: number = 0;
   private discount: number;
 
-  constructor(finalPrice: number = 0, discount: number = 0.35) {
-    this.finalPrice = finalPrice;
+  constructor(price: number = 0, discount: number = 0.35) {
+    this.price = price;
     this.discount = discount;
   }
 
   public visitRollerCoaster(rollerCoasterElement: RollerCoaster): void {
-    const fullPrice: number =
-      this.finalPrice || rollerCoasterElement.getPrice();
+    const fullPrice: number = this.price || rollerCoasterElement.getPrice();
     this.finalPrice = fullPrice - fullPrice * this.discount;
     console.debug(
       `The adult have ${
@@ -167,7 +167,7 @@ class SeniorAdultVisitor implements Visitor {
     );
   }
   public visitHauntedHouse(hauntedHouseElement: HauntedHouse): void {
-    const fullPrice: number = this.finalPrice || hauntedHouseElement.getPrice();
+    const fullPrice: number = this.price || hauntedHouseElement.getPrice();
     this.finalPrice = fullPrice - fullPrice * this.discount;
     console.debug(
       `The adult have ${
@@ -176,7 +176,7 @@ class SeniorAdultVisitor implements Visitor {
     );
   }
   public visitFerrisWheel(ferrisWheelElement: FerrisWheel): void {
-    const fullPrice: number = this.finalPrice || ferrisWheelElement.getPrice();
+    const fullPrice: number = this.price || ferrisWheelElement.getPrice();
     this.finalPrice = fullPrice - fullPrice * this.discount;
     console.debug(
       `The adult have ${
@@ -201,8 +201,8 @@ function main() {
       }, Price: ${attractionElement.getPrice()}`
     );
   });
-  console.debug(`\n\n`);
-  console.debug(`\n Child Visitor:`, COLORS.blue);
+  console.debug(`\n`);
+  console.debug(`\n %cChild Visitor:`, COLORS.blue);
   const childVisitor: ChildVisitor = new ChildVisitor();
 
   attractions.forEach((attractionElement: AttractionElement) => {
