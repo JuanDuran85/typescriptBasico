@@ -208,7 +208,23 @@ function main() {
   attractions.forEach((attractionElement: AttractionElement) => {
     attractionElement.accept(childVisitor);
   });
-  console.debug(`\n\n`);
+  console.debug(`\n`);
+
+  console.debug(`\n %cAdult Visitor:`, COLORS.cyan);
+  const adultVisitor: AdultVisitor = new AdultVisitor();
+
+  attractions.forEach((attractionElement: AttractionElement) => {
+    attractionElement.accept(adultVisitor);
+  });
+  console.debug(`\n`);
+
+  console.debug(`\n %cSenior Adult Visitor:`, COLORS.purple);
+  const seniorAdultVisitor: SeniorAdultVisitor = new SeniorAdultVisitor();
+
+  attractions.forEach((attractionElement: AttractionElement) => {
+    attractionElement.accept(seniorAdultVisitor);
+  });
+  console.debug(`\n`);
 }
 
 main();
