@@ -184,3 +184,23 @@ class SeniorAdultVisitor implements Visitor {
     );
   }
 }
+
+function main() {
+  const attractions: AttractionElement[] = [
+    new RollerCoasterElement(50),
+    new HauntedHouseElement(35),
+    new FerrisWheelElement(25),
+  ];
+
+  console.debug(`--- Actual Prices ---`);
+  attractions.forEach((attractionsElement) => {
+    console.debug(
+      `Attraction: ${
+        attractionsElement.constructor.name
+      }, Price: ${attractionsElement.getPrice()}`
+    );
+  });
+  console.debug(`\n`);
+}
+
+main();
