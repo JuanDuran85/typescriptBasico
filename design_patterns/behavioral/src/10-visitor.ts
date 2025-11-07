@@ -68,10 +68,10 @@ class FerrisWheel implements AttractionElement {
 }
 
 class ChildVisitor implements Visitor {
-  private finalPrice: number = 0;
-  private discount: number = 0.2;
+  private finalPrice: number;
+  private discount: number;
 
-  constructor(finalPrice: number, discount: number) {
+  constructor(finalPrice: number = 0, discount: number = 0.25) {
     this.finalPrice = finalPrice;
     this.discount = discount;
   }
@@ -109,10 +109,10 @@ class ChildVisitor implements Visitor {
 }
 
 class AdultVisitor implements Visitor {
-  private finalPrice: number = 0;
-  private discount: number = 0;
+  private finalPrice: number;
+  private discount: number;
 
-  constructor(finalPrice: number, discount: number) {
+  constructor(finalPrice: number = 0, discount: number = 0) {
     this.finalPrice = finalPrice;
     this.discount = discount;
   }
@@ -148,10 +148,10 @@ class AdultVisitor implements Visitor {
 }
 
 class SeniorAdultVisitor implements Visitor {
-  private finalPrice: number = 0;
-  private discount: number = 0.35;
+  private finalPrice: number;
+  private discount: number;
 
-  constructor(finalPrice: number, discount: number) {
+  constructor(finalPrice: number = 0, discount: number = 0.35) {
     this.finalPrice = finalPrice;
     this.discount = discount;
   }
@@ -194,14 +194,21 @@ function main() {
   ];
 
   console.debug(`%c----- Actual Prices -----`, COLORS.yellow);
-  attractions.forEach((attractionsElement) => {
+  attractions.forEach((attractionElement: AttractionElement) => {
     console.debug(
       `Attraction: ${
-        attractionsElement.constructor.name
-      }, Price: ${attractionsElement.getPrice()}`
+        attractionElement.constructor.name
+      }, Price: ${attractionElement.getPrice()}`
     );
   });
-  console.debug(`\n`);
+  console.debug(`\n\n`);
+  console.debug(`\n Child Visitor:`, COLORS.blue);
+  const childVisitor: ChildVisitor = new ChildVisitor();
+
+  attractions.forEach((attractionElement: AttractionElement) => {
+    attractionElement.accept(childVisitor);
+  });
+  console.debug(`\n\n`);
 }
 
 main();
